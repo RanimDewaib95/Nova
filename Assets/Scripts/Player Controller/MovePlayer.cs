@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    public float moveSpeed = 50f;//Change in inspector to adjust move speed
+    public float moveSpeed = 25f;//Change in inspector to adjust move speed
     public int flag = 0;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
 
@@ -42,7 +42,7 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
-    void Move()
+    public void Move()
     {
 
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -60,7 +60,7 @@ public class MovePlayer : MonoBehaviour
         transform.position += upMovement;
     }
 
-    IEnumerator RotateAround(Vector3 axis, float angle, float duration)
+    public IEnumerator RotateAround(Vector3 axis, float angle, float duration)
     {
         float elapsed = 0.0f;
         float rotated = 0.0f;
