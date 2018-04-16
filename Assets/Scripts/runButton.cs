@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class runButton : MonoBehaviour {
+public class runButton : MonoBehaviour{
+
+    public static bool clicked = false;
 
     public void runButtonClicked()
     {
-        MovePlayer script = FindObjectOfType<MovePlayer>();
+        clicked = true;
+        /*MovePlayer script = FindObjectOfType<MovePlayer>();
         string blockName;
 
         for(int i = 0; i < DragHandler.chosenBlocks.Count; i++)
@@ -31,6 +34,6 @@ public class runButton : MonoBehaviour {
                     Debug.Log("in move");
                     break;
             }
-        }
+        }*/
     }
 }
