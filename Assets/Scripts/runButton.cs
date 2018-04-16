@@ -26,18 +26,11 @@ public class runButton : MonoBehaviour {
                     break;
 
                 case "moveBlock(Clone)":
-                    moveForward();
-                    //script.Move();
+                    //moveForward();
+                    script.Move();
                     Debug.Log("in move");
                     break;
             }
         }
-    }
-
-    void moveForward()
-    {
-        GameObject player = GameObject.Find("Cube");//locating main character/player
-        float moveSpeed = 100f;
-        player.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);//set main character to move forward
     }
 }
