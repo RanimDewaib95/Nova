@@ -44,7 +44,11 @@ public class MovePlayer : MonoBehaviour
 
     public void Move()
     {
+        GameObject player = GameObject.Find("Cube");//locating main character/player
+        float moveSpeed = 100f;
+        player.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);//set main character to move forward
 
+        /*
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         Vector3 HorStep = new Vector3(100f, 0f, 0f);
@@ -58,6 +62,7 @@ public class MovePlayer : MonoBehaviour
         transform.forward = heading;
         transform.position += rightMovement;
         transform.position += upMovement;
+        */
     }
 
     public IEnumerator RotateAround(Vector3 axis, float angle, float duration)

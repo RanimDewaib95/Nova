@@ -26,6 +26,7 @@ public class runButton : MonoBehaviour {
                     break;
 
                 case "moveBlock(Clone)":
+                    //moveForward();
                     script.Move();
                     Debug.Log("in move");
                     break;
