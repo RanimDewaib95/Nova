@@ -12,6 +12,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     Vector3 startPosition; //start position of the block
 	Transform startParent; //start parent of  the parent
+    Vector3 mousePos;
+    Vector3 worldPos;
 
 	#region IBeginDragHandler implementation
 
@@ -39,7 +41,11 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public void OnDrag (PointerEventData eventData)
 	{
-		draggedBlock.transform.position = Input.mousePosition; //drag the cloned object
+        mousePos = Input.mousePosition;
+        mousePos.z = 2.0f;
+        worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        draggedBlock.transform.position = worldPos;
+        
 	}
 
 	#endregion
