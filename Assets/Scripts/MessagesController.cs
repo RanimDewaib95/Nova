@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MessagesController : MonoBehaviour {
-    Queue<string> messages = new Queue<string>();
+    //Dictionary<int, string> messages = new Dictionary<int, string>();
+    List<string> messages = new List<string>();
 
-    GameObject button;
+    GameObject image;
+    GameObject nextButton;
+    GameObject previousButton;
+    
+
 
     Text message1;
     string message2;
@@ -14,7 +19,9 @@ public class MessagesController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        button = GameObject.Find("Message 1");
+        messages.Add("Level1Message1");
+
+        image = GameObject.Find("Image");
 
         message2 = "ranim is 2";
         message3 = "heba is 3";
@@ -24,23 +31,25 @@ public class MessagesController : MonoBehaviour {
 
         //message2.SetActive(false);
         //message3.SetActive(false);
-
-        messages.Enqueue(message2);
-        messages.Enqueue(message3);
-        messages.Enqueue(message4);
     }
 
     // Update is called once per frame
     void Update () {
-        button.GetComponent<Button>().onClick.AddListener(delegate { updateButton(); });
-	}
+        updateButton();
+        image.transform.FindChild("Next Button");
 
+        //image.GetComponent<Button>().onClick.AddListener(delegate { updateButton(); });
+	}
+   
     void updateButton()
     {
-        if (messages.Count != 0)
+        for(int i = 0; i < messages.Count; i++)
         {
-            button.GetComponentInChildren<Text>().text = messages.Peek().ToString();
-            messages.Dequeue();
+            Sprite mySprite = Resources.Load<Sprite>(messages[i]);
+            image.GetComponent<Image>().sprite = mySprite;
+
+            //button.GetComponentInChildren<Text>().text = messages[i].ToString();
+            
             Debug.Log("changed");
         }
     }
