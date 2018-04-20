@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 public class MovePlayer : MonoBehaviour
 {
@@ -8,6 +10,9 @@ public class MovePlayer : MonoBehaviour
     public int flag = 0;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
     string blockName;
+    List<string> runCommands = new List<string>();
+    string TBCC;
+    int chosenBlocks = 0;
 
     //blockName = DragHandler.chosenBlocks[i];
 
@@ -25,57 +30,16 @@ public class MovePlayer : MonoBehaviour
     {
         if (runButton.clicked == true)
         {
-            Debug.Log("in runButton");
-
+            //Debug.Log(Inventory.TBCC);
+            //Split TBCC into a List
+            TBCC = Inventory.TBCC;
+            runCommands = TBCC.Split(',').ToList<string>();
+            runCommands.RemoveAt(0);
+            chosenBlocks = runCommands.Count-1;
+            Debug.Log("# of blocks" + chosenBlocks);
+            
             StartCoroutine(updateMovement());
-
-            //for (int i = 0; i < DragHandler.chosenBlocks.Count; i++)
-            //{
-            //    Debug.Log(i);
-            //    //blockName = DragHandler.chosenBlocks[i];
-            //    switch (blockName)
-            //    {
-            //        case "rotateRightBlock(Clone)":
-            //            StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-            //            Debug.Log("in right");
-            //            break;
-
-            //        case "rotateLeftBlock(Clone)":
-            //            StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
-            //            Debug.Log("in left");
-            //            break;
-
-            //        case "moveBlock(Clone)":
-            //            //moveForward();
-            //            StartCoroutine(Move());
-            //            Debug.Log("in move");
-            //            break;
-            //    }
-            //}
-        }
-        
-        /*
-        if (Input.GetKey(KeyCode.UpArrow) && flag == 0)
-        {
-            flag = 1;
-            Move();
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow) && flag == 0)
-        {
-            flag = 1;
-            Move();
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
-        }*/
+        }  
     }
 
     public IEnumerator Move()
@@ -84,22 +48,6 @@ public class MovePlayer : MonoBehaviour
         float moveSpeed = 300f;
         player.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);//set main character to move forward
         yield return null;
-
-        /*
-        Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-        Vector3 HorStep = new Vector3(100f, 0f, 0f);
-        Vector3 rightMovement = (HorStep + right) * Input.GetAxis("Horizontal");
-
-        Vector3 VerStep = new Vector3(0f, 0f, 100f);
-        Vector3 upMovement = (VerStep + forward) * Input.GetAxis("Vertical");
-
-        Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
-
-        transform.forward = heading;
-        transform.position += rightMovement;
-        transform.position += upMovement;
-        */
     }
 
     public IEnumerator RotateAround(Vector3 axis, float angle, float duration)
@@ -119,34 +67,45 @@ public class MovePlayer : MonoBehaviour
 
     public IEnumerator updateMovement()
     {
-        Debug.Log("Coroutine started");
+        //Debug.Log("Coroutine started");
 
-        while (DragHandler.chosenBlocks.Count != 0 && flag == 0) {
+        while (chosenBlocks > 0 && flag == 0) {
             flag = 1;
-            blockName = DragHandler.chosenBlocks.Dequeue();
-            Debug.Log(blockName);
+            //blockName = DragHandler.chosenBlocks.Dequeue();//----------------------------------------
+            //Debug.Log(blockName);
 
-            switch (blockName)
+            for (int i = 0; i < runCommands.Count; i++)
             {
-                case "rotateRightBlock(Clone)":
+                Debug.Log(i + runCommands[i]);
+                if (runCommands[i] == "rotateRightBlock")
+                {
                     StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-                    Debug.Log("in right");
-                    break;
-
-                case "rotateLeftBlock(Clone)":
+                }
+                else if (runCommands[i] == "rotateLeftBlock")
+                {
                     StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
-                    Debug.Log("in left");
-                    break;
 
-                case "moveBlock(Clone)":
-                    //moveForward();
+                }
+                else if (runCommands[i] == "moveBlock")
+                {
                     StartCoroutine(Move());
-                    Debug.Log("in move");
-                    break;
+                }
+                else
+                {
+
+                }
+                Debug.Log("B"+chosenBlocks);
+                chosenBlocks--;
+                Debug.Log("A"+chosenBlocks);
+                yield return new WaitForSeconds(2.0f);
             }
-            yield return new WaitForSeconds(1.5f);
             flag = 0;
         }
+        ////////////////////////////////////
+        //Create A Reset Function that will reset the following
+        // the position of the cube on the right slot
+        // the axis of the cube
+        //Note: Disable the Run Button & Let player press the reset Button
         runButton.clicked = false;
     }
 }
