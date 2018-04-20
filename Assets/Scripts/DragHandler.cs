@@ -12,6 +12,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     Vector3 startPosition; //start position of the block
 	Transform startParent; //start parent of  the parent
+    Vector3 mousePos;
+    Vector3 worldPos;
 
 	#region IBeginDragHandler implementation
 
@@ -26,7 +28,16 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		} 
 		else {
 			draggedBlock = gameObject;
+            Debug.Log(Quaternion.identity);
 			draggedBlock = Instantiate (block, startPosition, Quaternion.identity, block.transform.parent );
+            draggedBlock.transform.Rotate(0f, 45f, 0f);
+            
+            //draggedBlock.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //Quaternion rot = new Quaternion();
+            //rot.eulerAngles = new Vector3 (0, 0, 0);
+            //draggedBlock.transform.rotation = rot;
+            //draggedBlock.transform.Rotate(Vector3.right * Time.deltaTime);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 45, 0), Time.deltaTime);
 			//draggedBlock.GetComponent<DragHandler>().
 		}
 			
@@ -39,7 +50,13 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public void OnDrag (PointerEventData eventData)
 	{
-		draggedBlock.transform.position = Input.mousePosition; //drag the cloned object
+		//draggedBlock.transform.position = Input.mousePosition; //drag the cloned object
+
+        mousePos = Input.mousePosition;
+        mousePos.z = 50.0f;
+        worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        draggedBlock.transform.position = worldPos;
+
 	}
 
 	#endregion
@@ -51,7 +68,9 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		//Debug.Log (draggedBlock.name);
 		if (draggedBlock.name.Contains ("(Clone)")) {
 			draggedBlock.transform.position = startPosition;
-            //Debug.Log (draggedBlock.transform.position);
+            //draggedBlock.transform.Rotate(20.705f, 49.107f, -22.208f);
+            
+
             chosenBlocks.Enqueue(draggedBlock.name); //add name of dragged block to the list of chosen blocks
         } 
 		else {
