@@ -50,6 +50,10 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public void OnDrag (PointerEventData eventData)
 	{
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
 		//draggedBlock.transform.position = Input.mousePosition; //drag the cloned object
 
         mousePos = Input.mousePosition;
