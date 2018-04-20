@@ -10,6 +10,8 @@ public class MessagesController : MonoBehaviour {
     GameObject image;
     GameObject nextButton;
     GameObject previousButton;
+
+    int nextButtonFlag = 0;
     
 
 
@@ -20,12 +22,10 @@ public class MessagesController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         messages.Add("Level1Message1");
+        messages.Add("Level1Message2");
 
         image = GameObject.Find("Image");
 
-        message2 = "ranim is 2";
-        message3 = "heba is 3";
-        message4 = "heba is 4";
         //message2 = GameObject.Find("text2").GetComponentInChildren<Text>();
         //message3 = GameObject.Find("text3").GetComponentInChildren<Text>();
 
@@ -35,22 +35,29 @@ public class MessagesController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        updateButton();
-        image.transform.FindChild("Next Button");
+        //updateButton();
+        nextButton = image.transform.Find("Next Button").gameObject;
+
+        nextButton.GetComponent<Button>().onClick.AddListener(delegate { StartCoroutine(updateButton()); });
 
         //image.GetComponent<Button>().onClick.AddListener(delegate { updateButton(); });
 	}
    
-    void updateButton()
+    private IEnumerator updateButton()
     {
         for(int i = 0; i < messages.Count; i++)
         {
-            Sprite mySprite = Resources.Load<Sprite>(messages[i]);
-            image.GetComponent<Image>().sprite = mySprite;
-
-            //button.GetComponentInChildren<Text>().text = messages[i].ToString();
+            if(nextButtonFlag == 0 && NextButton.clicked == true)
+            {
+                nextButtonFlag = 1;
+                Sprite mySprite = Resources.Load<Sprite>(messages[i]);
+                image.GetComponent<Image>().sprite = mySprite;
+                nextButtonFlag = 0;
+            }
+ 
+            yield return new WaitForSeconds(2.0f);
             
-            Debug.Log("changed");
         }
     }
+    //NextButton.clicked == false;
 }
