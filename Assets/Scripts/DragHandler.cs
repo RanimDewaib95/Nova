@@ -8,7 +8,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	public GameObject block; //the original block
 	public static GameObject leftBracket;
 	public static GameObject draggedBlock; //The block that is currently being dragged
-    public static Queue<string> chosenBlocks = new Queue<string>(); //list that contains the blocks that the player has chosen
+    //public static Queue<string> chosenBlocks = new Queue<string>(); //list that contains the blocks that the player has chosen
 
     Vector3 startPosition; //start position of the block
 	Transform startParent; //start parent of  the parent
@@ -70,7 +70,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             //draggedBlock.transform.Rotate(20.705f, 49.107f, -22.208f);
             
 
-            chosenBlocks.Enqueue(draggedBlock.name); //add name of dragged block to the list of chosen blocks
+            //chosenBlocks.Enqueue(draggedBlock.name); //add name of dragged block to the list of chosen blocks
         } 
 		else {
 			if (draggedBlock.transform.parent == startParent) {
