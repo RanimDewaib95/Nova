@@ -8,7 +8,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	public GameObject block; //the original block
 	public static GameObject leftBracket;
 	public static GameObject draggedBlock; //The block that is currently being dragged
-    public static Queue<string> chosenBlocks = new Queue<string>(); //list that contains the blocks that the player has chosen
+    //public static Queue<string> chosenBlocks = new Queue<string>(); //list that contains the blocks that the player has chosen
 
     Vector3 startPosition; //start position of the block
 	Transform startParent; //start parent of  the parent
@@ -50,21 +50,12 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public void OnDrag (PointerEventData eventData)
 	{
-<<<<<<< HEAD
 		//draggedBlock.transform.position = Input.mousePosition; //drag the cloned object
 
         mousePos = Input.mousePosition;
         mousePos.z = 50.0f;
         worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         draggedBlock.transform.position = worldPos;
-
-=======
-        mousePos = Input.mousePosition;
-        mousePos.z = 2.0f;
-        worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        draggedBlock.transform.position = worldPos;
-        
->>>>>>> faf6204422378358c28a5ba85d4a9723981f5476
 	}
 
 	#endregion
@@ -79,7 +70,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             //draggedBlock.transform.Rotate(20.705f, 49.107f, -22.208f);
             
 
-            chosenBlocks.Enqueue(draggedBlock.name); //add name of dragged block to the list of chosen blocks
+            //chosenBlocks.Enqueue(draggedBlock.name); //add name of dragged block to the list of chosen blocks
         } 
 		else {
 			if (draggedBlock.transform.parent == startParent) {
