@@ -50,6 +50,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public void OnDrag (PointerEventData eventData)
 	{
+<<<<<<< HEAD
 		//draggedBlock.transform.position = Input.mousePosition; //drag the cloned object
 
         mousePos = Input.mousePosition;
@@ -57,6 +58,13 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         draggedBlock.transform.position = worldPos;
 
+=======
+        mousePos = Input.mousePosition;
+        mousePos.z = 2.0f;
+        worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        draggedBlock.transform.position = worldPos;
+        
+>>>>>>> faf6204422378358c28a5ba85d4a9723981f5476
 	}
 
 	#endregion

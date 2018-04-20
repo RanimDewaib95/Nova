@@ -126,7 +126,6 @@ public class MovePlayer : MonoBehaviour
             blockName = DragHandler.chosenBlocks.Dequeue();
             Debug.Log(blockName);
 
-            //blockName = DragHandler.chosenBlocks[i];
             switch (blockName)
             {
                 case "rotateRightBlock(Clone)":
