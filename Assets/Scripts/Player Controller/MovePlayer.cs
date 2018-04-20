@@ -13,7 +13,7 @@ public class MovePlayer : MonoBehaviour
     List<string> runCommands = new List<string>();
     string TBCC;
     int chosenBlocks = 0;
-
+    //GameObject player;
     //blockName = DragHandler.chosenBlocks[i];
 
     void Start()
@@ -26,27 +26,27 @@ public class MovePlayer : MonoBehaviour
 
     }
 
-    void Update()
+
+    public void RunButtonClicker()
     {
-        if (runButton.clicked == true)
-        {
-            //Debug.Log(Inventory.TBCC);
-            //Split TBCC into a List
-            TBCC = Inventory.TBCC;
-            runCommands = TBCC.Split(',').ToList<string>();
-            runCommands.RemoveAt(0);
-            chosenBlocks = runCommands.Count-1;
-            Debug.Log("# of blocks" + chosenBlocks);
-            
-            StartCoroutine(updateMovement());
-        }  
+        //Debug.Log(Inventory.TBCC);
+        //Split TBCC into a List
+        TBCC = Inventory.TBCC;
+        runCommands = TBCC.Split(',').ToList<string>();
+        runCommands.RemoveAt(0);
+        chosenBlocks = runCommands.Count ;
+        Debug.Log("# of blocks" + chosenBlocks);
+
+        StartCoroutine(updateMovement());
     }
 
     public IEnumerator Move()
     {
-        GameObject player = GameObject.Find("Cube");//locating main character/player
-        float moveSpeed = 300f;
-        player.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);//set main character to move forward
+        Debug.Log("Move");
+        //GameObject player = GameObject.Find("Cube");//locating main character/player
+
+        float moveSpeed = 5000f;
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);//set main character to move forward
         yield return null;
     }
 
@@ -106,6 +106,6 @@ public class MovePlayer : MonoBehaviour
         // the position of the cube on the right slot
         // the axis of the cube
         //Note: Disable the Run Button & Let player press the reset Button
-        runButton.clicked = false;
+        //runButton.clicked = false;
     }
 }
