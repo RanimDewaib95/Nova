@@ -9,7 +9,9 @@ public class Inventory : MonoBehaviour, IHasChanged {
 	[SerializeField] Text inventoryText; 
 
 	public static string TBCC;
-	public GameObject textBlock ;
+	public GameObject textBlock;
+
+    int numberOfClicks = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -23,8 +25,12 @@ public class Inventory : MonoBehaviour, IHasChanged {
 		System.Text.StringBuilder builder = new System.Text.StringBuilder ();
         
         foreach (Transform slotTransform in slots) {
-			GameObject item = slotTransform.GetComponent<Slot> ().item;
-			if (item) {
+			GameObject item = slotTransform.GetComponent<Slot>().item;
+            /*if (item.name.Contains("Counter"))
+            {
+                numberOfClicks = item.GetComponent<DragHandler>().clicksCount;
+            }*/
+			else if (item) {
                 builder.Append(",");
                 if (item.name.Contains("rotateLeftBlock")){
                     builder.Append("rotateLeftBlock");

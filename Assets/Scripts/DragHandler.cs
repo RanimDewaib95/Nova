@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+{
 
 	public GameObject block; //the original block
 	public static GameObject leftBracket;
@@ -15,9 +16,11 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     Vector3 mousePos;
     Vector3 worldPos;
 
-	#region IBeginDragHandler implementation
+    public int clicksCount = 0;
 
-	public void OnBeginDrag (PointerEventData eventData)
+    #region IBeginDragHandler implementation
+
+    public void OnBeginDrag (PointerEventData eventData)
 	{
 		block = gameObject;
 		startPosition = block.transform.position;
@@ -50,7 +53,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public void OnDrag (PointerEventData eventData)
 	{
-
 		//draggedBlock.transform.position = Input.mousePosition; //drag the cloned object
 
         mousePos = Input.mousePosition;
@@ -69,7 +71,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		if (draggedBlock.name.Contains ("(Clone)")) {
 			draggedBlock.transform.position = startPosition;
             //draggedBlock.transform.Rotate(20.705f, 49.107f, -22.208f);
-            
+           
 
             //chosenBlocks.Enqueue(draggedBlock.name); //add name of dragged block to the list of chosen blocks
         } 
@@ -83,6 +85,15 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		//draggedBlock = null;
 		draggedBlock.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 	}
-	#endregion
+    #endregion
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        clicksCount++;
+        Debug.Log("Number of clicks");
+        Debug.Log(clicksCount);  
+            
+        draggedBlock.GetComponent<CanvasGroup>().blocksRaycasts = true;              
+    }
 
 }

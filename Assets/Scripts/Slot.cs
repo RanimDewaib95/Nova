@@ -27,6 +27,6 @@ public class Slot : MonoBehaviour, IDropHandler {
 			ExecuteEvents.ExecuteHierarchy<IHasChanged> (gameObject, null, (x, y) => x.HasChanged ());
 		}
 	}
-	#endregion
+    #endregion
 
 }
