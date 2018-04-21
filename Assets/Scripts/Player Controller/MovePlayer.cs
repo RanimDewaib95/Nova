@@ -41,9 +41,8 @@ public class MovePlayer : MonoBehaviour
 
     public IEnumerator Move()
     {
-        GameObject player = GameObject.Find("Cube");//locating main character/player
-        float moveSpeed = 300f;
-        player.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);//set main character to move forward
+        float moveSpeed = 8000f;
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);//set main character to move forward
         yield return null;
     }
 
