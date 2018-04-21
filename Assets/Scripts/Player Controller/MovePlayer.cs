@@ -125,7 +125,7 @@ public class MovePlayer : MonoBehaviour
 
         for (int i = runCommands.Count - 1; i >= 0; i--)
         {
-            Debug.Log(i + runCommands[i]);
+            //Debug.Log(i + runCommands[i]);
             if (runCommands[i] == "rotateLeftBlock")
             {
                 StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
