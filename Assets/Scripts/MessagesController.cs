@@ -14,6 +14,9 @@ public class MessagesController : MonoBehaviour {
     int nextButtonFlag = 0;
     int previousButtonFlag = 0;
 
+    public static bool clickedNext = false;
+    public static bool clickedPrevious = false;
+
     int i = 0; //counter to display messages when next is pressed
 
     // Use this for initialization
@@ -47,16 +50,16 @@ public class MessagesController : MonoBehaviour {
         image.GetComponent<Image>().sprite = mySprite;
     }
     
-    private void updateNextButton ()
+    public void updateNextButton ()
     {
-        if (i < messagesLevel1.Count && NextButton.clicked == true && nextButtonFlag == 0)
+        if (i < messagesLevel1.Count && clickedNext == true && nextButtonFlag == 0)
         {
             previousButton.SetActive(true);
 
             Debug.Log(i);
             nextButtonFlag = 1;
             nextButtonFlag = 0;
-            NextButton.clicked = false;
+            clickedNext = false;
             i++;
 
             //begining of the messages
@@ -76,12 +79,12 @@ public class MessagesController : MonoBehaviour {
 
     private void updatePreviousButton ()
     {
-        if (i > 0 && PreviousButton.clicked == true && previousButtonFlag == 0)
+        if (i > 0 && clickedPrevious == true && previousButtonFlag == 0)
         {
-            Debug.Log(i);
+            Debug.Log("in previous");
             previousButtonFlag = 1;
             previousButtonFlag = 0;
-            PreviousButton.clicked = false;
+            clickedPrevious = false;
             i--;
         }
 
@@ -97,6 +100,20 @@ public class MessagesController : MonoBehaviour {
             nextButton.SetActive(true);
             doneButton.SetActive(false);
         }
+    }
+
+    public void nextButtonClicked()
+    {
+        clickedNext = true;
+        updateNextButton();
+        clickedNext = false;
+    }
+
+    public void previousButtonClicked()
+    {
+        clickedPrevious = true;
+        updatePreviousButton();
+        clickedPrevious = false;
     }
 
 }
