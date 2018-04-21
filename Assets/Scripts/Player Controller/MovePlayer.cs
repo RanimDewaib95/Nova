@@ -24,11 +24,17 @@ public class MovePlayer : MonoBehaviour
         forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
 
+        UnityEngine.UI.Button ResetButton = GameObject.Find("ResetButton").GetComponent<UnityEngine.UI.Button>();
+        ResetButton.interactable = false;
     }
 
     public void RunButtonClicker()
     {
         //Debug.Log(Inventory.TBCC);
+        UnityEngine.UI.Button RunButton = GameObject.Find("RunButton").GetComponent<UnityEngine.UI.Button>();
+        UnityEngine.UI.Button ResetButton = GameObject.Find("ResetButton").GetComponent<UnityEngine.UI.Button>();
+        RunButton.interactable = false;
+        ResetButton.interactable = true;
         //Split TBCC into a List
         TBCC = Inventory.TBCC;
         runCommands = TBCC.Split(',').ToList<string>();
@@ -44,7 +50,10 @@ public class MovePlayer : MonoBehaviour
         chosenBlocks = runCommands.Count;
         StartCoroutine(reverseMovement());
         //Enable Run Button
-
+        UnityEngine.UI.Button RunButton = GameObject.Find("RunButton").GetComponent<UnityEngine.UI.Button>();
+        UnityEngine.UI.Button ResetButton = GameObject.Find("ResetButton").GetComponent<UnityEngine.UI.Button>();
+        RunButton.interactable = true;
+        ResetButton.interactable = false;
         //Clear Slots Panel
 
     }
