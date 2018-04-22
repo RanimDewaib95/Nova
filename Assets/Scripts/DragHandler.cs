@@ -90,8 +90,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnPointerClick(PointerEventData eventData)
     {
         clicksCount++;
-        Debug.Log("Number of clicks");
-        Debug.Log(clicksCount);  
+        //Debug.Log("Number of clicks");
+        //Debug.Log(clicksCount);  
             
         draggedBlock.GetComponent<CanvasGroup>().blocksRaycasts = true;              
     }

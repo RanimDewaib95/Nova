@@ -36,7 +36,7 @@ public class MovePlayer : MonoBehaviour
             runCommands = TBCC.Split(',').ToList<string>();
             runCommands.RemoveAt(0);
             chosenBlocks = runCommands.Count-1;
-            Debug.Log("# of blocks" + chosenBlocks);
+            Debug.Log("# of blocks " + chosenBlocks);
             
             StartCoroutine(updateMovement());
         }  
