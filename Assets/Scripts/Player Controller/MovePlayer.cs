@@ -110,18 +110,7 @@ public class MovePlayer : MonoBehaviour
                 else if (runCommands[i] == "moveBlock")
                 {
                     StartCoroutine(Move(8000f));
-                }
-                else if (runCommands[i] == "collectBlock")
-                {
-                    if(transform.position == GameObject.FindGameObjectWithTag("collectible").transform.position)
-                    {
-                        Debug.Log("in collectBlock");
-                        score += 1;
-                        Debug.Log(score);
-                        Destroy(GameObject.FindGameObjectWithTag("collectible"));
-                    }
-                }
-                else
+                }else
                 {
 
                 }
@@ -167,5 +156,14 @@ public class MovePlayer : MonoBehaviour
         flag = 0;
          }
 
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        //Destroy(other.gameObject);
+        if (other.gameObject.CompareTag("collectible"))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }

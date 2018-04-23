@@ -34,8 +34,6 @@ public class Inventory : MonoBehaviour, IHasChanged {
                     builder.Append("moveBlock");
 				}else if (item.name.Contains ("jump")){
 					builder.Append ("jump");
-				} else if (item.name.Contains ("collectBlock")) {
-                    builder.Append("collectBlock");
 				} else {
                     //Debug.Log("Error");
 				}
