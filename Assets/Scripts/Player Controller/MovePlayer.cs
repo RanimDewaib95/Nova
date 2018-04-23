@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 
 public class MovePlayer : MonoBehaviour
 {
-    public float moveSpeed = 700f;//Change in inspector to adjust move speed
+    public float moveSpeed = 1000f;//Change in inspector to adjust move speed
     public int flag = 0;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
     List<string> runCommands = new List<string>(); //All Slot Panel Blocks Translated
@@ -24,15 +25,15 @@ public class MovePlayer : MonoBehaviour
         forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
 
-        UnityEngine.UI.Button ResetButton = GameObject.Find("ResetButton").GetComponent<UnityEngine.UI.Button>();
+        Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
     }
 
     public void RunButtonClicker()
     {
         //Debug.Log(Inventory.TBCC);
-        UnityEngine.UI.Button RunButton = GameObject.Find("RunButton").GetComponent<UnityEngine.UI.Button>();
-        UnityEngine.UI.Button ResetButton = GameObject.Find("ResetButton").GetComponent<UnityEngine.UI.Button>();
+        Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
+        Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         RunButton.interactable = false;
         ResetButton.interactable = true;
         //Split TBCC into a List
@@ -50,8 +51,8 @@ public class MovePlayer : MonoBehaviour
         chosenBlocks = runCommands.Count;
         StartCoroutine(reverseMovement());
         //Enable Run Button
-        UnityEngine.UI.Button RunButton = GameObject.Find("RunButton").GetComponent<UnityEngine.UI.Button>();
-        UnityEngine.UI.Button ResetButton = GameObject.Find("ResetButton").GetComponent<UnityEngine.UI.Button>();
+        Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
+        Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         RunButton.interactable = true;
         ResetButton.interactable = false;
         //Clear Slots Panel
@@ -61,7 +62,7 @@ public class MovePlayer : MonoBehaviour
     public IEnumerator Move(float moveSpeed)
     {
         //float moveSpeed = 8000f;
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);//set main character to move forward
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime * -1);//set main character to move forward
         yield return null;
     }
 
