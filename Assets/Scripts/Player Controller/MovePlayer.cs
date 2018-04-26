@@ -33,10 +33,11 @@ public class MovePlayer : MonoBehaviour
             //Debug.Log(Inventory.TBCC);
             //Split TBCC into a List
             TBCC = Inventory.TBCC;
+            //Debug.Log(TBCC);
             runCommands = TBCC.Split(',').ToList<string>();
             runCommands.RemoveAt(0);
             chosenBlocks = runCommands.Count-1;
-            Debug.Log("# of blocks " + chosenBlocks);
+            //Debug.Log("# of blocks " + chosenBlocks);
             
             StartCoroutine(updateMovement());
         }  
@@ -76,7 +77,7 @@ public class MovePlayer : MonoBehaviour
 
             for (int i = 0; i < runCommands.Count; i++)
             {
-                Debug.Log(i + runCommands[i]);
+                //Debug.Log(i + runCommands[i]);
                 if (runCommands[i] == "rotateRightBlock")
                 {
                     StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
@@ -94,9 +95,9 @@ public class MovePlayer : MonoBehaviour
                 {
 
                 }
-                Debug.Log("B"+chosenBlocks);
+                //Debug.Log("B"+chosenBlocks);
                 chosenBlocks--;
-                Debug.Log("A"+chosenBlocks);
+                //Debug.Log("A"+chosenBlocks);
                 yield return new WaitForSeconds(2.0f);
             }
             flag = 0;

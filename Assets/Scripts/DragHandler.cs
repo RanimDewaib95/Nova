@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
-
 	public GameObject block; //the original block
 	public static GameObject leftBracket;
 	public static GameObject draggedBlock; //The block that is currently being dragged
@@ -90,8 +89,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnPointerClick(PointerEventData eventData)
     {
         clicksCount++;
-        //Debug.Log("Number of clicks");
-        //Debug.Log(clicksCount);  
+       // Debug.Log("Number of clicks");
+       // Debug.Log(clicksCount);  
             
         draggedBlock.GetComponent<CanvasGroup>().blocksRaycasts = true;              
     }
