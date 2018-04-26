@@ -28,18 +28,27 @@ public class MovePlayer : MonoBehaviour
 
     void Update()
     {
-        if (runButton.clicked == true)
+        if (Inventory.start == true)
         {
             //Debug.Log(Inventory.TBCC);
             //Split TBCC into a List
             TBCC = Inventory.TBCC;
-            //Debug.Log(TBCC);
+            Debug.Log(TBCC);
             runCommands = TBCC.Split(',').ToList<string>();
             runCommands.RemoveAt(0);
-            chosenBlocks = runCommands.Count-1;
-            //Debug.Log("# of blocks " + chosenBlocks);
+
+            for(int j = 0; j < runCommands.Count; j++)
+            {
+                Debug.Log(runCommands[j]);
+            }
+            
+
+            chosenBlocks = runCommands.Count;
+            Debug.Log("# of blocks " + chosenBlocks);
             
             StartCoroutine(updateMovement());
+
+            Inventory.start = false;
         }  
     }
 
@@ -68,7 +77,7 @@ public class MovePlayer : MonoBehaviour
 
     public IEnumerator updateMovement()
     {
-        //Debug.Log("Coroutine started");
+        Debug.Log("Coroutine started");
 
         while (chosenBlocks > 0 && flag == 0) {
             flag = 1;
@@ -87,7 +96,7 @@ public class MovePlayer : MonoBehaviour
                     StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
                 }
-                else if (runCommands[i] == "moveBlock")
+                else if (runCommands[i] == "moveBlock(Clone)")
                 {
                     StartCoroutine(Move());
                 }

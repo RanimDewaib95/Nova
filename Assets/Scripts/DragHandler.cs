@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	public GameObject block; //the original block
 	public static GameObject leftBracket;
@@ -15,7 +15,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     Vector3 mousePos;
     Vector3 worldPos;
 
-    public int clicksCount = 0;
+    
 
     #region IBeginDragHandler implementation
 
@@ -30,7 +30,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		} 
 		else {
 			draggedBlock = gameObject;
-            Debug.Log(Quaternion.identity);
+            //Debug.Log(Quaternion.identity);
 			draggedBlock = Instantiate (block, startPosition, Quaternion.identity, block.transform.parent );
             draggedBlock.transform.Rotate(0f, 45f, 0f);
             
@@ -86,13 +86,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	}
     #endregion
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        clicksCount++;
-       // Debug.Log("Number of clicks");
-       // Debug.Log(clicksCount);  
-            
-        draggedBlock.GetComponent<CanvasGroup>().blocksRaycasts = true;              
-    }
+    
 
 }

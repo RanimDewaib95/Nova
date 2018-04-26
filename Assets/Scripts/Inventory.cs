@@ -5,70 +5,67 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Text;
 
-public class Inventory : MonoBehaviour, IHasChanged {
+public class Inventory : MonoBehaviour {
 	[SerializeField] Transform slots;
 	[SerializeField] Text inventoryText;
 
     StringBuilder builder = new StringBuilder();
 
     public static string TBCC;
-	public GameObject textBlock;
+    public static bool finished = false;
+    public static bool start = false;
+
+    public GameObject textBlock;
 
     int numberOfClicks = 0;
     GameObject item;
 
     // Use this for initialization
     void Start () {
-        HasChanged();
+
     }
 
-	#region IHasChanged implementation
-
-	public void HasChanged ()
-	{
-        while(true)
+	public void Changed ()
+	{      
+        getStringOfBlocks();
+        if(finished == true)
         {
-            if (runButton.clicked == true)
-            {
-                getStringOfBlocks();
-                TBCC = getStringOfBlocks().ToString();
-                Debug.Log("I am printing TBCC");
-                Debug.Log(TBCC);
-                //inventoryText.text = builder.ToString ();
-            }
+            Debug.Log("I am printing TBCC");
+            TBCC = builder.ToString();
+            //Debug.Log(TBCC);
+            start = true;
         }
-
+        
+            //inventoryText.text = builder.ToString ();
+            //finished = true;
     }
 
-    #endregion
-
-    public StringBuilder getStringOfBlocks()
+    public void getStringOfBlocks()
     {
         foreach (Transform slotTransform in slots)
         {
             item = slotTransform.GetComponent<Slot>().item;
             if (item)
             {
-                numberOfClicks = item.GetComponent<DragHandler>().clicksCount;
+                //Debug.Log("in");
+                numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
                 //Debug.Log(item.name);
                 //Debug.Log("Number of clicks");
                 //Debug.Log(numberOfClicks);
                 loopThroughClicks(item.name, numberOfClicks);
             }      
         }
-        return builder;
+        finished = true;
     }
 
     public StringBuilder loopThroughClicks( string nameOfBlock, int numberOfClicks)
     {
-        //Debug.Log("in");
-        //Debug.Log(numberOfClicks);
        for (int r = 0; r < numberOfClicks; r++)
        {
         builder.Append(",");
         builder.Append(nameOfBlock);
-           // Debug.Log("loop");
-           // Debug.Log(builder.ToString());
+        //Debug.Log("loop");
+        //Debug.Log(builder.ToString());
        }
         return builder;
     }
