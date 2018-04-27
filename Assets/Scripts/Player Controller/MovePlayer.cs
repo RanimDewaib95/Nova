@@ -13,7 +13,6 @@ public class MovePlayer : MonoBehaviour
     List<string> runCommands = new List<string>();
     string TBCC;
     int chosenBlocks = 0;
-    public int score = 0;
 
     //blockName = DragHandler.chosenBlocks[i];
 
@@ -86,16 +85,6 @@ public class MovePlayer : MonoBehaviour
                 else if (runCommands[i] == "moveBlock")
                 {
                     StartCoroutine(Move());
-                }
-                else if (runCommands[i] == "collectBlock")
-                {
-                    if(transform.position == GameObject.FindGameObjectWithTag("collectible").transform.position)
-                    {
-                        Debug.Log("in grabBlock");
-                        score += 1;
-                        Debug.Log(score);
-                        Destroy(GameObject.FindGameObjectWithTag("collectible"));
-                    }
                 }
                 else
                 {
