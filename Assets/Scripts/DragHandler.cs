@@ -28,9 +28,19 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		} 
 		else {
 			draggedBlock = gameObject;
+            Debug.Log(Quaternion.identity);
 			draggedBlock = Instantiate (block, startPosition, Quaternion.identity, block.transform.parent );
             draggedBlock.transform.Rotate(0f, 45f, 0f);
+            
+            //draggedBlock.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //Quaternion rot = new Quaternion();
+            //rot.eulerAngles = new Vector3 (0, 0, 0);
+            //draggedBlock.transform.rotation = rot;
+            //draggedBlock.transform.Rotate(Vector3.right * Time.deltaTime);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 45, 0), Time.deltaTime);
+			//draggedBlock.GetComponent<DragHandler>().
 		}
+			
 		draggedBlock.GetComponent<CanvasGroup> ().blocksRaycasts = false;
 	}
 
@@ -40,7 +50,9 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public void OnDrag (PointerEventData eventData)
 	{
+
 		//draggedBlock.transform.position = Input.mousePosition; //drag the cloned object
+
         mousePos = Input.mousePosition;
         mousePos.z = 50.0f;
         worldPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -53,19 +65,22 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	public void OnEndDrag (PointerEventData eventData)
 	{
-        ////Debug.Log (draggedBlock.name);
-        //if (draggedBlock.name.Contains ("(Clone)")) {
-        //    draggedBlock.transform.position = startPosition;
+		//Debug.Log (draggedBlock.name);
+		if (draggedBlock.name.Contains ("(Clone)")) {
+			draggedBlock.transform.position = startPosition;
+            //draggedBlock.transform.Rotate(20.705f, 49.107f, -22.208f);
+            
 
-        //} 
-        //else {
-        //    if (draggedBlock.transform.parent == startParent) {
-        //        //Debug.Log ("destroy elmfrod"); ///////////////////////////////////ISSUE/////////////////////////
-        //        Destroy (draggedBlock);
-        //    }
-        //}
-        ////leftBracket = Resources.Load ("zBlock") as GameObject;
-        ////draggedBlock = null;
+            //chosenBlocks.Enqueue(draggedBlock.name); //add name of dragged block to the list of chosen blocks
+        } 
+		else {
+			if (draggedBlock.transform.parent == startParent) {
+				//Debug.Log ("destroy elmfrod"); ///////////////////////////////////ISSUE/////////////////////////
+				Destroy (draggedBlock);
+			}
+		}
+		//leftBracket = Resources.Load ("zBlock") as GameObject;
+		//draggedBlock = null;
 		draggedBlock.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 	}
 	#endregion

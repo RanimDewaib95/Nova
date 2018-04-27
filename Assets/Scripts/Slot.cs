@@ -24,11 +24,6 @@ public class Slot : MonoBehaviour, IDropHandler {
 
 		if (!item) {
 			DragHandler.draggedBlock.transform.SetParent (transform);
-            if(DragHandler.draggedBlock.transform.parent.name == "DeleteSlot")
-            {
-                Destroy(DragHandler.draggedBlock);
-            }
-            
 			ExecuteEvents.ExecuteHierarchy<IHasChanged> (gameObject, null, (x, y) => x.HasChanged ());
 		}
 	}

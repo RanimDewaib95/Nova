@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuController : MonoBehaviour {
 
-	public void playButtonClicked()
+	public void startButtonClicked()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
