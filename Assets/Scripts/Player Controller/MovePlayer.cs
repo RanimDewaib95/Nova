@@ -10,17 +10,20 @@ public class MovePlayer : MonoBehaviour
     public float moveSpeed = 1000f;//Change in inspector to adjust move speed
     public int flag = 0;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
-
+<<<<<<< HEAD
     string blockName;
+    List<string> runCommands = new List<string>();
+    string TBCC;
+    int chosenBlocks = 0;
     public int score = 0;
 
     //blockName = DragHandler.chosenBlocks[i];
-
+=======
     List<string> runCommands = new List<string>(); //All Slot Panel Blocks Translated
     string TBCC; //String Carries Names of all blocks in panel Slot
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
-
+>>>>>>> master
 
     void Start()
     {
@@ -115,7 +118,7 @@ public class MovePlayer : MonoBehaviour
                 {
                     if(transform.position == GameObject.FindGameObjectWithTag("collectible").transform.position)
                     {
-                        Debug.Log("in collectBlock");
+                        Debug.Log("in grabBlock");
                         score += 1;
                         Debug.Log(score);
                         Destroy(GameObject.FindGameObjectWithTag("collectible"));
