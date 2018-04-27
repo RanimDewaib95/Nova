@@ -12,17 +12,17 @@ public class CollectableHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(new Vector3(15, 25, 35) * Time.deltaTime);
-    }
+        //Debug.Log("in collectible handler script");
+	}
 
-    //void OnCollisionEnter(Collision col)
-    //{
-    //    Debug.Log("in collision function");
-    //    if (col.gameObject.tag == "collectible")
-    //    {
-    //        score += 1;
-    //        Debug.Log(score);
-    //        Destroy(col.gameObject);
-    //    }
-    //}
+    void OnCollisionEnter(Collision col)
+    {
+        Debug.Log("in collision function");
+        if (col.gameObject.tag == "collectible")
+        {
+            score += 1;
+            Debug.Log(score);
+            Destroy(col.gameObject);
+        }
+    }
 }
