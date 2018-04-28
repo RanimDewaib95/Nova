@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &365981153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,6 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &392016422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,6 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &547199072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1197,8 +1200,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 996496503}
-        m_MethodName: RunButtonClicker
+      - m_Target: {fileID: 2068807216}
+        m_MethodName: Changed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1517,6 +1520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &778997550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1938,7 +1942,7 @@ GameObject:
   - component: {fileID: 996496503}
   m_Layer: 0
   m_Name: astronaut
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2305,6 +2309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1043251766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2607,6 +2612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1204364958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3049,6 +3055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1373703460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3442,6 +3449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1521218948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3733,6 +3741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1650093117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3973,6 +3982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1684581132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4258,6 +4268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1830607810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4483,6 +4494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1913936388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4587,6 +4599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &1916658524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4799,6 +4812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &2000623557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4982,6 +4996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &2042665974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5071,6 +5086,7 @@ MonoBehaviour:
   slots: {fileID: 1692599563}
   inventoryText: {fileID: 0}
   textBlock: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &2068807217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5270,6 +5286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicksCount: 0
 --- !u!114 &2135591266
 MonoBehaviour:
   m_ObjectHideFlags: 0
