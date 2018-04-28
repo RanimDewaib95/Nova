@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
-{
-    public int clicksCount = 0;
+public class Slot : MonoBehaviour, IDropHandler {
 
-    public GameObject item {
+	public GameObject item {
 		get {
 			if (transform.childCount > 0) {
-                //Debug.Log (transform.childCount);
-            return transform.GetChild (0).gameObject;
+				Debug.Log (transform.childCount);
+			return transform.GetChild (0).gameObject;
 			}
 			return null;
 		}
@@ -34,16 +32,6 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 			ExecuteEvents.ExecuteHierarchy<IHasChanged> (gameObject, null, (x, y) => x.HasChanged ());
 		}
 	}
-    #endregion
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if(transform.childCount > 0)
-        {
-            clicksCount++;
-            //Debug.Log("Number of clicks");
-            //Debug.Log(clicksCount);
-        }
-    }
+	#endregion
 
 }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
-{
+public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+
 	public GameObject block; //the original block
 	public static GameObject leftBracket;
 	public static GameObject draggedBlock; //The block that is currently being dragged
@@ -15,11 +15,9 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     Vector3 mousePos;
     Vector3 worldPos;
 
-    
+	#region IBeginDragHandler implementation
 
-    #region IBeginDragHandler implementation
-
-    public void OnBeginDrag (PointerEventData eventData)
+	public void OnBeginDrag (PointerEventData eventData)
 	{
 		block = gameObject;
 		startPosition = block.transform.position;
@@ -30,8 +28,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		} 
 		else {
 			draggedBlock = gameObject;
-            //Debug.Log(Quaternion.identity);
-
 			draggedBlock = Instantiate (block, startPosition, Quaternion.identity, block.transform.parent );
             draggedBlock.transform.Rotate(0f, 45f, 0f);
 		}
@@ -70,28 +66,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         //}
         ////leftBracket = Resources.Load ("zBlock") as GameObject;
         ////draggedBlock = null;
-
-		//Debug.Log (draggedBlock.name);
-		if (draggedBlock.name.Contains ("(Clone)")) {
-			draggedBlock.transform.position = startPosition;
-            //draggedBlock.transform.Rotate(20.705f, 49.107f, -22.208f);
-           
-
-            //chosenBlocks.Enqueue(draggedBlock.name); //add name of dragged block to the list of chosen blocks
-        } 
-		else {
-			if (draggedBlock.transform.parent == startParent) {
-				//Debug.Log ("destroy elmfrod"); ///////////////////////////////////ISSUE/////////////////////////
-				Destroy (draggedBlock);
-			}
-		}
-		//leftBracket = Resources.Load ("zBlock") as GameObject;
-		//draggedBlock = null;
-
 		draggedBlock.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 	}
-    #endregion
-
-    
+	#endregion
 
 }

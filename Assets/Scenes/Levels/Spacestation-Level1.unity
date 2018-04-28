@@ -338,7 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &365981153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,7 +581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &392016422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +754,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4084554297726468, guid: a14d4dffef8cd774fb39630a166f6731,
     type: 2}
   m_PrefabInternal: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
   m_GameObject: {fileID: 437903582}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -464.77206, y: 4.9119415, z: 100.30824}
@@ -765,15 +762,6 @@ Transform:
   - {fileID: 1509350878}
   m_Father: {fileID: 749103116}
   m_RootOrder: 6
-=======
-  m_GameObject: {fileID: 458365275}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 60, z: 0}
-  m_LocalScale: {x: 60.467762, y: 60.46771, z: 60.46771}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &547199069
 GameObject:
@@ -823,7 +811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &547199072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1210,13 +1197,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
       - m_Target: {fileID: 996496503}
         m_MethodName: RunButtonClicker
-=======
-      - m_Target: {fileID: 2068807216}
-        m_MethodName: Changed
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1372,7 +1354,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1543516041613470, guid: a14d4dffef8cd774fb39630a166f6731,
     type: 2}
   m_PrefabInternal: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
   serializedVersion: 5
   m_Component:
   - component: {fileID: 749103116}
@@ -1385,17 +1366,6 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &749103116
 Transform:
-=======
-  m_GameObject: {fileID: 778997547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clicksCount: 0
---- !u!114 &778997550
-MonoBehaviour:
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 4398164145483634, guid: a14d4dffef8cd774fb39630a166f6731,
     type: 2}
@@ -1547,12 +1517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
 --- !u!114 &778997550
-=======
-  clicksCount: 0
---- !u!114 &1043251766
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2951,23 +2916,7 @@ RectTransform:
   m_AnchoredPosition: {x: 130.66, y: -55.36001}
   m_SizeDelta: {x: 32.1, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
 --- !u!114 &1352285063
-=======
---- !u!114 &1204364957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1204364955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clicksCount: 0
---- !u!114 &1204364958
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -3100,7 +3049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &1373703460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3494,7 +3442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &1521218948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3684,7 +3631,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4549262498255408, guid: a14d4dffef8cd774fb39630a166f6731,
     type: 2}
   m_PrefabInternal: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
   m_GameObject: {fileID: 1602013451}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
@@ -3700,34 +3646,6 @@ MeshRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1602013451}
-=======
-  m_GameObject: {fileID: 1521218945}
---- !u!1 &1566555241
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1566555245}
-  - component: {fileID: 1566555244}
-  - component: {fileID: 1566555243}
-  - component: {fileID: 1566555242}
-  - component: {fileID: 1566555246}
-  m_Layer: 0
-  m_Name: Cube (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &1566555242
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1566555241}
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -3736,13 +3654,9 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
   - {fileID: 2100000, guid: b9425a217d90e49448946afe2264f808, type: 2}
   - {fileID: 2100000, guid: 788bd6994e6e0c043b3f705ec96f1d3d, type: 2}
   - {fileID: 2100000, guid: ae4a580a810ac6f4e8a5196baad2c17e, type: 2}
-=======
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3750,11 +3664,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
   m_PreserveUVs: 0
-=======
-  m_PreserveUVs: 1
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -3766,7 +3676,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-<<<<<<< HEAD:Assets/Scenes/Levels/Spacestation-Level1.unity
 --- !u!33 &1602013454
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3775,51 +3684,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1602013451}
   m_Mesh: {fileID: 4300000, guid: 4a2625622f0204b40a312a4eb8c5e172, type: 3}
-=======
---- !u!65 &1566555243
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1566555241}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &1566555244
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1566555241}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1566555245
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1566555241}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.6, y: 60, z: 63.8}
-  m_LocalScale: {x: 28.725075, y: 28.725096, z: 28.725096}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1566555246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1566555241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8d5b63d1939d1d4daf3f0af42904769, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
->>>>>>> refs/remotes/origin/Ranim:Assets/Scenes/s.unity
 --- !u!1 &1650093114
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,7 +3733,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &1650093117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4110,7 +3973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &1684581132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4396,7 +4258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &1830607810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4622,7 +4483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &1913936388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4727,7 +4587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &1916658524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4940,7 +4799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &2000623557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5124,7 +4982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba906da1759ac844b6cf011517a55e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clicksCount: 0
 --- !u!114 &2042665974
 MonoBehaviour:
   m_ObjectHideFlags: 0

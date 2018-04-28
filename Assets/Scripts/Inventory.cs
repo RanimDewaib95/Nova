@@ -3,72 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Text;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour, IHasChanged {
 	[SerializeField] Transform slots;
-	[SerializeField] Text inventoryText;
+	[SerializeField] Text inventoryText; 
 
-    StringBuilder builder = new StringBuilder();
+	public static string TBCC;
+	public GameObject textBlock ;
 
-    public static string TBCC;
-    public static bool finished = false;
-    public static bool start = false;
+	// Use this for initialization
+	void Start () {
+		HasChanged ();
+	}
 
-    public GameObject textBlock;
+	#region IHasChanged implementation
 
-    int numberOfClicks = 0;
-    GameObject item;
-
-    // Use this for initialization
-    void Start () {
-
-    }
-
-	public void Changed ()
-	{      
-        getStringOfBlocks();
-        if(finished == true)
-        {
-            Debug.Log("I am printing TBCC");
-            TBCC = builder.ToString();
-            //Debug.Log(TBCC);
-            start = true;
-        }
+	public void HasChanged ()
+	{
+		System.Text.StringBuilder builder = new System.Text.StringBuilder ();
         
-            //inventoryText.text = builder.ToString ();
-            //finished = true;
-    }
+        foreach (Transform slotTransform in slots) {
+			GameObject item = slotTransform.GetComponent<Slot> ().item;
+			if (item) {
+                builder.Append(",");
+                if (item.name.Contains("rotateLeftBlock")){
+                    builder.Append("rotateLeftBlock");
+                }else if (item.name.Contains("rotateRightBlock")){
+                    builder.Append("rotateRightBlock");
+                }else if (item.name.Contains("moveBlock")){
+                    builder.Append("moveBlock");
+				}else if (item.name.Contains ("jump")){
+					builder.Append ("jump");
+				} else if (item.name.Contains ("collect")) {
+                    builder.Append("collect");
+				} else {
+                    //Debug.Log("Error");
+				}
+			}
+		}
+		TBCC = builder.ToString ();
+        //Debug.Log(TBCC);
+		//inventoryText.text = builder.ToString ();
+	}
 
-    public void getStringOfBlocks()
-    {
-        foreach (Transform slotTransform in slots)
-        {
-            item = slotTransform.GetComponent<Slot>().item;
-            if (item)
-            {
-                //Debug.Log("in");
-                numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
-                //Debug.Log(item.name);
-                //Debug.Log("Number of clicks");
-                //Debug.Log(numberOfClicks);
-                loopThroughClicks(item.name, numberOfClicks);
-            }      
-        }
-        finished = true;
-    }
-
-    public StringBuilder loopThroughClicks( string nameOfBlock, int numberOfClicks)
-    {
-       for (int r = 0; r < numberOfClicks; r++)
-       {
-        builder.Append(",");
-        builder.Append(nameOfBlock);
-        //Debug.Log("loop");
-        //Debug.Log(builder.ToString());
-       }
-        return builder;
-    }
+	#endregion
 }
 	
 	
