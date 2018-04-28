@@ -37,13 +37,35 @@ public class MovePlayer : MonoBehaviour
         RunButton.interactable = false;
         ResetButton.interactable = true;
         //Split TBCC into a List
+        /*
         TBCC = Inventory.TBCC;
         runCommands = TBCC.Split(',').ToList<string>();
         runCommands.RemoveAt(0);
         chosenBlocks = runCommands.Count;
         //Debug.Log("# of blocks" + chosenBlocks);
 
-        StartCoroutine(updateMovement());
+        StartCoroutine(updateMovement());*/
+        if (Inventory.start == true)
+        {
+            //Debug.Log(Inventory.TBCC);
+            //Split TBCC into a List
+            TBCC = Inventory.TBCC;
+            Debug.Log(TBCC);
+            runCommands = TBCC.Split(',').ToList<string>();
+            runCommands.RemoveAt(0);
+
+            for (int j = 0; j < runCommands.Count; j++)
+            {
+                Debug.Log(runCommands[j]);
+            }
+
+            chosenBlocks = runCommands.Count;
+            Debug.Log("# of blocks " + chosenBlocks);
+
+            StartCoroutine(updateMovement());
+
+            Inventory.start = false;
+        }
     }
 
     public void ResetButtonClicker()
@@ -91,16 +113,16 @@ public class MovePlayer : MonoBehaviour
             for (int i = 0; i < runCommands.Count; i++)
             {
                 //Debug.Log(i + runCommands[i]);
-                if (runCommands[i] == "rotateRightBlock")
+                if (runCommands[i] == "rotateRightBlock(Clone)")
                 {
                     StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
                 }
-                else if (runCommands[i] == "rotateLeftBlock")
+                else if (runCommands[i] == "rotateLeftBlock(Clone)")
                 {
                     StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
                 }
-                else if (runCommands[i] == "moveBlock")
+                else if (runCommands[i] == "moveBlock(Clone)")
                 {
                     StartCoroutine(Move(8000f));
                 }
