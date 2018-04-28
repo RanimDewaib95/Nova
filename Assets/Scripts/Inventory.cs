@@ -32,12 +32,8 @@ public class Inventory : MonoBehaviour {
         {
             Debug.Log("I am printing TBCC");
             TBCC = builder.ToString();
-            //Debug.Log(TBCC);
             start = true;
         }
-        
-            //inventoryText.text = builder.ToString ();
-            //finished = true;
     }
 
     public void getStringOfBlocks()
@@ -47,11 +43,7 @@ public class Inventory : MonoBehaviour {
             item = slotTransform.GetComponent<Slot>().item;
             if (item)
             {
-                //Debug.Log("in");
                 numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
-                //Debug.Log(item.name);
-                //Debug.Log("Number of clicks");
-                //Debug.Log(numberOfClicks);
                 loopThroughClicks(item.name, numberOfClicks);
             }      
         }
@@ -64,8 +56,6 @@ public class Inventory : MonoBehaviour {
        {
         builder.Append(",");
         builder.Append(nameOfBlock);
-        //Debug.Log("loop");
-        //Debug.Log(builder.ToString());
        }
         return builder;
     }

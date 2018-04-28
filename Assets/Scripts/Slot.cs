@@ -10,7 +10,6 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
     public GameObject item {
 		get {
 			if (transform.childCount > 0) {
-                //Debug.Log (transform.childCount);
             return transform.GetChild (0).gameObject;
 			}
 			return null;
@@ -41,8 +40,6 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         if(transform.childCount > 0)
         {
             clicksCount++;
-            //Debug.Log("Number of clicks");
-            //Debug.Log(clicksCount);
         }
     }
 

@@ -71,7 +71,6 @@ public class MovePlayer : MonoBehaviour
                 Debug.Log(runCommands[j]);
             }
             
-
             chosenBlocks = runCommands.Count;
             Debug.Log("# of blocks " + chosenBlocks);
             
