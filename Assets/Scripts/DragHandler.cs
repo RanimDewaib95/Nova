@@ -8,11 +8,14 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	public GameObject block; //the original block
 	public static GameObject leftBracket;
 	public static GameObject draggedBlock; //The block that is currently being dragged
+    //public static Queue<string> chosenBlocks = new Queue<string>(); //list that contains the blocks that the player has chosen
 
     Vector3 startPosition; //start position of the block
 	Transform startParent; //start parent of  the parent
     Vector3 mousePos;
     Vector3 worldPos;
+
+    
 
     #region IBeginDragHandler implementation
 
@@ -27,7 +30,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		} 
 		else {
 			draggedBlock = gameObject;
-        
+            //Debug.Log(Quaternion.identity);
+
 			draggedBlock = Instantiate (block, startPosition, Quaternion.identity, block.transform.parent );
             draggedBlock.transform.Rotate(0f, 45f, 0f);
 		}
@@ -87,4 +91,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		draggedBlock.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 	}
     #endregion
+
+    
+
 }
