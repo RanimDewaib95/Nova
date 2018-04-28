@@ -5,9 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Text;
 
-public class Inventory : MonoBehaviour {
-	[SerializeField] Transform slots;
-	[SerializeField] Text inventoryText;
+public class Inventory : MonoBehaviour
+{
+    [SerializeField]
+    Transform slots;
+    [SerializeField]
+    Text inventoryText;
 
     StringBuilder builder = new StringBuilder();
 
@@ -16,28 +19,26 @@ public class Inventory : MonoBehaviour {
     public static bool start = false;
 
     public GameObject textBlock;
+    public GameObject player; 
 
     int numberOfClicks = 0;
     GameObject item;
 
-    // Use this for initialization
-    void Start () {
-
+    public void Start()
+    {
+        player = GameObject.Find("astronaut");
     }
-
-	public void Changed ()
-	{      
+    public void Changed()
+    {
         getStringOfBlocks();
-        if(finished == true)
+        if (finished == true)
         {
             Debug.Log("I am printing TBCC");
             TBCC = builder.ToString();
             //Debug.Log(TBCC);
             start = true;
+            player.GetComponent<MovePlayer>().RunButtonClicker();
         }
-        
-            //inventoryText.text = builder.ToString ();
-            //finished = true;
     }
 
     public void getStringOfBlocks()
@@ -53,27 +54,38 @@ public class Inventory : MonoBehaviour {
                 //Debug.Log("Number of clicks");
                 //Debug.Log(numberOfClicks);
                 loopThroughClicks(item.name, numberOfClicks);
-            }      
+            }
         }
         finished = true;
     }
 
-    public StringBuilder loopThroughClicks( string nameOfBlock, int numberOfClicks)
+    public StringBuilder loopThroughClicks(string nameOfBlock, int numberOfClicks)
     {
-       for (int r = 0; r < numberOfClicks; r++)
-       {
-        builder.Append(",");
-        builder.Append(nameOfBlock);
-        //Debug.Log("loop");
-        //Debug.Log(builder.ToString());
-       }
+        if(numberOfClicks == 0)
+        {
+            builder.Append(",");
+            builder.Append(nameOfBlock);
+        }
+        else
+        {
+            for (int r = 0; r < numberOfClicks; r++)
+            {
+                builder.Append(",");
+                builder.Append(nameOfBlock);
+                //Debug.Log("loop");
+                //Debug.Log(builder.ToString());
+            }
+        }
+        
         return builder;
     }
 }
-	
-	
-namespace UnityEngine.EventSystems {
-	public interface IHasChanged : IEventSystemHandler {
-		void HasChanged ();	
-	}
+
+
+namespace UnityEngine.EventSystems
+{
+    public interface IHasChanged : IEventSystemHandler
+    {
+        void HasChanged();
+    }
 }
