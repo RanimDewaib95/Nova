@@ -116,11 +116,6 @@ public class MovePlayer : MonoBehaviour
                 else if (runCommands[i] == "moveBlock(Clone)")
                 {
                     StartCoroutine(Move(8000f));
-                    //GameObject.Find("PickUp");
-                    //if (transform.childCount())
-                    //{
-
-                    //}
                 }
                 else
                 {
@@ -167,5 +162,13 @@ public class MovePlayer : MonoBehaviour
         flag = 0;
          }
 
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Collectibles"))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }
