@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour {
-    GameObject goalMessage;
+    endingMessage goalMessage;
 
     // Use this for initialization
     void Start ()
     {
-        goalMessage = GameObject.FindGameObjectWithTag("Finish");
+        goalMessage = new endingMessage();
 	}
 
     void OnTriggerEnter(Collider other)
     {
+        goalMessage.displayLastMessage();
         Debug.Log("found collider");
-        goalMessage.GetComponent<MessagesController>().displayLastMessage();
         //goalMessage.SetActive(true);
     }
 }

@@ -10,6 +10,7 @@ public class MessagesController : MonoBehaviour {
     GameObject nextButton;
     GameObject previousButton;
     GameObject doneButton;
+    public static GameObject endMessage;
 
     Sprite mySprite;
 
@@ -23,6 +24,9 @@ public class MessagesController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        endMessage = GameObject.Find("CanvasPop (2)").gameObject;
+        endMessage.SetActive(false);
+
         messagesLevel1.Add("Level1Message1");
         messagesLevel1.Add("Level1Message2");
         messagesLevel1.Add("MessagesLevel1-03");
@@ -38,9 +42,10 @@ public class MessagesController : MonoBehaviour {
         nextButton = image.transform.Find("Next Button").gameObject;
         previousButton = image.transform.Find("Previous Button").gameObject;
         doneButton = image.transform.Find("Done Button").gameObject;
-
+        
         doneButton.SetActive(false);
         previousButton.SetActive(false);
+        
     }
 
     public void Update () {
@@ -123,12 +128,13 @@ public class MessagesController : MonoBehaviour {
         GameObject.Find("CanvasPop (1)").SetActive(false);
     }
 
+    /*
     public void displayLastMessage()
     {
         mySprite = Resources.Load<Sprite>(messagesLevel1[messagesLevel1.Count - 1]);
         gameObject.GetComponentInChildren<Image>().sprite = mySprite;
         gameObject.transform.Find("Image").gameObject.GetComponent<Image>().sprite = mySprite;
         gameObject.SetActive(true);
-    }
+    }*/
 
 }
