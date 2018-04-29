@@ -61,13 +61,22 @@ public class Inventory : MonoBehaviour
 
     public StringBuilder loopThroughClicks(string nameOfBlock, int numberOfClicks)
     {
-        for (int r = 0; r < numberOfClicks+1; r++)
+        if(numberOfClicks == 0)
         {
             builder.Append(",");
             builder.Append(nameOfBlock);
-            //Debug.Log("loop");
-            //Debug.Log(builder.ToString());
         }
+        else
+        {
+            for (int r = 0; r < numberOfClicks; r++)
+            {
+                builder.Append(",");
+                builder.Append(nameOfBlock);
+                //Debug.Log("loop");
+                //Debug.Log(builder.ToString());
+            }
+        }
+        
         return builder;
     }
 }

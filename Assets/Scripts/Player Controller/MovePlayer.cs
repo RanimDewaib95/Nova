@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 
-
 public class MovePlayer : MonoBehaviour
 {
     public float moveSpeed = 1000f;//Change in inspector to adjust move speed
@@ -36,19 +35,11 @@ public class MovePlayer : MonoBehaviour
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         RunButton.interactable = false;
         ResetButton.interactable = true;
-        //Split TBCC into a List
-        /*
-        TBCC = Inventory.TBCC;
-        runCommands = TBCC.Split(',').ToList<string>();
-        runCommands.RemoveAt(0);
-        chosenBlocks = runCommands.Count;
-        //Debug.Log("# of blocks" + chosenBlocks);
-
-        StartCoroutine(updateMovement());*/
+        
+        //after inventory finished getting the chosen blocks
         if (Inventory.start == true)
         {
-            //Debug.Log(Inventory.TBCC);
-            //Split TBCC into a List
+            //Debug.Log(Inventory.TBCC)
             TBCC = Inventory.TBCC;
             Debug.Log(TBCC);
             runCommands = TBCC.Split(',').ToList<string>();
@@ -139,7 +130,6 @@ public class MovePlayer : MonoBehaviour
         }
 
     }
-
 
     public IEnumerator reverseMovement()
     {
