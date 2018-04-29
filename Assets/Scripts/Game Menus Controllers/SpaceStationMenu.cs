@@ -18,12 +18,8 @@ public class SpaceStationMenu : MonoBehaviour {
         //SceneManager.MergeScenes(level1, messages);
     }
 
-    // The coroutine runs on its own at the same time as Update() and takes an integer indicating which scene to load.
     IEnumerator LoadNewScene()
     {
-        // This line waits for 2 seconds before executing the next line in the coroutine.
-        // This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
-        
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("Spacestation-Level1");
         // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.

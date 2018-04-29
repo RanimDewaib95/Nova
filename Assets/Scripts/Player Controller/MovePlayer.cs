@@ -61,7 +61,9 @@ public class MovePlayer : MonoBehaviour
 
     public void ResetButtonClicker()
     {
+        Debug.Log("in reverse");
         chosenBlocks = runCommands.Count;
+        Debug.Log("number of blocks to reverse is " + chosenBlocks);
         StartCoroutine(reverseMovement());
         //Enable Run Button
         Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
