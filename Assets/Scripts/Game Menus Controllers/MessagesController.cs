@@ -11,6 +11,8 @@ public class MessagesController : MonoBehaviour {
     GameObject previousButton;
     GameObject doneButton;
 
+    Sprite mySprite;
+
     int nextButtonFlag = 0;
     int previousButtonFlag = 0;
 
@@ -30,6 +32,7 @@ public class MessagesController : MonoBehaviour {
         messagesLevel1.Add("MessagesLevel1-07");
         messagesLevel1.Add("MessagesLevel1-08");
         messagesLevel1.Add("MessagesLevel1-09");
+        messagesLevel1.Add("MessagesLevel1-10");
 
         image = GameObject.Find("Image");
         nextButton = image.transform.Find("Next Button").gameObject;
@@ -45,7 +48,7 @@ public class MessagesController : MonoBehaviour {
         nextButton.GetComponent<Button>().onClick.AddListener(delegate { updateNextButton(); }); 
         previousButton.GetComponent<Button>().onClick.AddListener(delegate { updatePreviousButton(); });
 
-        Sprite mySprite = Resources.Load<Sprite>(messagesLevel1[i]);
+        mySprite = Resources.Load<Sprite>(messagesLevel1[i]);
         image.GetComponent<Image>().sprite = mySprite;
     }
     
@@ -68,7 +71,7 @@ public class MessagesController : MonoBehaviour {
             }
 
             //reached the end of the messages
-            if (i == messagesLevel1.Count - 1)
+            if (i == messagesLevel1.Count - 2)
             {
                 nextButton.SetActive(false);
                 doneButton.SetActive(true);
@@ -94,7 +97,7 @@ public class MessagesController : MonoBehaviour {
         }
 
         //pressed previous when player reached the end of the messages
-        if (i == messagesLevel1.Count - 2)
+        if (i == messagesLevel1.Count - 3)
         {
             nextButton.SetActive(true);
             doneButton.SetActive(false);
@@ -118,6 +121,14 @@ public class MessagesController : MonoBehaviour {
     public void doneButtonClicked()
     {
         GameObject.Find("CanvasPop (1)").SetActive(false);
+    }
+
+    public void displayLastMessage()
+    {
+        mySprite = Resources.Load<Sprite>(messagesLevel1[messagesLevel1.Count - 1]);
+        gameObject.GetComponentInChildren<Image>().sprite = mySprite;
+        gameObject.transform.Find("Image").gameObject.GetComponent<Image>().sprite = mySprite;
+        gameObject.SetActive(true);
     }
 
 }

@@ -1012,7 +1012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -311.26, y: 16.26}
+  m_AnchoredPosition: {x: -44, y: 16.26}
   m_SizeDelta: {x: 316.71, y: 135.66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &660055484
@@ -2011,7 +2011,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 996496502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -469.9286, y: 5.771942, z: 115.41824}
+  m_LocalPosition: {x: -469.9286, y: 4.97, z: 115.41824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1326925843}
@@ -3626,6 +3626,8 @@ GameObject:
   - component: {fileID: 1602013452}
   - component: {fileID: 1602013454}
   - component: {fileID: 1602013453}
+  - component: {fileID: 1602013456}
+  - component: {fileID: 1602013455}
   m_Layer: 0
   m_Name: metalTileConnectStraight
   m_TagString: Untagged
@@ -3692,6 +3694,29 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1602013451}
   m_Mesh: {fileID: 4300000, guid: 4a2625622f0204b40a312a4eb8c5e172, type: 3}
+--- !u!114 &1602013455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1602013451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e756062afb747244b753a07ecdcfc69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1602013456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1602013451}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 0.8, z: 9.999999}
+  m_Center: {x: 5.0000057, y: 0.4, z: 4.9999995}
 --- !u!1 &1650093114
 GameObject:
   m_ObjectHideFlags: 0
