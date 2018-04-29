@@ -116,11 +116,11 @@ public class MovePlayer : MonoBehaviour
                 else if (runCommands[i] == "moveBlock(Clone)")
                 {
                     StartCoroutine(Move(8000f));
-                    GameObject.Find("PickUp");
-                    if (transform.childCount())
-                    {
+                    //GameObject.Find("PickUp");
+                    //if (transform.childCount())
+                    //{
 
-                    }
+                    //}
                 }
                 else
                 {
