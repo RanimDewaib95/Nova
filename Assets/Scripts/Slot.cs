@@ -7,31 +7,6 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 {
     public int clicksCount = 0;
 
-<<<<<<< HEAD
-	public GameObject item {
-		get {
-			if (transform.childCount > 0) {
-				Debug.Log (transform.childCount);
-			return transform.GetChild (0).gameObject;
-			}
-			return null;
-		}
-	}
-
-	Transform CodePanelTransform;
-		
-	#region IDropHandler implementation
-	public void OnDrop (PointerEventData eventData)
-	{
-		CodePanelTransform = transform.parent;
-
-		if (!item) {
-			DragHandler.draggedBlock.transform.SetParent (transform);
-			ExecuteEvents.ExecuteHierarchy<IHasChanged> (gameObject, null, (x, y) => x.HasChanged ());
-		}
-	}
-	#endregion
-=======
     public GameObject item
     {
         get
@@ -69,6 +44,5 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             //Debug.Log(clicksCount);
         }
     }
->>>>>>> master
 
 }

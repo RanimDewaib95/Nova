@@ -40,8 +40,7 @@ public class MessagesController : MonoBehaviour {
         previousButton.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update () {
+    public void Update () {
         
         nextButton.GetComponent<Button>().onClick.AddListener(delegate { updateNextButton(); }); 
         previousButton.GetComponent<Button>().onClick.AddListener(delegate { updatePreviousButton(); });
@@ -114,6 +113,11 @@ public class MessagesController : MonoBehaviour {
         clickedPrevious = true;
         updatePreviousButton();
         clickedPrevious = false;
+    }
+
+    public void doneButtonClicked()
+    {
+        GameObject.Find("CanvasPop (1)").SetActive(false);
     }
 
 }
