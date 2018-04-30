@@ -71,7 +71,6 @@ public class MovePlayer : MonoBehaviour
         RunButton.interactable = true;
         ResetButton.interactable = false;
         //Clear Slots Panel
-
     }
 
     public IEnumerator Move(float moveSpeed)
