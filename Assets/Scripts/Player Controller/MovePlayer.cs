@@ -14,9 +14,6 @@ public class MovePlayer : MonoBehaviour
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
 
-    private int score;
-    public Text scoreText;
-
     void Start()
     {
         //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
@@ -29,9 +26,6 @@ public class MovePlayer : MonoBehaviour
 
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
-
-        score = 0;
-        SetScoreText();
     }
 
     public void RunButtonClicker()
@@ -170,20 +164,5 @@ public class MovePlayer : MonoBehaviour
         flag = 0;
          }
 
-    }
-
-    public void OnTriggerEnter(Collider pickup)
-    {
-        if (pickup.gameObject.CompareTag("Collectibles"))
-        {
-            pickup.gameObject.SetActive(false);
-            score += 1;
-            SetScoreText();
-        }
-    }
-
-    public void SetScoreText()
-    {
-        scoreText.text = "Score: " + score.ToString();
     }
 }
