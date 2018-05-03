@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
     public GameObject player; 
 
     int numberOfClicks = 0;
-    int numberOfClicksProcedure = 0;
+    int numberOfClicksProcedure = 1;
     GameObject item;
 
     public void Start()
@@ -55,7 +55,7 @@ public class Inventory : MonoBehaviour
                     numberOfClicksProcedure = slotTransform.GetComponent<Slot>().clicksCount;
                     Debug.Log("clicks of procedure:" + numberOfClicksProcedure);
 
-                    for (int r = 0; r < numberOfClicksProcedure; r++)
+                    for (int r = 0; r < numberOfClicksProcedure+1; r++)
                     {
                         Debug.Log("repeating");
                         foreach (Transform slotTransformProcedure in slots) //slots of the procedure panel
@@ -89,7 +89,7 @@ public class Inventory : MonoBehaviour
         }
         else //append the block numberOfClicks times
         {
-            for (int r = 0; r < numberOfClicks; r++)
+            for (int r = 0; r < numberOfClicks+1; r++)
             {
                 builder.Append(",");
                 builder.Append(nameOfBlock);
