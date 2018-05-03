@@ -14,7 +14,7 @@ public class MovePlayer : MonoBehaviour
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
 
-    private int score;
+    private int scoreCount;
     public Text scoreText;
 
     void Start()
@@ -30,8 +30,8 @@ public class MovePlayer : MonoBehaviour
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
 
-        score = 0;
-        SetScoreText();
+        scoreCount = 0;
+        SetScoreText ();
     }
 
     public void RunButtonClicker()
@@ -67,7 +67,9 @@ public class MovePlayer : MonoBehaviour
 
     public void ResetButtonClicker()
     {
+        Debug.Log("in reverse");
         chosenBlocks = runCommands.Count;
+        Debug.Log("number of blocks to reverse is " + chosenBlocks);
         StartCoroutine(reverseMovement());
         //Enable Run Button
         Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
@@ -75,7 +77,6 @@ public class MovePlayer : MonoBehaviour
         RunButton.interactable = true;
         ResetButton.interactable = false;
         //Clear Slots Panel
-
     }
 
     public IEnumerator Move(float moveSpeed)
@@ -170,18 +171,18 @@ public class MovePlayer : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter(Collider pickup)
+    void OnTriggerEnter(Collider pickup) 
     {
-        if (pickup.gameObject.CompareTag("Collectibles"))
+        if (pickup.gameObject.CompareTag("Pick Up"))
         {
-            pickup.gameObject.SetActive(false);
-            score += 1;
-            SetScoreText();
+            pickup.gameObject.SetActive (false);
+            scoreCount = scoreCount + 1;
+            SetScoreText ();
         }
     }
 
-    public void SetScoreText()
+    void SetScoreText ()
     {
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = "Score: " + scoreCount.ToString ();
     }
 }

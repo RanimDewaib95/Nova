@@ -22,6 +22,7 @@ public class Inventory : MonoBehaviour
     public GameObject player; 
 
     int numberOfClicks = 0;
+    int numberOfClicksProcedure = 1;
     GameObject item;
 
     public void Start()
@@ -48,12 +49,32 @@ public class Inventory : MonoBehaviour
             item = slotTransform.GetComponent<Slot>().item;
             if (item)
             {
-                //Debug.Log("in");
-                numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
-                //Debug.Log(item.name);
-                //Debug.Log("Number of clicks");
-                //Debug.Log(numberOfClicks);
-                loopThroughClicks(item.name, numberOfClicks);
+                if (item.name == "procedureBlock(Clone)") //get blocks from procedure panel
+                {
+                    slots = GameObject.Find("codePanelProcedure").transform;
+                    numberOfClicksProcedure = slotTransform.GetComponent<Slot>().clicksCount;
+                    Debug.Log("clicks of procedure:" + numberOfClicksProcedure);
+
+                    for (int r = 0; r < numberOfClicksProcedure+1; r++)
+                    {
+                        Debug.Log("repeating");
+                        foreach (Transform slotTransformProcedure in slots) //slots of the procedure panel
+                        {
+                            item = slotTransformProcedure.GetComponent<Slot>().item;
+
+                            if (item)
+                            {
+                                numberOfClicks = slotTransformProcedure.GetComponent<Slot>().clicksCount;
+                                loopThroughClicks(item.name, numberOfClicks);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
+                    loopThroughClicks(item.name, numberOfClicks);
+                }
             }
         }
         finished = true;
@@ -61,14 +82,14 @@ public class Inventory : MonoBehaviour
 
     public StringBuilder loopThroughClicks(string nameOfBlock, int numberOfClicks)
     {
-        if(numberOfClicks == 0)
+        if(numberOfClicks == 0) //append the block once
         {
             builder.Append(",");
             builder.Append(nameOfBlock);
         }
-        else
+        else //append the block numberOfClicks times
         {
-            for (int r = 0; r < numberOfClicks; r++)
+            for (int r = 0; r < numberOfClicks+1; r++)
             {
                 builder.Append(",");
                 builder.Append(nameOfBlock);
