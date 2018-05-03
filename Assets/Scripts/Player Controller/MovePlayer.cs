@@ -14,6 +14,9 @@ public class MovePlayer : MonoBehaviour
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
 
+    private int scoreCount;
+
+
     void Start()
     {
         //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
@@ -26,6 +29,8 @@ public class MovePlayer : MonoBehaviour
 
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
+
+        scoreCount = 0;
     }
 
     public void RunButtonClicker()
@@ -170,6 +175,7 @@ public class MovePlayer : MonoBehaviour
         if (pickup.gameObject.CompareTag("Pick Up"))
         {
             pickup.gameObject.SetActive (false);
+            scoreCount = scoreCount + 1;
         }
     }
 }
