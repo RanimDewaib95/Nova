@@ -15,7 +15,7 @@ public class MovePlayer : MonoBehaviour
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
 
     private int scoreCount;
-
+    public Text scoreText;
 
     void Start()
     {
@@ -31,6 +31,7 @@ public class MovePlayer : MonoBehaviour
         ResetButton.interactable = false;
 
         scoreCount = 0;
+        SetScoreText ();
     }
 
     public void RunButtonClicker()
@@ -176,6 +177,12 @@ public class MovePlayer : MonoBehaviour
         {
             pickup.gameObject.SetActive (false);
             scoreCount = scoreCount + 1;
+            SetScoreText ();
         }
+    }
+
+    void SetScoreText ()
+    {
+        scoreText.text = "Score: " + scoreCount.ToString ();
     }
 }
