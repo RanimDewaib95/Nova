@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 {
@@ -48,31 +49,38 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        string nameOfClickedBlock;
-        Sprite nextSprite;
-
-        if (transform.childCount > 0)
+        if (SceneManager.GetActiveScene().name != "Spacestation-Level1")
         {
-            nameOfClickedBlock = transform.GetChild(0).name;
- 
-            switch (nameOfClickedBlock)
+            string nameOfClickedBlock;
+            Sprite nextSprite;
+
+            if (transform.childCount > 0)
             {
-                case "moveBlock(Clone)":
-                    if (clicksCount < 5 )
-                    {
-                        nextSprite = Resources.Load<Sprite>(moveBlocks[clicksCount]);
-                        transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
-                        clicksCount++;
-                        Debug.Log(clicksCount);
-                    }
-                    else
-                    {
-                        clicksCount = 0;
-                        nextSprite = Resources.Load<Sprite>(moveBlocks[clicksCount]);
-                        transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
-                    }
-                    break;
-            }       
+                nameOfClickedBlock = transform.GetChild(0).name;
+
+                switch (nameOfClickedBlock)
+                {
+                    case "moveBlock(Clone)":
+                        if (clicksCount < 5)
+                        {
+                            nextSprite = Resources.Load<Sprite>(moveBlocks[clicksCount]);
+                            transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
+                            clicksCount++;
+                            Debug.Log(clicksCount);
+                        }
+                        else
+                        {
+                            clicksCount = 1;
+                            nextSprite = Resources.Load<Sprite>(moveBlocks[clicksCount]);
+                            transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
+                        }
+                        break;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("In level 1");
         }
     }
 }

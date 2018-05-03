@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour {
+
     endingMessage goalMessage;
 
     // Use this for initialization
@@ -16,6 +17,5 @@ public class NewBehaviourScript : MonoBehaviour {
     {
         goalMessage.displayLastMessage();
         Debug.Log("found collider");
-        //goalMessage.SetActive(true);
     }
 }
