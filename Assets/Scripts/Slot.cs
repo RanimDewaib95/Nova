@@ -15,21 +15,20 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
     {
         if (SceneManager.GetActiveScene().name == "Planet1-Level 1" || SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
         {
-            moveBlocks.Add("move1");
             moveBlocks.Add("move2");
             moveBlocks.Add("move3");
             moveBlocks.Add("move4");
             moveBlocks.Add("move5");
+            moveBlocks.Add("move1");
         }
         if (SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
         {
-            procedureBlocks.Add("p11");
             procedureBlocks.Add("p12");
             procedureBlocks.Add("p13");
             procedureBlocks.Add("p14");
             procedureBlocks.Add("p15");
+            procedureBlocks.Add("p11");
         }
-
     }
 
     public GameObject item
@@ -65,8 +64,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         if (SceneManager.GetActiveScene().name != "Spacestation-Level1")
         {
             string nameOfClickedBlock;
-            Sprite nextSprite;
-
+           
             if (transform.childCount > 0)
             {
                 nameOfClickedBlock = transform.GetChild(0).name;
@@ -76,32 +74,29 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                     case "moveBlock(Clone)":
                         if (clicksCount < 5)
                         {
-                            nextSprite = Resources.Load<Sprite>(moveBlocks[clicksCount]);
-                            transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
+                            displaySprite(nameOfClickedBlock);
                             clicksCount++;
+
                             Debug.Log(clicksCount);
                         }
                         else
                         {
-                            clicksCount = 1;
-                            nextSprite = Resources.Load<Sprite>(moveBlocks[clicksCount]);
-                            transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
+                            clicksCount = 0;
+                            displaySprite(nameOfClickedBlock);
                         }
                         break;
 
                     case "procedureBlock(Clone)":
                         if (clicksCount < 5)
                         {
-                            nextSprite = Resources.Load<Sprite>(procedureBlocks[clicksCount]);
-                            transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
+                            displaySprite(nameOfClickedBlock);
                             clicksCount++;
                             Debug.Log(clicksCount);
                         }
                         else
                         {
                             clicksCount = 1;
-                            nextSprite = Resources.Load<Sprite>(procedureBlocks[clicksCount]);
-                            transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
+                            displaySprite(nameOfClickedBlock);
                         }
                         break;
                 }
@@ -111,5 +106,25 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         {
             Debug.Log("In level 1");
         }
+    }
+
+    public void displaySprite(string nameOfClickedBlock)
+    {
+        Sprite nextSprite;
+        List<string> sprites = new List<string>();
+
+        switch (nameOfClickedBlock)
+        {
+            case "moveBlock(Clone)":
+                sprites = moveBlocks;
+                break;
+
+            case "procedureBlock(Clone)":
+                sprites = procedureBlocks;
+                break;
+        }
+
+        nextSprite = Resources.Load<Sprite>(sprites[clicksCount]);
+        transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
     }
 }
