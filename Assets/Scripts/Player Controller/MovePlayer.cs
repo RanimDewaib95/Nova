@@ -165,5 +165,11 @@ public class MovePlayer : MonoBehaviour
 
     }
 
-    
+    void OnTriggerEnter(Collider pickup) 
+    {
+        if (pickup.gameObject.CompareTag("Pick Up"))
+        {
+            pickup.gameObject.SetActive (false);
+        }
+    }
 }
