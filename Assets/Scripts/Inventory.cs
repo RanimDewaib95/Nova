@@ -22,6 +22,7 @@ public class Inventory : MonoBehaviour
     public GameObject player; 
 
     int numberOfClicks = 0;
+    int numberOfClicksProcedure = 0;
     GameObject item;
 
     public void Start()
@@ -51,14 +52,21 @@ public class Inventory : MonoBehaviour
                 if (item.name == "procedureBlock(Clone)") //get blocks from procedure panel
                 {
                     slots = GameObject.Find("codePanelProcedure").transform;
-                    foreach (Transform slotTransformProcedure in slots)
-                    {
-                        item = slotTransformProcedure.GetComponent<Slot>().item;
+                    numberOfClicksProcedure = slotTransform.GetComponent<Slot>().clicksCount;
+                    Debug.Log("clicks of procedure:" + numberOfClicksProcedure);
 
-                        if(item)
+                    for (int r = 0; r < numberOfClicksProcedure; r++)
+                    {
+                        Debug.Log("repeating");
+                        foreach (Transform slotTransformProcedure in slots) //slots of the procedure panel
                         {
-                            numberOfClicks = slotTransformProcedure.GetComponent<Slot>().clicksCount;
-                            loopThroughClicks(item.name, numberOfClicks);
+                            item = slotTransformProcedure.GetComponent<Slot>().item;
+
+                            if (item)
+                            {
+                                numberOfClicks = slotTransformProcedure.GetComponent<Slot>().clicksCount;
+                                loopThroughClicks(item.name, numberOfClicks);
+                            }
                         }
                     }
                 }
