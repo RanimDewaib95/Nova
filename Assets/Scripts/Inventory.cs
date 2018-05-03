@@ -48,12 +48,25 @@ public class Inventory : MonoBehaviour
             item = slotTransform.GetComponent<Slot>().item;
             if (item)
             {
-                //Debug.Log("in");
-                numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
-                //Debug.Log(item.name);
-                //Debug.Log("Number of clicks");
-                //Debug.Log(numberOfClicks);
-                loopThroughClicks(item.name, numberOfClicks);
+                if (item.name == "procedureBlock(Clone)") //get blocks from procedure panel
+                {
+                    slots = GameObject.Find("codePanelProcedure").transform;
+                    foreach (Transform slotTransformProcedure in slots)
+                    {
+                        item = slotTransformProcedure.GetComponent<Slot>().item;
+
+                        if(item)
+                        {
+                            numberOfClicks = slotTransformProcedure.GetComponent<Slot>().clicksCount;
+                            loopThroughClicks(item.name, numberOfClicks);
+                        }
+                    }
+                }
+                else
+                {
+                    numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
+                    loopThroughClicks(item.name, numberOfClicks);
+                }
             }
         }
         finished = true;
@@ -61,12 +74,12 @@ public class Inventory : MonoBehaviour
 
     public StringBuilder loopThroughClicks(string nameOfBlock, int numberOfClicks)
     {
-        if(numberOfClicks == 0)
+        if(numberOfClicks == 0) //append the block once
         {
             builder.Append(",");
             builder.Append(nameOfBlock);
         }
-        else
+        else //append the block numberOfClicks times
         {
             for (int r = 0; r < numberOfClicks; r++)
             {

@@ -9,14 +9,27 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 {
     public int clicksCount = 0;
     List<string> moveBlocks = new List<string>();
+    List<string> procedureBlocks = new List<string>();
 
     private void Start()
     {
-        moveBlocks.Add("move1");
-        moveBlocks.Add("move2");
-        moveBlocks.Add("move3");
-        moveBlocks.Add("move4");
-        moveBlocks.Add("move5");
+        if (SceneManager.GetActiveScene().name == "Planet1-Level 1" || SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
+        {
+            moveBlocks.Add("move1");
+            moveBlocks.Add("move2");
+            moveBlocks.Add("move3");
+            moveBlocks.Add("move4");
+            moveBlocks.Add("move5");
+        }
+        if (SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
+        {
+            procedureBlocks.Add("p11");
+            procedureBlocks.Add("p12");
+            procedureBlocks.Add("p13");
+            procedureBlocks.Add("p14");
+            procedureBlocks.Add("p15");
+        }
+
     }
 
     public GameObject item
@@ -72,6 +85,22 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                         {
                             clicksCount = 1;
                             nextSprite = Resources.Load<Sprite>(moveBlocks[clicksCount]);
+                            transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
+                        }
+                        break;
+
+                    case "procedureBlock(Clone)":
+                        if (clicksCount < 5)
+                        {
+                            nextSprite = Resources.Load<Sprite>(procedureBlocks[clicksCount]);
+                            transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
+                            clicksCount++;
+                            Debug.Log(clicksCount);
+                        }
+                        else
+                        {
+                            clicksCount = 1;
+                            nextSprite = Resources.Load<Sprite>(procedureBlocks[clicksCount]);
                             transform.GetChild(0).GetComponent<Image>().sprite = nextSprite;
                         }
                         break;
