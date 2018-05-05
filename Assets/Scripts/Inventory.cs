@@ -34,11 +34,12 @@ public class Inventory : MonoBehaviour
         getStringOfBlocks();
         if (finished == true)
         {
-            Debug.Log("I am printing TBCC");
+            //Debug.Log("I am printing TBCC");
             TBCC = builder.ToString();
             //Debug.Log(TBCC);
             start = true;
             player.GetComponent<MovePlayer>().RunButtonClicker();
+            builder = new StringBuilder(""); ;
         }
     }
 
@@ -53,11 +54,11 @@ public class Inventory : MonoBehaviour
                 {
                     slots = GameObject.Find("codePanelProcedure").transform;
                     numberOfClicksProcedure = slotTransform.GetComponent<Slot>().clicksCount;
-                    Debug.Log("clicks of procedure:" + numberOfClicksProcedure);
+                    //Debug.Log("clicks of procedure:" + numberOfClicksProcedure);
 
                     for (int r = 0; r < numberOfClicksProcedure+1; r++)
                     {
-                        Debug.Log("repeating");
+                        //Debug.Log("repeating");
                         foreach (Transform slotTransformProcedure in slots) //slots of the procedure panel
                         {
                             item = slotTransformProcedure.GetComponent<Slot>().item;
@@ -82,6 +83,7 @@ public class Inventory : MonoBehaviour
 
     public StringBuilder loopThroughClicks(string nameOfBlock, int numberOfClicks)
     {
+        
         if(numberOfClicks == 0) //append the block once
         {
             builder.Append(",");

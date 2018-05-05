@@ -44,7 +44,6 @@ public class MovePlayer : MonoBehaviour
 
     public void RunButtonClicker()
     {
-        //Debug.Log(Inventory.TBCC);
         Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         RunButton.interactable = false;
@@ -53,19 +52,13 @@ public class MovePlayer : MonoBehaviour
         //after inventory finished getting the chosen blocks
         if (Inventory.start == true)
         {
-            //Debug.Log(Inventory.TBCC)
             TBCC = Inventory.TBCC;
-            Debug.Log(TBCC);
+            //Debug.Log(TBCC);
             runCommands = TBCC.Split(',').ToList<string>();
             runCommands.RemoveAt(0);
 
-            for (int j = 0; j < runCommands.Count; j++)
-            {
-                Debug.Log(runCommands[j]);
-            }
-
             chosenBlocks = runCommands.Count;
-            Debug.Log("# of blocks " + chosenBlocks);
+            //Debug.Log("# of blocks " + chosenBlocks);
 
             StartCoroutine(updateMovement());
 
@@ -75,9 +68,9 @@ public class MovePlayer : MonoBehaviour
 
     public void ResetButtonClicker()
     {
-        Debug.Log("in reverse");
+        //Debug.Log("in reverse");
         chosenBlocks = runCommands.Count;
-        Debug.Log("number of blocks to reverse is " + chosenBlocks);
+        //Debug.Log("number of blocks to reverse is " + chosenBlocks);
         StartCoroutine(reverseMovement());
         //Enable Run Button
         Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
@@ -85,6 +78,7 @@ public class MovePlayer : MonoBehaviour
         RunButton.interactable = true;
         ResetButton.interactable = false;
         //Clear Slots Panel
+        //I dont need to clear the panel
     }
 
     public IEnumerator Move(float moveSpeed)
@@ -118,7 +112,7 @@ public class MovePlayer : MonoBehaviour
 
             for (int i = 0; i < runCommands.Count; i++)
             {
-                //Debug.Log(i + runCommands[i]);
+                Debug.Log("Forward" + i + runCommands[i]);
                 if (runCommands[i] == "rotateRightBlock(Clone)")
                 {
                     StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
@@ -130,7 +124,7 @@ public class MovePlayer : MonoBehaviour
                 }
                 else if (runCommands[i] == "moveBlock(Clone)")
                 {
-                    StartCoroutine(Move(8000f));
+                    StartCoroutine(Move(8000.0f));
                 }
                 else
                 {
@@ -153,19 +147,19 @@ public class MovePlayer : MonoBehaviour
 
         for (int i = runCommands.Count - 1; i >= 0; i--)
         {
-            //Debug.Log(i + runCommands[i]);
-            if (runCommands[i] == "rotateLeftBlock")
+            Debug.Log("Reverse" + i + runCommands[i]);
+            if (runCommands[i] == "rotateLeftBlock(Clone)")
             {
                 StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
             }
-            else if (runCommands[i] == "rotateRightBlock")
+            else if (runCommands[i] == "rotateRightBlock(Clone)")
             {
                 StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
             }
-            else if (runCommands[i] == "moveBlock")
+            else if (runCommands[i] == "moveBlock(Clone)")
             {
-                StartCoroutine(Move(-8000f));
+                StartCoroutine(Move(-8000.0f));
             }
             else
             {
