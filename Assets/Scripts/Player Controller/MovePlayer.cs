@@ -17,6 +17,12 @@ public class MovePlayer : MonoBehaviour
     private int scoreCount;
     public Text scoreText;
 
+    public AudioClip pickupSound;
+    public AudioSource pickupSource;
+    public float volLowRange = .5f;
+    public float volHighRange = 1.0f;
+    float vol;
+
     void Start()
     {
         //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
@@ -32,6 +38,8 @@ public class MovePlayer : MonoBehaviour
 
         scoreCount = 0;
         SetScoreText ();
+
+        pickupSource = GetComponent<AudioSource>();
     }
 
     public void RunButtonClicker()
@@ -175,6 +183,9 @@ public class MovePlayer : MonoBehaviour
     {
         if (pickup.gameObject.CompareTag("Pick Up"))
         {
+            vol = Random.Range(volLowRange, volHighRange);
+            pickupSource.PlayOneShot(pickupSound, vol);
+
             pickup.gameObject.SetActive (false);
             scoreCount = scoreCount + 1;
             SetScoreText ();
