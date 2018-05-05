@@ -56,11 +56,6 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             DragHandler.draggedBlock.transform.SetParent(transform);
             ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
         }
-
-        if (DragHandler.draggedBlock.transform.parent.name == "DeleteSlot")
-        {
-            Destroy(DragHandler.draggedBlock);
-        }
     }
     #endregion
 
