@@ -92,6 +92,14 @@ public class MovePlayer : MonoBehaviour
         yield return null;
     }
 
+    public IEnumerator Jump(float moveSpeed)
+    {
+        //float moveSpeed = 8000f;
+        transform.Translate(Vector3.up * moveSpeed * Time.deltaTime * 1);
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime * -1);
+        yield return null;
+    }
+
     public IEnumerator RotateAround(Vector3 axis, float angle, float duration)
     {
         float elapsed = 0.0f;
@@ -130,9 +138,13 @@ public class MovePlayer : MonoBehaviour
                 {
                     StartCoroutine(Move(8000f));
                 }
+                else if (runCommands[i] == "jumpBlock(Clone)")
+                {
+                    StartCoroutine(Jump(8000f));
+                }
                 else
                 {
-
+                    //nothing
                 }
                 //Debug.Log("B"+chosenBlocks);
                 chosenBlocks--;
