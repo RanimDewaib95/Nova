@@ -14,14 +14,10 @@ public class MovePlayer : MonoBehaviour
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
 
-    private int scoreCount;
-    public Text scoreText;
+    PickUp pickup = new PickUp();
 
     public AudioClip pickupSound;
     public AudioSource pickupSource;
-    public float volLowRange = .5f;
-    public float volHighRange = 1.0f;
-    float vol;
 
     void Start()
     {
@@ -36,8 +32,7 @@ public class MovePlayer : MonoBehaviour
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
 
-        scoreCount = 0;
-        SetScoreText ();
+        pickup.setInitialScore();
 
         pickupSource = GetComponent<AudioSource>();
     }
@@ -179,21 +174,18 @@ public class MovePlayer : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider pickup) 
+    void OnTriggerEnter(Collider col) 
     {
-        if (pickup.gameObject.CompareTag("Pick Up"))
+        if (col.gameObject.CompareTag("Pick Up"))
         {
-            vol = Random.Range(volLowRange, volHighRange);
-            pickupSource.PlayOneShot(pickupSound, vol);
+            pickupSource.PlayOneShot(pickupSound, 1.0f);
 
-            pickup.gameObject.SetActive (false);
-            scoreCount = scoreCount + 1;
-            SetScoreText ();
+            col.gameObject.SetActive (false);
+
+            pickup.updateScore();
+            pickup.updateScoreText ();
         }
     }
 
-    void SetScoreText ()
-    {
-        scoreText.text = "Score: " + scoreCount.ToString ();
-    }
+    
 }
