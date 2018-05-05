@@ -14,12 +14,14 @@ public class MovePlayer : MonoBehaviour
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
 
-    PickUp pickup = new PickUp();
-    public int scoreCount;
+    private int scoreCount;
     public Text scoreText;
 
     public AudioClip pickupSound;
     public AudioSource pickupSource;
+    public float volLowRange = .5f;
+    public float volHighRange = 1.0f;
+    float vol;
 
     void Start()
     {
@@ -34,10 +36,10 @@ public class MovePlayer : MonoBehaviour
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
 
-        pickupSource = GetComponent<AudioSource>();
+        scoreCount = 0;
+        SetScoreText ();
 
-        pickup.setInitial(scoreCount);
-        pickup.updateScoreText(scoreText, scoreCount);
+        pickupSource = GetComponent<AudioSource>();
     }
 
     public void RunButtonClicker()
@@ -87,14 +89,6 @@ public class MovePlayer : MonoBehaviour
         yield return null;
     }
 
-    public IEnumerator Jump(float moveSpeed)
-    {
-        //float moveSpeed = 8000f;
-        transform.Translate(Vector3.up * moveSpeed * Time.deltaTime * 1);
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime * -1);
-        yield return null;
-    }
-
     public IEnumerator RotateAround(Vector3 axis, float angle, float duration)
     {
         float elapsed = 0.0f;
@@ -133,13 +127,9 @@ public class MovePlayer : MonoBehaviour
                 {
                     StartCoroutine(Move(8000.0f));
                 }
-                else if (runCommands[i] == "jumpBlock(Clone)")
-                {
-                    StartCoroutine(Jump(8000f));
-                }
                 else
                 {
-                    //nothing
+
                 }
                 //Debug.Log("B"+chosenBlocks);
                 chosenBlocks--;
@@ -184,17 +174,21 @@ public class MovePlayer : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider col) 
+    void OnTriggerEnter(Collider pickup) 
     {
-        if (col.gameObject.CompareTag("Pick Up"))
+        if (pickup.gameObject.CompareTag("Pick Up"))
         {
-            pickupSource.PlayOneShot(pickupSound, 1.0f);
-            col.gameObject.SetActive (false);
+            vol = Random.Range(volLowRange, volHighRange);
+            pickupSource.PlayOneShot(pickupSound, vol);
 
-            scoreCount = pickup.updateScore(scoreCount);
-            pickup.updateScoreText (scoreText, scoreCount);
+            pickup.gameObject.SetActive (false);
+            scoreCount = scoreCount + 1;
+            SetScoreText ();
         }
     }
 
-    
+    void SetScoreText ()
+    {
+        scoreText.text = "Score: " + scoreCount.ToString ();
+    }
 }
