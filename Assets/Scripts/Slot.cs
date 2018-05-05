@@ -9,6 +9,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 {
     public int clicksCount = 0;
     List<string> moveBlocks = new List<string>();
+    List<string> jumpBlocks = new List<string>();
     List<string> procedureBlocks = new List<string>();
 
     private void Start()
@@ -20,6 +21,12 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             moveBlocks.Add("move4");
             moveBlocks.Add("move5");
             moveBlocks.Add("move1");
+
+            jumpBlocks.Add("jump2");
+            jumpBlocks.Add("jump3");
+            jumpBlocks.Add("jump4");
+            jumpBlocks.Add("jump5");
+            jumpBlocks.Add("jump1");
         }
         if (SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
         {
@@ -86,11 +93,27 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                         }
                         break;
 
+                    case "jumpBlock(Clone)":
+                        if (clicksCount < 5)
+                        {
+                            displaySprite(nameOfClickedBlock);
+                            clicksCount++;
+
+                            Debug.Log(clicksCount);
+                        }
+                        else
+                        {
+                            clicksCount = 0;
+                            displaySprite(nameOfClickedBlock);
+                        }
+                        break;
+
                     case "procedureBlock(Clone)":
                         if (clicksCount < 5)
                         {
                             displaySprite(nameOfClickedBlock);
                             clicksCount++;
+
                             Debug.Log(clicksCount);
                         }
                         else
@@ -117,6 +140,10 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         {
             case "moveBlock(Clone)":
                 sprites = moveBlocks;
+                break;
+
+            case "jumpBlock(Clone)":
+                sprites = jumpBlocks;
                 break;
 
             case "procedureBlock(Clone)":
