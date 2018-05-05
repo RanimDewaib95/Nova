@@ -6,20 +6,18 @@ using UnityEngine.UI;
 
 public class PickUp
 {
-    private int scoreCount;
-    private Text scoreText;
-
-    public void setInitialScore()
+    public void setInitial(int scoreCount)
     {
         scoreCount = 0;
     }
 
-    public void updateScore()
+    public int updateScore(int scoreCount)
     {
         scoreCount += 1;
+        return scoreCount;
     }
 
-    public void updateScoreText()
+    public void updateScoreText(Text scoreText, int scoreCount)
     {
         scoreText.text = "Score: " + scoreCount.ToString();
     }

@@ -15,6 +15,8 @@ public class MovePlayer : MonoBehaviour
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
 
     PickUp pickup = new PickUp();
+    public int scoreCount;
+    public Text scoreText;
 
     public AudioClip pickupSound;
     public AudioSource pickupSource;
@@ -32,9 +34,10 @@ public class MovePlayer : MonoBehaviour
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
 
-        pickup.setInitialScore();
-
         pickupSource = GetComponent<AudioSource>();
+
+        pickup.setInitial(scoreCount);
+        pickup.updateScoreText(scoreText, scoreCount);
     }
 
     public void RunButtonClicker()
@@ -179,11 +182,10 @@ public class MovePlayer : MonoBehaviour
         if (col.gameObject.CompareTag("Pick Up"))
         {
             pickupSource.PlayOneShot(pickupSound, 1.0f);
-
             col.gameObject.SetActive (false);
 
-            pickup.updateScore();
-            pickup.updateScoreText ();
+            scoreCount = pickup.updateScore(scoreCount);
+            pickup.updateScoreText (scoreText, scoreCount);
         }
     }
 
