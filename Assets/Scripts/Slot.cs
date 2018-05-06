@@ -13,7 +13,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Planet1-Level1" || SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
+        if (SceneManager.GetActiveScene().name == "Planet1-Level1" || SceneManager.GetActiveScene().name == "Planet3-Level1")
         {
             moveBlocks.Add("move2");
             moveBlocks.Add("move3");
@@ -21,7 +21,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             moveBlocks.Add("move5");
             moveBlocks.Add("move1");
         }
-        if (SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
+        if (SceneManager.GetActiveScene().name == "Planet3-Level1")
         {
             procedureBlocks.Add("p12");
             procedureBlocks.Add("p13");
