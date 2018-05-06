@@ -152,6 +152,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1715984900178226, guid: 80fccd323a9bb324ca23496526f4e7bd, type: 2}
+      propertyPath: m_Name
+      value: astronaut
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 80fccd323a9bb324ca23496526f4e7bd, type: 2}
   m_IsPrefabParent: 0
@@ -2431,7 +2435,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1988307418}
         m_MethodName: ResetButtonClicker
         m_Mode: 1
         m_Arguments:
