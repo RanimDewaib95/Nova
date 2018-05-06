@@ -39,6 +39,7 @@ public class Inventory : MonoBehaviour
             //Debug.Log(TBCC);
             start = true;
             player.GetComponent<MovePlayer>().RunButtonClicker();
+            builder = new StringBuilder("");
         }
     }
 

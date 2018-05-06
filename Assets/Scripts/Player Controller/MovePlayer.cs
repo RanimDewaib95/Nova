@@ -59,11 +59,6 @@ public class MovePlayer : MonoBehaviour
             runCommands = TBCC.Split(',').ToList<string>();
             runCommands.RemoveAt(0);
 
-            for (int j = 0; j < runCommands.Count; j++)
-            {
-                Debug.Log(runCommands[j]);
-            }
-
             chosenBlocks = runCommands.Count;
             Debug.Log("# of blocks " + chosenBlocks);
 
@@ -130,7 +125,7 @@ public class MovePlayer : MonoBehaviour
                 }
                 else if (runCommands[i] == "moveBlock(Clone)")
                 {
-                    StartCoroutine(Move(8000f));
+                    StartCoroutine(Move(8000.0f));
                 }
                 else
                 {
@@ -154,18 +149,18 @@ public class MovePlayer : MonoBehaviour
         for (int i = runCommands.Count - 1; i >= 0; i--)
         {
             //Debug.Log(i + runCommands[i]);
-            if (runCommands[i] == "rotateLeftBlock")
+            if (runCommands[i] == "rotateLeftBlock(Clone)")
             {
                 StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
             }
-            else if (runCommands[i] == "rotateRightBlock")
+            else if (runCommands[i] == "rotateRightBlock(Clone)")
             {
                 StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
             }
-            else if (runCommands[i] == "moveBlock")
+            else if (runCommands[i] == "moveBlock(Clone)")
             {
-                StartCoroutine(Move(-8000f));
+                StartCoroutine(Move(-8000.0f));
             }
             else
             {
