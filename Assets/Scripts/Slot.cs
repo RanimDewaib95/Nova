@@ -13,7 +13,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Planet1-Level 1" || SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
+        if (SceneManager.GetActiveScene().name == "Planet1-Level1" || SceneManager.GetActiveScene().name == "Planet2 - Level Dummy")
         {
             moveBlocks.Add("move2");
             moveBlocks.Add("move3");
@@ -81,7 +81,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                             displaySprite(nameOfClickedBlock);
                             clicksCount++;
 
-                            Debug.Log(clicksCount);
+                            //Debug.Log(clicksCount);
                         }
                         else
                         {
@@ -95,7 +95,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                         {
                             displaySprite(nameOfClickedBlock);
                             clicksCount++;
-                            Debug.Log(clicksCount);
+                            //Debug.Log(clicksCount);
                         }
                         else
                         {
@@ -108,7 +108,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
         else
         {
-            Debug.Log("In level 1");
+            //Debug.Log("In level 1");
         }
     }
 
