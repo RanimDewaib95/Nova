@@ -53,17 +53,11 @@ public class MovePlayer : MonoBehaviour
         //after inventory finished getting the chosen blocks
         if (Inventory.start == true)
         {
-            //Debug.Log(Inventory.TBCC)
             TBCC = Inventory.TBCC;
-            Debug.Log(TBCC);
             runCommands = TBCC.Split(',').ToList<string>();
             runCommands.RemoveAt(0);
-
             chosenBlocks = runCommands.Count;
-            Debug.Log("# of blocks " + chosenBlocks);
-
             StartCoroutine(updateMovement());
-
             Inventory.start = false;
         }
     }
