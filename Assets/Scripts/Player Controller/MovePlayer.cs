@@ -76,10 +76,11 @@ public class MovePlayer : MonoBehaviour
         //Clear Slots Panel
     }
 
-    public IEnumerator Move(float moveSpeed)
+    public IEnumerator Move(int direction)
     {
-        //float moveSpeed = 8000f;
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime * -1);//set main character to move forward
+        float s = (15 / Time.deltaTime)*10*direction;
+        Debug.Log("speed is" + s);
+        transform.Translate(Vector3.forward * s * Time.deltaTime * -1);//set main character to move forward
         yield return null;
     }
 
@@ -119,7 +120,7 @@ public class MovePlayer : MonoBehaviour
                 }
                 else if (runCommands[i] == "moveBlock(Clone)")
                 {
-                    StartCoroutine(Move(8000.0f));
+                    StartCoroutine(Move(1));
                 }
                 else
                 {
@@ -154,7 +155,7 @@ public class MovePlayer : MonoBehaviour
             }
             else if (runCommands[i] == "moveBlock(Clone)")
             {
-                StartCoroutine(Move(-8000.0f));
+                StartCoroutine(Move(-1));
             }
             else
             {
