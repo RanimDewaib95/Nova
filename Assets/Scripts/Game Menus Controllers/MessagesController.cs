@@ -27,17 +27,14 @@ public class MessagesController : MonoBehaviour {
         endMessage = GameObject.Find("CanvasPop (2)").gameObject;
         endMessage.SetActive(false);
 
-        messagesLevel1.Add("Level1Message1");
-        messagesLevel1.Add("Level1Message2");
-        messagesLevel1.Add("MessagesLevel1-03");
-        messagesLevel1.Add("MessagesLevel1-04");
-        messagesLevel1.Add("MessagesLevel1-05");
-        messagesLevel1.Add("MessagesLevel1-06");
-        messagesLevel1.Add("MessagesLevel1-07");
-        messagesLevel1.Add("MessagesLevel1-08");
-        messagesLevel1.Add("MessagesLevel1-09");
-        messagesLevel1.Add("MessagesLevel1-10");
-
+        messagesLevel1.Add("L1M1");
+        messagesLevel1.Add("L1M2");
+        messagesLevel1.Add("L1M3");
+        messagesLevel1.Add("L1M4");
+        messagesLevel1.Add("L1M5");
+        messagesLevel1.Add("L1M6");
+        messagesLevel1.Add("L1M7");
+     
         image = GameObject.Find("Image");
         nextButton = image.transform.Find("Next Button").gameObject;
         previousButton = image.transform.Find("Previous Button").gameObject;
@@ -127,14 +124,4 @@ public class MessagesController : MonoBehaviour {
     {
         GameObject.Find("CanvasPop (1)").SetActive(false);
     }
-
-    /*
-    public void displayLastMessage()
-    {
-        mySprite = Resources.Load<Sprite>(messagesLevel1[messagesLevel1.Count - 1]);
-        gameObject.GetComponentInChildren<Image>().sprite = mySprite;
-        gameObject.transform.Find("Image").gameObject.GetComponent<Image>().sprite = mySprite;
-        gameObject.SetActive(true);
-    }*/
-
 }

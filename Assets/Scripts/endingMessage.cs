@@ -13,6 +13,7 @@ public class endingMessage : MonoBehaviour {
 
     public void goToNextLevel()
     {
-        SceneManager.LoadScene("Planet1-Level 1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.LoadScene("Planet1-Level1");
     }
 }
