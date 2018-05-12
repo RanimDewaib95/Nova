@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MessagesController : MonoBehaviour {
     List<string> messagesLevel1 = new List<string>();
@@ -27,14 +28,27 @@ public class MessagesController : MonoBehaviour {
         endMessage = GameObject.Find("CanvasPop (2)").gameObject;
         endMessage.SetActive(false);
 
-        messagesLevel1.Add("L1M1");
-        messagesLevel1.Add("L1M2");
-        messagesLevel1.Add("L1M3");
-        messagesLevel1.Add("L1M4");
-        messagesLevel1.Add("L1M5");
-        messagesLevel1.Add("L1M6");
-        messagesLevel1.Add("L1M7");
-     
+        if(SceneManager.GetActiveScene().name == "Spacestation-Level1")
+        {
+            messagesLevel1.Add("L1M1");
+            messagesLevel1.Add("L1M2");
+            messagesLevel1.Add("L1M3");
+            messagesLevel1.Add("L1M4");
+            messagesLevel1.Add("L1M5");
+            messagesLevel1.Add("L1M6");
+            messagesLevel1.Add("L1M7");
+        }
+
+        if (SceneManager.GetActiveScene().name == "Planet1-Level1")
+        {
+            messagesLevel1.Add("L2M1");
+            messagesLevel1.Add("L2M2");
+            messagesLevel1.Add("L2M3");
+            messagesLevel1.Add("L2M4");
+            messagesLevel1.Add("L2M5");
+            messagesLevel1.Add("L2M6");
+        }
+
         image = GameObject.Find("Image");
         nextButton = image.transform.Find("Next Button").gameObject;
         previousButton = image.transform.Find("Previous Button").gameObject;
@@ -73,7 +87,7 @@ public class MessagesController : MonoBehaviour {
             }
 
             //reached the end of the messages
-            if (i == messagesLevel1.Count - 2)
+            if (i == messagesLevel1.Count - 1)
             {
                 nextButton.SetActive(false);
                 doneButton.SetActive(true);
@@ -99,7 +113,7 @@ public class MessagesController : MonoBehaviour {
         }
 
         //pressed previous when player reached the end of the messages
-        if (i == messagesLevel1.Count - 3)
+        if (i == messagesLevel1.Count - 2)
         {
             nextButton.SetActive(true);
             doneButton.SetActive(false);
