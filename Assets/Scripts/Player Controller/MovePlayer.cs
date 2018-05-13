@@ -84,6 +84,15 @@ public class MovePlayer : MonoBehaviour
         yield return null;
     }
 
+    public IEnumerator Jump(int direction)
+    {
+        float s = (15 / Time.deltaTime) * 10 * direction;
+        Debug.Log("speed is" + s);
+        transform.Translate(Vector3.up * s * Time.deltaTime * 1);//set main character to move upwards then
+        transform.Translate(Vector3.forward * s * Time.deltaTime * -1);//move forward to add the "jump" effect
+        yield return null;
+    }
+
     public IEnumerator RotateAround(Vector3 axis, float angle, float duration)
     {
         float elapsed = 0.0f;
@@ -121,6 +130,10 @@ public class MovePlayer : MonoBehaviour
                 else if (runCommands[i] == "moveBlock(Clone)")
                 {
                     StartCoroutine(Move(1));
+                }
+                else if (runCommands[i] == "jumpBlock(Clone)")
+                {
+                    StartCoroutine(Jump(1));
                 }
                 else
                 {
