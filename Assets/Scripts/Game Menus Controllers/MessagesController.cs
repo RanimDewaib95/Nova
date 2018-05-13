@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MessagesController : MonoBehaviour {
     List<string> messagesLevel1 = new List<string>();
@@ -27,16 +28,26 @@ public class MessagesController : MonoBehaviour {
         endMessage = GameObject.Find("CanvasPop (2)").gameObject;
         endMessage.SetActive(false);
 
-        messagesLevel1.Add("Level1Message1");
-        messagesLevel1.Add("Level1Message2");
-        messagesLevel1.Add("MessagesLevel1-03");
-        messagesLevel1.Add("MessagesLevel1-04");
-        messagesLevel1.Add("MessagesLevel1-05");
-        messagesLevel1.Add("MessagesLevel1-06");
-        messagesLevel1.Add("MessagesLevel1-07");
-        messagesLevel1.Add("MessagesLevel1-08");
-        messagesLevel1.Add("MessagesLevel1-09");
-        messagesLevel1.Add("MessagesLevel1-10");
+        if(SceneManager.GetActiveScene().name == "Spacestation-Level1")
+        {
+            messagesLevel1.Add("L1M1");
+            messagesLevel1.Add("L1M2");
+            messagesLevel1.Add("L1M3");
+            messagesLevel1.Add("L1M4");
+            messagesLevel1.Add("L1M5");
+            messagesLevel1.Add("L1M6");
+            messagesLevel1.Add("L1M7");
+        }
+
+        if (SceneManager.GetActiveScene().name == "Planet1-Level1")
+        {
+            messagesLevel1.Add("L2M1");
+            messagesLevel1.Add("L2M2");
+            messagesLevel1.Add("L2M3");
+            messagesLevel1.Add("L2M4");
+            messagesLevel1.Add("L2M5");
+            messagesLevel1.Add("L2M6");
+        }
 
         image = GameObject.Find("Image");
         nextButton = image.transform.Find("Next Button").gameObject;
@@ -76,7 +87,7 @@ public class MessagesController : MonoBehaviour {
             }
 
             //reached the end of the messages
-            if (i == messagesLevel1.Count - 2)
+            if (i == messagesLevel1.Count - 1)
             {
                 nextButton.SetActive(false);
                 doneButton.SetActive(true);
@@ -102,7 +113,7 @@ public class MessagesController : MonoBehaviour {
         }
 
         //pressed previous when player reached the end of the messages
-        if (i == messagesLevel1.Count - 3)
+        if (i == messagesLevel1.Count - 2)
         {
             nextButton.SetActive(true);
             doneButton.SetActive(false);
@@ -127,14 +138,4 @@ public class MessagesController : MonoBehaviour {
     {
         GameObject.Find("CanvasPop (1)").SetActive(false);
     }
-
-    /*
-    public void displayLastMessage()
-    {
-        mySprite = Resources.Load<Sprite>(messagesLevel1[messagesLevel1.Count - 1]);
-        gameObject.GetComponentInChildren<Image>().sprite = mySprite;
-        gameObject.transform.Find("Image").gameObject.GetComponent<Image>().sprite = mySprite;
-        gameObject.SetActive(true);
-    }*/
-
 }

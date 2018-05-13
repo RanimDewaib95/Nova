@@ -21,5 +21,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/Pop up messages.unity
     guid: 351b69dad5417f54bafad29c853e0284
   - enabled: 1
-    path: Assets/Scenes/Levels/Planet1-Level 1.unity
+    path: Assets/Scenes/Levels/Planet1-Level1.unity
     guid: a6e5b7f5c55a85c41a68971a8afa7363
+  - enabled: 1
+    path: Assets/Scenes/Levels/Planet2-Level1.unity
+    guid: 0c8d478d8474636429e22f8dca29b817

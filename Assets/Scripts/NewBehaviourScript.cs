@@ -13,8 +13,9 @@ public class NewBehaviourScript : MonoBehaviour {
         goalMessage = new endingMessage();
 	}
 
-    void OnTriggerEnter(Collider other)
+    IEnumerator OnTriggerEnter(Collider other)
     {
+        yield return new WaitForSeconds(1.0f);
         goalMessage.displayLastMessage();
         Debug.Log("found collider");
     }
