@@ -16,4 +16,14 @@ public class endingMessage : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.LoadScene("Planet1-Level1");
     }
+
+    public void goToLevelsMenu()
+    {
+        SceneManager.LoadScene("Levels Menu");
+    }
+
+    public void replayButtonClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
