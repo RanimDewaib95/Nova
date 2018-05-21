@@ -23,7 +23,8 @@ public class MovePlayer : MonoBehaviour
     public float volHighRange = 1.0f;
     float vol;
 
-    public int highTileFlag = 0; //If set, it means the character is on top of a step. Else, it's on level ground
+    public int stepUpFlag = 0;
+    public int stepDownFlag = 0;
 
     void Start()
     {
@@ -90,8 +91,12 @@ public class MovePlayer : MonoBehaviour
     {
         float s = (15 / Time.deltaTime) * 10 * direction;
         Debug.Log("speed is" + s);
+
         transform.Translate(Vector3.up * s * Time.deltaTime * 0.5f);//set main character to move upwards then
-        transform.Translate(Vector3.forward * s * Time.deltaTime * -1);//move forward to add the "jump" effect
+        transform.Translate(Vector3.forward * s * Time.deltaTime * direction * -1);//move forward to add the "jump" effect
+
+        stepUpFlag = 0;
+        stepDownFlag = 0;
         yield return null;
     }
 
@@ -129,13 +134,17 @@ public class MovePlayer : MonoBehaviour
                     StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
                 }
-                else if (runCommands[i] == "moveBlock(Clone)" && highTileFlag == 0)
+                else if (runCommands[i] == "moveBlock(Clone)" && stepUpFlag == 0 && stepDownFlag == 0)
                 {
                     StartCoroutine(Move(1));
                 }
-                else if (runCommands[i] == "jumpBlock(Clone)" && highTileFlag == 1)
+                else if (runCommands[i] == "jumpBlock(Clone)" && stepUpFlag == 1)
                 {
                     StartCoroutine(Jump(1));
+                }
+                else if (runCommands[i] == "jumpBlock(Clone)" && stepDownFlag == 1)
+                {
+                    StartCoroutine(Jump(-1));
                 }
                 else
                 {
@@ -198,8 +207,12 @@ public class MovePlayer : MonoBehaviour
         else if (col.gameObject.CompareTag("Step Up"))
         {
             Debug.Log("IN STEP-UP CODE !");
-            highTileFlag = 1;
-            //StartCoroutine(Move(-1)); 
+            stepUpFlag = 1;
+        }
+        else if (col.gameObject.CompareTag("Step Down"))
+        {
+            Debug.Log("IN STEP-DOWN CODE !");
+            stepDownFlag = 1;
         }
     }
 

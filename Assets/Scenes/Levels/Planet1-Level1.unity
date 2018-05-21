@@ -1762,7 +1762,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.000002, y: 5.4000063, z: 10.000002}
+  m_Size: {x: 10.000002, y: 5.4000063, z: 20}
   m_Center: {x: 4.999999, y: 1.9000031, z: 4.999999}
 --- !u!23 &736063808
 MeshRenderer:
@@ -1959,7 +1959,7 @@ GameObject:
   - component: {fileID: 805482833}
   m_Layer: 0
   m_Name: frameHighTile (4)
-  m_TagString: Step Up
+  m_TagString: Step Down
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2032,7 +2032,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.000002, y: 5.4000063, z: 10.000002}
+  m_Size: {x: 10.000002, y: 10, z: 10.000002}
   m_Center: {x: 4.999999, y: 1.9000031, z: 4.999999}
 --- !u!54 &805482834
 Rigidbody:
@@ -4945,7 +4945,8 @@ MonoBehaviour:
   pickupSource: {fileID: 0}
   volLowRange: 0.5
   volHighRange: 1
-  jumpFlag: 0
+  stepUpFlag: 0
+  stepDownFlag: 0
 --- !u!33 &1988307419
 MeshFilter:
   m_ObjectHideFlags: 0
