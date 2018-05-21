@@ -39,7 +39,6 @@ public class MovePlayer : MonoBehaviour
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
 
-        scoreText.text = "";
         scoreCount = 0;
         SetScoreText ();
 
@@ -206,10 +205,11 @@ public class MovePlayer : MonoBehaviour
         {
             vol = Random.Range(volLowRange, volHighRange);
             pickupSource.PlayOneShot(pickupSound, vol);
-
+            
             col.gameObject.SetActive (false);
             scoreCount = scoreCount + 1;
             SetScoreText ();
+            Debug.Log("HEBA HEBA");
         }
         else if (col.gameObject.CompareTag("Step Up"))
         {
