@@ -71,6 +71,41 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
+                else if (item.name == "ifBlock(Clone)")
+                {
+                    //Debug.Log("Color is " + item.GetComponent<Image>().name);
+                    numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
+                    string color;
+                    //loopThroughClicks(item.name, numberOfClicks);
+                    if (numberOfClicks == 0)
+                    {
+                        builder.Append(",");
+                        color = "Red";
+                        builder.Append(item.name+"-"+color);
+                    }
+                    else if (numberOfClicks == 1)
+                    {
+                        builder.Append(",");
+                        color = "Green";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else if (numberOfClicks == 2)
+                    {
+                        builder.Append(",");
+                        color = "White";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else if (numberOfClicks == 3)
+                    {
+                        builder.Append(",");
+                        color = "Black";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else
+                    {
+                        //Something is wrong
+                    }
+                }
                 else
                 {
                     numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
