@@ -7,6 +7,7 @@ TagManager:
   - Pick Up
   - Step Up
   - Step Down
+  - Midway Step
   layers:
   - Default
   - TransparentFX

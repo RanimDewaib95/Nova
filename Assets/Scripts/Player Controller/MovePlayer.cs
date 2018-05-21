@@ -214,6 +214,12 @@ public class MovePlayer : MonoBehaviour
             Debug.Log("IN STEP-DOWN CODE !");
             stepDownFlag = 1;
         }
+        else if (col.gameObject.CompareTag("Midway Step"))
+        {
+            Debug.Log("IN STEP-DOWN CODE !");
+            stepUpFlag = 1;
+            stepDownFlag = 1;
+        }
     }
 
     void SetScoreText ()
