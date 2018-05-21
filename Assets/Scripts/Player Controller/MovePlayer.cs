@@ -23,6 +23,8 @@ public class MovePlayer : MonoBehaviour
     public float volHighRange = 1.0f;
     float vol;
 
+    public int highTileFlag = 0; //If set, it means the character is on top of a step. Else, it's on level ground
+
     void Start()
     {
         //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
@@ -88,7 +90,7 @@ public class MovePlayer : MonoBehaviour
     {
         float s = (15 / Time.deltaTime) * 10 * direction;
         Debug.Log("speed is" + s);
-        transform.Translate(Vector3.up * s * Time.deltaTime * 1);//set main character to move upwards then
+        transform.Translate(Vector3.up * s * Time.deltaTime * 0.5f);//set main character to move upwards then
         transform.Translate(Vector3.forward * s * Time.deltaTime * -1);//move forward to add the "jump" effect
         yield return null;
     }
@@ -127,11 +129,11 @@ public class MovePlayer : MonoBehaviour
                     StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
                 }
-                else if (runCommands[i] == "moveBlock(Clone)")
+                else if (runCommands[i] == "moveBlock(Clone)" && highTileFlag == 0)
                 {
                     StartCoroutine(Move(1));
                 }
-                else if (runCommands[i] == "jumpBlock(Clone)")
+                else if (runCommands[i] == "jumpBlock(Clone)" && highTileFlag == 1)
                 {
                     StartCoroutine(Jump(1));
                 }
@@ -182,16 +184,22 @@ public class MovePlayer : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider pickup) 
+    void OnTriggerEnter(Collider col) 
     {
-        if (pickup.gameObject.CompareTag("Pick Up"))
+        if (col.gameObject.CompareTag("Pick Up"))
         {
             vol = Random.Range(volLowRange, volHighRange);
             pickupSource.PlayOneShot(pickupSound, vol);
 
-            pickup.gameObject.SetActive (false);
+            col.gameObject.SetActive (false);
             scoreCount = scoreCount + 1;
             SetScoreText ();
+        }
+        else if (col.gameObject.CompareTag("Step Up"))
+        {
+            Debug.Log("IN STEP-UP CODE !");
+            highTileFlag = 1;
+            //StartCoroutine(Move(-1)); 
         }
     }
 
