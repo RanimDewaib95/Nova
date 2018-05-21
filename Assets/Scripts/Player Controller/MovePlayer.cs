@@ -89,14 +89,20 @@ public class MovePlayer : MonoBehaviour
 
     public IEnumerator Jump(int direction)
     {
+        if (direction == 1)
+        {
+            stepUpFlag = 0;
+        }
+        else if (direction == -1)
+        {
+            stepDownFlag = 0;
+        }
+
         float s = (15 / Time.deltaTime) * 10 * direction;
         Debug.Log("speed is" + s);
 
         transform.Translate(Vector3.up * s * Time.deltaTime * 0.5f);//set main character to move upwards then
         transform.Translate(Vector3.forward * s * Time.deltaTime * direction * -1);//move forward to add the "jump" effect
-
-        stepUpFlag = 0;
-        stepDownFlag = 0;
         yield return null;
     }
 
@@ -216,7 +222,7 @@ public class MovePlayer : MonoBehaviour
         }
         else if (col.gameObject.CompareTag("Midway Step"))
         {
-            Debug.Log("IN STEP-DOWN CODE !");
+            Debug.Log("IN MIDWAY-STEP CODE !");
             stepUpFlag = 1;
             stepDownFlag = 1;
         }
