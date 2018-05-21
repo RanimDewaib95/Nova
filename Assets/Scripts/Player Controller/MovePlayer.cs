@@ -39,6 +39,7 @@ public class MovePlayer : MonoBehaviour
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         ResetButton.interactable = false;
 
+        scoreText.text = "";
         scoreCount = 0;
         SetScoreText ();
 
