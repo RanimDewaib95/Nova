@@ -23,6 +23,9 @@ public class MovePlayer : MonoBehaviour
     public float volHighRange = 1.0f;
     float vol;
 
+    public int stepUpFlag = 0;
+    public int stepDownFlag = 0;
+
     void Start()
     {
         //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
@@ -84,6 +87,25 @@ public class MovePlayer : MonoBehaviour
         yield return null;
     }
 
+    public IEnumerator Jump(int direction)
+    {
+        if (direction == 1)
+        {
+            stepUpFlag = 0;
+        }
+        else if (direction == -1)
+        {
+            stepDownFlag = 0;
+        }
+
+        float s = (15 / Time.deltaTime) * 10 * direction;
+        Debug.Log("speed is" + s);
+
+        transform.Translate(Vector3.up * s * Time.deltaTime * 0.5f);//set main character to move upwards then
+        transform.Translate(Vector3.forward * s * Time.deltaTime * direction * -1);//move forward to add the "jump" effect
+        yield return null;
+    }
+
     public IEnumerator RotateAround(Vector3 axis, float angle, float duration)
     {
         float elapsed = 0.0f;
@@ -118,9 +140,17 @@ public class MovePlayer : MonoBehaviour
                     StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
                 }
-                else if (runCommands[i] == "moveBlock(Clone)")
+                else if (runCommands[i] == "moveBlock(Clone)" && stepUpFlag == 0 && stepDownFlag == 0)
                 {
                     StartCoroutine(Move(1));
+                }
+                else if (runCommands[i] == "jumpBlock(Clone)" && stepUpFlag == 1)
+                {
+                    StartCoroutine(Jump(1));
+                }
+                else if (runCommands[i] == "jumpBlock(Clone)" && stepDownFlag == 1)
+                {
+                    StartCoroutine(Jump(-1));
                 }
                 else
                 {
@@ -169,16 +199,33 @@ public class MovePlayer : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider pickup) 
+    void OnTriggerEnter(Collider col) 
     {
-        if (pickup.gameObject.CompareTag("Pick Up"))
+        if (col.gameObject.CompareTag("Pick Up"))
         {
             vol = Random.Range(volLowRange, volHighRange);
             pickupSource.PlayOneShot(pickupSound, vol);
-
-            pickup.gameObject.SetActive (false);
+            
+            col.gameObject.SetActive (false);
             scoreCount = scoreCount + 1;
             SetScoreText ();
+            Debug.Log("HEBA HEBA");
+        }
+        else if (col.gameObject.CompareTag("Step Up"))
+        {
+            Debug.Log("IN STEP-UP CODE !");
+            stepUpFlag = 1;
+        }
+        else if (col.gameObject.CompareTag("Step Down"))
+        {
+            Debug.Log("IN STEP-DOWN CODE !");
+            stepDownFlag = 1;
+        }
+        else if (col.gameObject.CompareTag("Midway Step"))
+        {
+            Debug.Log("IN MIDWAY-STEP CODE !");
+            stepUpFlag = 1;
+            stepDownFlag = 1;
         }
     }
 

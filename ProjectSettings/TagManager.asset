@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Pick Up
+  - Step Up
+  - Step Down
+  - Midway Step
   layers:
   - Default
   - TransparentFX
