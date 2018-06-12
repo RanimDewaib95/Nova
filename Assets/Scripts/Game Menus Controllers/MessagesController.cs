@@ -11,7 +11,6 @@ public class MessagesController : MonoBehaviour {
     GameObject nextButton;
     GameObject previousButton;
     GameObject doneButton;
-    public static GameObject endMessage;
 
     Sprite mySprite;
 
@@ -25,10 +24,8 @@ public class MessagesController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        endMessage = GameObject.Find("CanvasPop (2)").gameObject;
-        endMessage.SetActive(false);
 
-        if(SceneManager.GetActiveScene().name == "Spacestation-Level1")
+        if(LevelsMenuController.level == 1)
         {
             messagesLevel1.Add("L1M1");
             messagesLevel1.Add("L1M2");
@@ -136,6 +133,11 @@ public class MessagesController : MonoBehaviour {
 
     public void doneButtonClicked()
     {
-        GameObject.Find("CanvasPop (1)").SetActive(false);
+        GameObject.Find("CanvasPop").SetActive(false);
+
+        if (LevelsMenuController.level == 1)
+        {
+            SceneManager.LoadScene("Spacestation-Level1");
+        }
     }
 }

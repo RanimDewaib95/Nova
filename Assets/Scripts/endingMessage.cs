@@ -6,15 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class endingMessage : MonoBehaviour {
 
+    public static GameObject endMessage;
+
+    private void Start()
+    {
+        endMessage = GameObject.Find("CanvasPop (2)").gameObject;
+        endMessage.SetActive(false);
+    }
+
     public void displayLastMessage()
     {
-        MessagesController.endMessage.SetActive(true);
+        endMessage.SetActive(true);
     }
 
     public void goToNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //SceneManager.LoadScene("Planet1-Level1");
     }
 
     public void goToLevelsMenu()

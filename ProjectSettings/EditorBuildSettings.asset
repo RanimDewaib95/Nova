@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Spacestation-Level1.unity
     guid: d8aa49c6325eae243b631490fdb75530
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Menus/Pop up messages.unity
     guid: 351b69dad5417f54bafad29c853e0284
   - enabled: 1
