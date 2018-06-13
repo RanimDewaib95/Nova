@@ -21,7 +21,24 @@ public class endingMessage : MonoBehaviour {
 
     public void goToNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (LevelsMenuController.level == 1)
+        {
+            LevelsMenuController.level = 2;
+            SceneManager.LoadScene("Pop up messages");
+        }
+
+        if (LevelsMenuController.level == 2)
+        {
+            LevelsMenuController.level = 3;
+            SceneManager.LoadScene("Pop up messages");
+        }
+
+        if (LevelsMenuController.level == 3)
+        {
+            LevelsMenuController.level = 4;
+            SceneManager.LoadScene("Pop up messages");
+        }
+
     }
 
     public void goToLevelsMenu()

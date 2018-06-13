@@ -36,7 +36,7 @@ public class MessagesController : MonoBehaviour {
             messagesLevel1.Add("L1M7");
         }
 
-        if (SceneManager.GetActiveScene().name == "Planet1-Level1")
+        if (LevelsMenuController.level == 2)
         {
             messagesLevel1.Add("L2M1");
             messagesLevel1.Add("L2M2");
@@ -44,6 +44,23 @@ public class MessagesController : MonoBehaviour {
             messagesLevel1.Add("L2M4");
             messagesLevel1.Add("L2M5");
             messagesLevel1.Add("L2M6");
+        }
+
+        if (LevelsMenuController.level == 3)
+        {
+            messagesLevel1.Add("L3M1");
+            messagesLevel1.Add("L3M2");
+            messagesLevel1.Add("L3M3");
+            messagesLevel1.Add("L3M4");
+        }
+
+        if (LevelsMenuController.level == 4)
+        {
+            messagesLevel1.Add("L4M1");
+            messagesLevel1.Add("L4M2");
+            messagesLevel1.Add("L4M3");
+            messagesLevel1.Add("L4M4");
+            messagesLevel1.Add("L4M5");
         }
 
         image = GameObject.Find("Image");
@@ -138,6 +155,18 @@ public class MessagesController : MonoBehaviour {
         if (LevelsMenuController.level == 1)
         {
             SceneManager.LoadScene("Spacestation-Level1");
+        }
+        if (LevelsMenuController.level == 2)
+        {
+            SceneManager.LoadScene("Planet1-Level1");
+        }
+        if (LevelsMenuController.level == 3)
+        {
+            SceneManager.LoadScene("Planet2-Level1");
+        }
+        if (LevelsMenuController.level == 4)
+        {
+            SceneManager.LoadScene("Planet3-Level1");
         }
     }
 }
