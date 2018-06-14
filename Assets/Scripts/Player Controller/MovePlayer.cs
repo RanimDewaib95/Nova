@@ -24,6 +24,11 @@ public class MovePlayer : MonoBehaviour
     public float volHighRange = 1.0f;
     float vol;
 
+    int ContinueFlag = 1;
+    List<string> Level3Colors = new List<string>{ "Yellow", "Blue"};
+    int ColorCounter = 0;
+
+
     void Start()
     {
         //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
@@ -144,15 +149,18 @@ public class MovePlayer : MonoBehaviour
                     chosenColor = runCommands[i].Split('-').ToList<string>();
                     //Debug.Log(chosenColor[1]);
 
-                    string panelColor = "Red"; //
-                    if (panelColor == chosenColor[1])
+                    if (chosenColor[1] == "FourColor")
                     {
-                        StartCoroutine(Move(1));
+                        ContinueFlag = 0;
+                    }
+                    else if (chosenColor[1] == Level3Colors[ColorCounter])
+                    {
+                        ContinueFlag = 1;
+                        ColorCounter++;
                     }
                     else
                     {
-                        //Stop, Don't Continue
-                        //break;
+                        //Do Nothing
                     }
 
                 }
@@ -190,6 +198,10 @@ public class MovePlayer : MonoBehaviour
             else if (runCommands[i] == "moveBlock(Clone)")
             {
                 StartCoroutine(Move(-1));
+            }
+            else if (runCommands[i].Contains("ifBlock(Clone)"))
+            {
+                ColorCounter--;
             }
             else
             {

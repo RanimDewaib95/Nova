@@ -31,10 +31,11 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             jumpBlocks.Add("jump5");
             jumpBlocks.Add("jump1");
 
-            ifBlocks.Add("Green");
-            ifBlocks.Add("White");
-            ifBlocks.Add("Black");
             ifBlocks.Add("Red");
+            ifBlocks.Add("Yellow");
+            ifBlocks.Add("Green");
+            ifBlocks.Add("Blue");
+            ifBlocks.Add("FourColor");
         }
         if (SceneManager.GetActiveScene().name == "Planet3-Level1")
         {
@@ -121,12 +122,10 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                         break;
 
                     case "ifBlock(Clone)":
-                        if (clicksCount < 4)
+                        if (clicksCount < 5)
                         {
                             displaySprite(nameOfClickedBlock);
                             clicksCount++;
-
-                            Debug.Log(clicksCount);
                         }
                         else
                         {
@@ -140,7 +139,6 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                         {
                             displaySprite(nameOfClickedBlock);
                             clicksCount++;
-                            //Debug.Log(clicksCount);
                         }
                         else
                         {

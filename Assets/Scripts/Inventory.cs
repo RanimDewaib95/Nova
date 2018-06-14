@@ -80,25 +80,31 @@ public class Inventory : MonoBehaviour
                     if (numberOfClicks == 0)
                     {
                         builder.Append(",");
-                        color = "Red";
+                        color = "FourColor";
                         builder.Append(item.name+"-"+color);
                     }
                     else if (numberOfClicks == 1)
                     {
                         builder.Append(",");
-                        color = "Green";
+                        color = "Red";
                         builder.Append(item.name + "-" + color);
                     }
                     else if (numberOfClicks == 2)
                     {
                         builder.Append(",");
-                        color = "White";
+                        color = "Yellow";
                         builder.Append(item.name + "-" + color);
                     }
                     else if (numberOfClicks == 3)
                     {
                         builder.Append(",");
-                        color = "Black";
+                        color = "Green";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else if (numberOfClicks == 3)
+                    {
+                        builder.Append(",");
+                        color = "Blue";
                         builder.Append(item.name + "-" + color);
                     }
                     else
