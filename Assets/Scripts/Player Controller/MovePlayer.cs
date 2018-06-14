@@ -27,6 +27,8 @@ public class MovePlayer : MonoBehaviour
     public int stepDownFlag = 0;
     Stack jumpReversePath = new Stack();
 
+    //public Vector3 bounceOffPosition;
+
     void Start()
     {
         //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
@@ -129,9 +131,9 @@ public class MovePlayer : MonoBehaviour
         while (chosenBlocks > 0 && flag == 0)
         {
             flag = 1;
-
             for (int i = 0; i < runCommands.Count; i++)
             {
+                //bounceOffPosition = transform.position;
                 //Debug.Log(i + runCommands[i]);
                 if (runCommands[i] == "rotateRightBlock(Clone)")
                 {
@@ -165,7 +167,6 @@ public class MovePlayer : MonoBehaviour
             }
             flag = 0;
         }
-        //reverseFlag = 0;
     }
 
     public IEnumerator reverseMovement()
@@ -235,6 +236,12 @@ public class MovePlayer : MonoBehaviour
             Debug.Log("DETECTED MIDWAY-STEP COLLIDER !");
             stepUpFlag = 1;
             stepDownFlag = 1;
+        }
+        else if (col.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("BOUNCING WALL COLLIDER !");
+            //transform.position = bounceOffPosition;
+            transform.gameObject.SetActive(false);
         }
     }
 
