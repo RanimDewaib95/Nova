@@ -3464,9 +3464,10 @@ GameObject:
   - component: {fileID: 1392181129}
   - component: {fileID: 1392181131}
   - component: {fileID: 1392181130}
+  - component: {fileID: 1392181132}
   m_Layer: 0
   m_Name: spaceCraft1 (1)
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3529,6 +3530,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1392181128}
   m_Mesh: {fileID: 4300000, guid: 503661912b528554696d995c88f51dbf, type: 3}
+--- !u!65 &1392181132
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1392181128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 19.750017, y: 4.7500043, z: 17.298903}
+  m_Center: {x: -0.0000010172527, y: 1.8749952, z: -0.95056206}
 --- !u!1 &1395352084
 GameObject:
   m_ObjectHideFlags: 0

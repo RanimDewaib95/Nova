@@ -1,22 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEngine.UI;
 
-public class NewBehaviourScript : MonoBehaviour {
+//public class NewBehaviourScript : MonoBehaviour {
 
-    endingMessage goalMessage;
+//    endingMessage goalMessage;
 
-    // Use this for initialization
-    void Start ()
-    {
-        goalMessage = new endingMessage();
-	}
+//    // Use this for initialization
+//    void Start ()
+//    {
+//        goalMessage = new endingMessage();
+//	}
 
-    IEnumerator OnTriggerEnter(Collider other)
-    {
-        yield return new WaitForSeconds(1.0f);
-        goalMessage.displayLastMessage();
-        Debug.Log("found collider");
-    }
-}
+//    IEnumerator OnTriggerEnter(Collider other)
+//    {
+//        if (other.gameObject.CompareTag("heba"))
+//        {
+//            yield return new WaitForSeconds(1.0f);
+//            goalMessage.displayLastMessage();
+//            Debug.Log("found collider");
+//        }       
+//    }
+//}

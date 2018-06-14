@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System.Threading;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class MovePlayer : MonoBehaviour
     public int stepDownFlag = 0;
     Stack jumpReversePath = new Stack();
 
+    endingMessage goalMessage;
     //public Vector3 bounceOffPosition;
 
     void Start()
@@ -220,6 +222,14 @@ public class MovePlayer : MonoBehaviour
             col.gameObject.SetActive(false);
             scoreCount = scoreCount + 1;
             SetScoreText();
+        }
+        else if (col.gameObject.CompareTag("Finish"))
+        {
+            transform.gameObject.SetActive(false);
+            goalMessage = new endingMessage();
+            Thread.Sleep(1000);
+            goalMessage.displayLastMessage();
+            Debug.Log("heba found collider");
         }
         else if (col.gameObject.CompareTag("Step Up"))
         {
