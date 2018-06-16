@@ -306,6 +306,16 @@ Prefab:
       propertyPath: m_Name
       value: astronaut
       objectReference: {fileID: 0}
+    - target: {fileID: 23592669243811642, guid: 74a50bedad2b0f540968e5f7357985ee,
+        type: 2}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e0b37ac09bf10f4b953895f3aa92f43, type: 2}
+    - target: {fileID: 23020905124981870, guid: 74a50bedad2b0f540968e5f7357985ee,
+        type: 2}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5b80ea8578c1dc45b3dfe04692f2720, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74a50bedad2b0f540968e5f7357985ee, type: 2}
   m_IsPrefabParent: 0

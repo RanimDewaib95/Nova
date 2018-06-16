@@ -159,8 +159,9 @@ public class MovePlayer : MonoBehaviour
                         chosenColor = runCommands[i].Split('-').ToList<string>();
                         //Debug.Log(chosenColor[1]);
 
-                        if (chosenColor[1] == Level3Colors[ColorCounter])
+                        if (chosenColor[1] == Level3Colors[ColorCounter] )
                         {
+                            // Add in if --> && IfTrigger == 1
                             ContinueFlag = 1;
                             ColorCounter++;
                         }
