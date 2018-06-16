@@ -24,8 +24,9 @@ public class MovePlayer : MonoBehaviour
     public float volHighRange = 1.0f;
     float vol;
 
-    int ContinueFlag = 1;
-    List<string> Level3Colors = new List<string>{ "Yellow", "Blue"};
+    int ContinueFlag = 1; // Flag to know when player made a mistake
+    int LastCorrectInput; // Flag for reverse
+    List<string> Level3Colors = new List<string>{"Yellow", "Blue"};
     int ColorCounter = 0;
 
 
@@ -82,14 +83,21 @@ public class MovePlayer : MonoBehaviour
         ResetButton.interactable = false;
         //Clear Slots Panel
 
-        //Adjust reverse for iffffff
     }
 
     public IEnumerator Move(int direction)
     {
         float s = (15 / Time.deltaTime)*10*direction;
         //Debug.Log("speed is" + s);
-        transform.Translate(Vector3.forward * s * Time.deltaTime * -1);//set main character to move forward
+        for (int j = 0; j< 50; j++)
+        {
+            Debug.Log(ContinueFlag);
+            if (ContinueFlag == 1)
+            {
+                Debug.Log(j);
+                transform.Translate(Vector3.forward * s / 50 * Time.deltaTime * -1);//set main character to move forward
+            }
+        }
         yield return null;
     }
 
@@ -126,52 +134,52 @@ public class MovePlayer : MonoBehaviour
 
             for (int i = 0; i < runCommands.Count; i++)
             {
-                //Debug.Log(i + runCommands[i]);
-                if (runCommands[i] == "rotateRightBlock(Clone)")
+                if (ContinueFlag == 1)
                 {
-                    StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-                }
-                else if (runCommands[i] == "rotateLeftBlock(Clone)")
-                {
-                    StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
-
-                }
-                else if (runCommands[i] == "moveBlock(Clone)")
-                {
-                    StartCoroutine(Move(1));
-                }
-                else if (runCommands[i] == "jumpBlock(Clone)")
-                {
-                    StartCoroutine(Jump(1));
-                }
-                else if (runCommands[i].Contains("ifBlock(Clone)"))
-                {
-                    chosenColor = runCommands[i].Split('-').ToList<string>();
-                    //Debug.Log(chosenColor[1]);
-
-                    if (chosenColor[1] == "FourColor")
+                    //Debug.Log(i + runCommands[i]);
+                    if (runCommands[i] == "rotateRightBlock(Clone)")
                     {
-                        ContinueFlag = 0;
+                        StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
                     }
-                    else if (chosenColor[1] == Level3Colors[ColorCounter])
+                    else if (runCommands[i] == "rotateLeftBlock(Clone)")
                     {
-                        ContinueFlag = 1;
-                        ColorCounter++;
+                        StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
+
+                    }
+                    else if (runCommands[i] == "moveBlock(Clone)")
+                    {
+                        StartCoroutine(Move(1));
+                    }
+                    else if (runCommands[i] == "jumpBlock(Clone)")
+                    {
+                        StartCoroutine(Jump(1));
+                    }
+                    else if (runCommands[i].Contains("ifBlock(Clone)"))
+                    {
+                        chosenColor = runCommands[i].Split('-').ToList<string>();
+                        //Debug.Log(chosenColor[1]);
+
+                        if (chosenColor[1] == Level3Colors[ColorCounter])
+                        {
+                            ContinueFlag = 1;
+                            ColorCounter++;
+                        }
+                        else
+                        {
+                            ContinueFlag = 0;
+                            LastCorrectInput = i;
+                            Debug.Log(i);
+                        }
                     }
                     else
                     {
-                        //Do Nothing
+
                     }
-
+                    //Debug.Log("B"+chosenBlocks);
+                    chosenBlocks--;
+                    //Debug.Log("A"+chosenBlocks);
+                    yield return new WaitForSeconds(2.0f);
                 }
-                else
-                {
-
-                }
-                //Debug.Log("B"+chosenBlocks);
-                chosenBlocks--;
-                //Debug.Log("A"+chosenBlocks);
-                yield return new WaitForSeconds(2.0f);
             }
             flag = 0;
         }
@@ -183,7 +191,7 @@ public class MovePlayer : MonoBehaviour
          while (chosenBlocks > 0 && flag == 0) {
             flag = 1;
 
-        for (int i = runCommands.Count - 1; i >= 0; i--)
+        for (int i = LastCorrectInput; i >= 0; i--)
         {
             //Debug.Log(i + runCommands[i]);
             if (runCommands[i] == "rotateLeftBlock(Clone)")
@@ -215,16 +223,21 @@ public class MovePlayer : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider pickup) 
+    void OnTriggerEnter(Collider other) 
     {
-        if (pickup.gameObject.CompareTag("Pick Up"))
+        if (other.gameObject.CompareTag("Pick Up"))
         {
             vol = Random.Range(volLowRange, volHighRange);
             pickupSource.PlayOneShot(pickupSound, vol);
 
-            pickup.gameObject.SetActive (false);
+            other.gameObject.SetActive (false);
             scoreCount = scoreCount + 1;
             SetScoreText ();
+        }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("HIT WALL");
+            ContinueFlag = 0;
         }
     }
 
