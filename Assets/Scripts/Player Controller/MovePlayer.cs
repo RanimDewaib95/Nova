@@ -27,6 +27,9 @@ public class MovePlayer : MonoBehaviour
     public int stepDownFlag = 0;
     Stack jumpReversePath = new Stack();
 
+    public static int  clicksCountResetButton = 0;
+    hintMessage hint = new hintMessage();
+
     void Start()
     {
         //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
@@ -68,6 +71,7 @@ public class MovePlayer : MonoBehaviour
 
     public void ResetButtonClicker()
     {
+        clicksCountResetButton++;
         Debug.Log("in reverse");
         chosenBlocks = runCommands.Count;
         Debug.Log("number of blocks to reverse is " + chosenBlocks);
@@ -78,6 +82,13 @@ public class MovePlayer : MonoBehaviour
         RunButton.interactable = true;
         ResetButton.interactable = false;
         //Clear Slots Panel
+
+        if(clicksCountResetButton == 3)
+        {
+            Debug.Log("will start displaying hints");
+            StartCoroutine(hint.displayHint());
+            clicksCountResetButton = 0;
+        }
     }
 
     public IEnumerator Move(int direction)
