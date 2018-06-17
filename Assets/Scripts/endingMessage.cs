@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class endingMessage : MonoBehaviour {
 
     public static GameObject endMessage;
-
+ 
     private void Start()
     {
         endMessage = GameObject.Find("CanvasPop (2)").gameObject;
