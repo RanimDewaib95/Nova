@@ -6,15 +6,39 @@ using UnityEngine.SceneManagement;
 
 public class endingMessage : MonoBehaviour {
 
+    public static GameObject endMessage;
+
+    private void Start()
+    {
+        endMessage = GameObject.Find("CanvasPop (2)").gameObject;
+        endMessage.SetActive(false);
+    }
+
     public void displayLastMessage()
     {
-        MessagesController.endMessage.SetActive(true);
+        endMessage.SetActive(true);
     }
 
     public void goToNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //SceneManager.LoadScene("Planet1-Level1");
+        if (LevelsMenuController.level == 1)
+        {
+            LevelsMenuController.level = 2;
+            SceneManager.LoadScene("Pop up messages");
+        }
+
+        if (LevelsMenuController.level == 2)
+        {
+            LevelsMenuController.level = 3;
+            SceneManager.LoadScene("Pop up messages");
+        }
+
+        if (LevelsMenuController.level == 3)
+        {
+            LevelsMenuController.level = 4;
+            SceneManager.LoadScene("Pop up messages");
+        }
+
     }
 
     public void goToLevelsMenu()

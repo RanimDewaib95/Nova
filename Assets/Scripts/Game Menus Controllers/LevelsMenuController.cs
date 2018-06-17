@@ -5,24 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class LevelsMenuController : MonoBehaviour {
 
+    public static int level;
+
     public void spaceStationButtonClicked()
     {
-        SceneManager.LoadScene("Spacestation-Level1");
+        SceneManager.LoadScene("Pop up messages");
+        level = 1;
     }
 
     public void planet1ButtonClicked()
     {
-        SceneManager.LoadScene("Planet1-Level1");
+        SceneManager.LoadScene("Pop up messages");
+        level = 2;
     }
 
     public void planet3ButtonClicked()
     {
-        SceneManager.LoadScene("Planet2-Level1");
+        SceneManager.LoadScene("Pop up messages");
+        level = 3;
     }
 
     public void planet4ButtonClicked()
     {
-        SceneManager.LoadScene("Planet3-Level1");
+        SceneManager.LoadScene("Pop up messages");
+        level = 4;
     }
 
     public void backButtonClicked()

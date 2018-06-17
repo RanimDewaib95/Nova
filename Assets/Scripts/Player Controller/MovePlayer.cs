@@ -25,6 +25,7 @@ public class MovePlayer : MonoBehaviour
 
     public int stepUpFlag = 0;
     public int stepDownFlag = 0;
+    Stack jumpReversePath = new Stack();
 
     void Start()
     {
@@ -40,7 +41,7 @@ public class MovePlayer : MonoBehaviour
         ResetButton.interactable = false;
 
         scoreCount = 0;
-        SetScoreText ();
+        SetScoreText();
 
         pickupSource = GetComponent<AudioSource>();
     }
@@ -52,7 +53,7 @@ public class MovePlayer : MonoBehaviour
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         RunButton.interactable = false;
         ResetButton.interactable = true;
-        
+
         //after inventory finished getting the chosen blocks
         if (Inventory.start == true)
         {
@@ -81,28 +82,28 @@ public class MovePlayer : MonoBehaviour
 
     public IEnumerator Move(int direction)
     {
-        float s = (15 / Time.deltaTime)*10*direction;
+        float s = (15 / Time.deltaTime) * 10 * direction;
         Debug.Log("speed is" + s);
         transform.Translate(Vector3.forward * s * Time.deltaTime * -1);//set main character to move forward
         yield return null;
     }
 
-    public IEnumerator Jump(int direction)
+    public IEnumerator Jump(int verticalDirection, int horizontalDirection)
     {
-        if (direction == 1)
+        if (verticalDirection == 1)//jump upwards
         {
             stepUpFlag = 0;
         }
-        else if (direction == -1)
+        else if (verticalDirection == -1)//jump downwards
         {
             stepDownFlag = 0;
         }
 
-        float s = (15 / Time.deltaTime) * 10 * direction;
+        float s = (15 / Time.deltaTime) * 10;
         Debug.Log("speed is" + s);
 
-        transform.Translate(Vector3.up * s * Time.deltaTime * 0.5f);//set main character to move upwards then
-        transform.Translate(Vector3.forward * s * Time.deltaTime * direction * -1);//move forward to add the "jump" effect
+        transform.Translate(Vector3.up * s * Time.deltaTime * verticalDirection * 0.5f);//set main character to move upwards then
+        transform.Translate(Vector3.forward * s * Time.deltaTime * horizontalDirection * -1);//move forward to add the "jump" effect
         yield return null;
     }
 
@@ -125,7 +126,8 @@ public class MovePlayer : MonoBehaviour
     {
         //Debug.Log("Coroutine started");
 
-        while (chosenBlocks > 0 && flag == 0) {
+        while (chosenBlocks > 0 && flag == 0)
+        {
             flag = 1;
 
             for (int i = 0; i < runCommands.Count; i++)
@@ -146,15 +148,15 @@ public class MovePlayer : MonoBehaviour
                 }
                 else if (runCommands[i] == "jumpBlock(Clone)" && stepUpFlag == 1)
                 {
-                    StartCoroutine(Jump(1));
+                    StartCoroutine(Jump(1,1));
+                    jumpReversePath.Push("jumpUp");
+                    Debug.Log("IN STEP-UP CODE !");
                 }
                 else if (runCommands[i] == "jumpBlock(Clone)" && stepDownFlag == 1)
                 {
-                    StartCoroutine(Jump(-1));
-                }
-                else
-                {
-
+                    StartCoroutine(Jump(-1,1));
+                    jumpReversePath.Push("jumpDown");
+                    Debug.Log("IN STEP-DOWN CODE !");
                 }
                 //Debug.Log("B"+chosenBlocks);
                 chosenBlocks--;
@@ -163,74 +165,81 @@ public class MovePlayer : MonoBehaviour
             }
             flag = 0;
         }
-
+        //reverseFlag = 0;
     }
 
     public IEnumerator reverseMovement()
     {
-         while (chosenBlocks > 0 && flag == 0) {
+        while (chosenBlocks > 0 && flag == 0)
+        {
             flag = 1;
 
-        for (int i = runCommands.Count - 1; i >= 0; i--)
-        {
-            //Debug.Log(i + runCommands[i]);
-            if (runCommands[i] == "rotateLeftBlock(Clone)")
+            for (int i = runCommands.Count - 1; i >= 0; i--)
             {
-                StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-            }
-            else if (runCommands[i] == "rotateRightBlock(Clone)")
-            {
-                StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
+                //Debug.Log(i + runCommands[i]);
+                if (runCommands[i] == "rotateLeftBlock(Clone)")
+                {
+                    StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
+                }
+                else if (runCommands[i] == "rotateRightBlock(Clone)")
+                {
+                    StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
+                }
+                else if (runCommands[i] == "moveBlock(Clone)")
+                {
+                    StartCoroutine(Move(-1));
+                }
+                else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpUp"))
+                {
+                    StartCoroutine(Jump(-1,-1));
+                    jumpReversePath.Pop();
+                    Debug.Log("IN REVERSE STEP-UP CODE !");
+                }
+                else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpDown"))
+                {
+                    StartCoroutine(Jump(1,-1));
+                    jumpReversePath.Pop();
+                    Debug.Log("IN REVERSE STEP-DOWN CODE !");
+                }
+                chosenBlocks--;
+                yield return new WaitForSeconds(2.0f);
             }
-            else if (runCommands[i] == "moveBlock(Clone)")
-            {
-                StartCoroutine(Move(-1));
-            }
-            else
-            {
-
-            }
-            chosenBlocks--;
-            yield return new WaitForSeconds(2.0f);
+            flag = 0;
         }
-        flag = 0;
-         }
-
     }
 
-    void OnTriggerEnter(Collider col) 
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Pick Up"))
         {
             vol = Random.Range(volLowRange, volHighRange);
             pickupSource.PlayOneShot(pickupSound, vol);
-            
-            col.gameObject.SetActive (false);
+
+            col.gameObject.SetActive(false);
             scoreCount = scoreCount + 1;
-            SetScoreText ();
-            Debug.Log("HEBA HEBA");
+            SetScoreText();
         }
         else if (col.gameObject.CompareTag("Step Up"))
         {
-            Debug.Log("IN STEP-UP CODE !");
+            Debug.Log("DETECTED STEP-UP COLLIDER !");
             stepUpFlag = 1;
         }
         else if (col.gameObject.CompareTag("Step Down"))
         {
-            Debug.Log("IN STEP-DOWN CODE !");
+            Debug.Log("DETECTED STEP-DOWN COLLIDER !");
             stepDownFlag = 1;
         }
         else if (col.gameObject.CompareTag("Midway Step"))
         {
-            Debug.Log("IN MIDWAY-STEP CODE !");
+            Debug.Log("DETECTED MIDWAY-STEP COLLIDER !");
             stepUpFlag = 1;
             stepDownFlag = 1;
         }
     }
 
-    void SetScoreText ()
+    void SetScoreText()
     {
-        scoreText.text = "Score: " + scoreCount.ToString ();
+        scoreText.text = "Score: " + scoreCount.ToString();
     }
 }
