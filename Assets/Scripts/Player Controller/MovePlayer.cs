@@ -20,9 +20,6 @@ public class MovePlayer : MonoBehaviour
 
     public AudioClip pickupSound;
     public AudioSource pickupSource;
-    public float volLowRange = .5f;
-    public float volHighRange = 1.0f;
-    float vol;
 
     int ContinueFlag = 1; // Flag to know when player made a mistake
     List<string> Level3Colors = new List<string> { "Yellow", "Blue" };
@@ -247,12 +244,16 @@ public class MovePlayer : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Pick Up"))
         {
-            vol = Random.Range(volLowRange, volHighRange);
-            pickupSource.PlayOneShot(pickupSound, vol);
-
+            pickupSource.PlayOneShot(pickupSound, 1);
             col.gameObject.SetActive(false);
             scoreCount = scoreCount + 1;
             SetScoreText();
+        }
+        else if (col.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("DETECTED WALL BOUNDARY !");
+            transform.gameObject.SetActive(false);
+            //end current level then display a message containing "restart level" and "levels menu" buttons
         }
         else if (col.gameObject.CompareTag("Step Up"))
         {
