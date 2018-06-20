@@ -1274,7 +1274,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4126022577425114, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.1400006
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4126022577425114, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3232,7 +3232,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4126022577425114, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.1400006
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4126022577425114, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4289,7 +4289,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4126022577425114, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.1400006
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4126022577425114, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4340,7 +4340,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4126022577425114, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.1400006
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4126022577425114, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4960,6 +4960,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1000
   flag: 0
+  TBCC: 
+  chosenBlocks: 0
   scoreText: {fileID: 0}
   pickupSound: {fileID: 0}
   pickupSource: {fileID: 0}

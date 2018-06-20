@@ -237,7 +237,7 @@ public class MovePlayer : MonoBehaviour
         {
             Debug.Log("DETECTED WALL BOUNDARY !");
             //transform.gameObject.SetActive(false);
-            //end current level then display a message containing "restart level" and "levels menu" buttons
+            resetPlayer();
         }
         else if (col.gameObject.CompareTag("Step Up"))
         {
