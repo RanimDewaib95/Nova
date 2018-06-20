@@ -334,6 +334,16 @@ Prefab:
       propertyPath: m_TagString
       value: Step Down
       objectReference: {fileID: 0}
+    - target: {fileID: 23020905124981870, guid: 74a50bedad2b0f540968e5f7357985ee,
+        type: 2}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: e444c1560dbf14d4aa85d4c3864d6105, type: 2}
+    - target: {fileID: 23592669243811642, guid: 74a50bedad2b0f540968e5f7357985ee,
+        type: 2}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6eb5942130d0ee14490468bc5c6bef1e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74a50bedad2b0f540968e5f7357985ee, type: 2}
   m_IsPrefabParent: 0
