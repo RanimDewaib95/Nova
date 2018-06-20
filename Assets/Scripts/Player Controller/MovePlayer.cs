@@ -31,18 +31,20 @@ public class MovePlayer : MonoBehaviour
     public static int  clicksCountResetButton = 0;
     hintMessage hint = new hintMessage();
 
+    Button runButton;
+    Button resetButton;
+
     void Start()
     {
-        //forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
-        //playerInitialPosition = transform.position;
-        //playerInitialForward = transform.forward;
         forward = transform.forward;
         forward.y = 0; // make sure y is 0
         forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
 
-        Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
-        ResetButton.interactable = false;
+        resetButton = GameObject.Find("ResetButton").GetComponent<Button>();
+        resetButton.interactable = false;
+
+        runButton = GameObject.Find("RunButton").GetComponent<Button>(); 
 
         scoreCount = 0;
         SetScoreText();
@@ -52,11 +54,8 @@ public class MovePlayer : MonoBehaviour
 
     public void RunButtonClicker()
     {
-        //Debug.Log(Inventory.TBCC);
-        Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
-        Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
-        RunButton.interactable = false;
-        ResetButton.interactable = true;
+        runButton.interactable = false;
+        resetButton.interactable = true;
 
         //after inventory finished getting the chosen blocks
         if (Inventory.start == true)
@@ -95,7 +94,6 @@ public class MovePlayer : MonoBehaviour
     public IEnumerator Move(int direction)
     {
         float s = (15 / Time.deltaTime) * 10 * direction;
-        //Debug.Log("speed is" + s);
         transform.Translate(Vector3.forward * s * Time.deltaTime * -1);//set main character to move forward
         yield return null;
     }
@@ -136,8 +134,6 @@ public class MovePlayer : MonoBehaviour
 
     public IEnumerator updateMovement()
     {
-        //Debug.Log("Coroutine started");
-
         while (chosenBlocks > 0 && flag == 0)
         {
             flag = 1;
@@ -146,7 +142,6 @@ public class MovePlayer : MonoBehaviour
             {
                 if (ContinueFlag == 1)
                 {
-                    //Debug.Log(i + runCommands[i]);
                     if (runCommands[i] == "rotateRightBlock(Clone)")
                     {
                         StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
@@ -189,9 +184,7 @@ public class MovePlayer : MonoBehaviour
                     }
 
                 }
-                //Debug.Log("B"+chosenBlocks);
                 chosenBlocks--;
-                //Debug.Log("A"+chosenBlocks);
                 yield return new WaitForSeconds(2.0f);
             }
             flag = 0;
