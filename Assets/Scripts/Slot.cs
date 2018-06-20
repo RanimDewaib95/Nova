@@ -32,7 +32,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             jumpBlocks.Add("jump5");
             jumpBlocks.Add("jump1");
 
-            fBlocks.Add("ifRed");
+            ifBlocks.Add("ifRed");
             ifBlocks.Add("ifYellow");
             ifBlocks.Add("ifGreen");
             ifBlocks.Add("ifBlue");

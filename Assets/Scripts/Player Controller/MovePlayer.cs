@@ -24,6 +24,9 @@ public class MovePlayer : MonoBehaviour
     public float volHighRange = 1.0f;
     float vol;
 
+    int ContinueFlag = 1; // Flag to know when player made a mistake
+    List<string> Level3Colors = new List<string> { "Yellow", "Blue" };
+    int ColorCounter = 0;
     public int stepUpFlag = 0;
     public int stepDownFlag = 0;
     Stack jumpReversePath = new Stack();
@@ -144,46 +147,48 @@ public class MovePlayer : MonoBehaviour
 
             for (int i = 0; i < runCommands.Count; i++)
             {
-                //Debug.Log(i + runCommands[i]);
-                if (runCommands[i] == "rotateRightBlock(Clone)")
+                if (ContinueFlag == 1)
                 {
-                    StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-                }
-                else if (runCommands[i] == "rotateLeftBlock(Clone)")
-                {
-                    StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
+                    //Debug.Log(i + runCommands[i]);
+                    if (runCommands[i] == "rotateRightBlock(Clone)")
+                    {
+                        StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
+                    }
+                    else if (runCommands[i] == "rotateLeftBlock(Clone)")
+                    {
+                        StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
-                }
-                else if (runCommands[i] == "moveBlock(Clone)" && stepUpFlag == 0 && stepDownFlag == 0)
-                {
-                    StartCoroutine(Move(1));
-                }
-                else if (runCommands[i] == "jumpBlock(Clone)" && stepUpFlag == 1)
-                {
-                    StartCoroutine(Jump(1, 1));
-                    jumpReversePath.Push("jumpUp");
-                    Debug.Log("IN STEP-UP CODE !");
-                }
-                else if (runCommands[i] == "jumpBlock(Clone)" && stepDownFlag == 1)
-                {
-                    StartCoroutine(Jump(-1, 1));
-                    jumpReversePath.Push("jumpDown");
-                    Debug.Log("IN STEP-DOWN CODE !");
-                }
-                else if (runCommands[i].Contains("ifBlock(Clone)"))
-                {
-                    chosenColor = runCommands[i].Split('-').ToList<string>();
-                    //Debug.Log(chosenColor[1]);
-
-                    string panelColor = "Red"; //
-                    if (panelColor == chosenColor[1])
+                    }
+                    else if (runCommands[i] == "moveBlock(Clone)" && stepUpFlag == 0 && stepDownFlag == 0)
                     {
                         StartCoroutine(Move(1));
                     }
-                    else
+                    else if (runCommands[i] == "jumpBlock(Clone)" && stepUpFlag == 1)
                     {
-                        //Stop, Don't Continue
-                        //break;
+                        StartCoroutine(Jump(1, 1));
+                        jumpReversePath.Push("jumpUp");
+                        Debug.Log("IN STEP-UP CODE !");
+                    }
+                    else if (runCommands[i] == "jumpBlock(Clone)" && stepDownFlag == 1)
+                    {
+                        StartCoroutine(Jump(-1, 1));
+                        jumpReversePath.Push("jumpDown");
+                        Debug.Log("IN STEP-DOWN CODE !");
+                    }
+                    else if (runCommands[i].Contains("ifBlock(Clone)"))
+                    {
+                        chosenColor = runCommands[i].Split('-').ToList<string>();
+                        //Debug.Log(chosenColor[1]);
+
+                        if (chosenColor[1] == Level3Colors[ColorCounter])
+                        {
+                            ContinueFlag = 1;
+                            ColorCounter++;
+                        }
+                        else
+                        {
+                            ContinueFlag = 0;
+                        }
                     }
 
                 }
