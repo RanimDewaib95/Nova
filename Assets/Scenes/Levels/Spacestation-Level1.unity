@@ -2164,8 +2164,6 @@ MonoBehaviour:
   scoreText: {fileID: 313561426}
   pickupSound: {fileID: 8300000, guid: 325aefaa41726c74ea166de1fae9ee92, type: 3}
   pickupSource: {fileID: 0}
-  volLowRange: 0.5
-  volHighRange: 1
   stepUpFlag: 0
   stepDownFlag: 0
 --- !u!23 &996496504
@@ -2697,6 +2695,11 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65606805904909870, guid: 0dd18cdf3807edd499b9d1d5612e6149,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0dd18cdf3807edd499b9d1d5612e6149, type: 2}
