@@ -10,6 +10,7 @@ public class MovePlayer : MonoBehaviour
     public int flag = 0;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
     List<string> runCommands = new List<string>(); //All Slot Panel Blocks Translated
+    List<string> chosenColor = new List<string>();
     string TBCC; //String Carries Names of all blocks in panel Slot
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
     //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
@@ -72,9 +73,9 @@ public class MovePlayer : MonoBehaviour
     public void ResetButtonClicker()
     {
         clicksCountResetButton++;
-        Debug.Log("in reverse");
+        //Debug.Log("in reverse");
         chosenBlocks = runCommands.Count;
-        Debug.Log("number of blocks to reverse is " + chosenBlocks);
+        //Debug.Log("number of blocks to reverse is " + chosenBlocks);
         StartCoroutine(reverseMovement());
         //Enable Run Button
         Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
@@ -94,7 +95,7 @@ public class MovePlayer : MonoBehaviour
     public IEnumerator Move(int direction)
     {
         float s = (15 / Time.deltaTime) * 10 * direction;
-        Debug.Log("speed is" + s);
+        //Debug.Log("speed is" + s);
         transform.Translate(Vector3.forward * s * Time.deltaTime * -1);//set main character to move forward
         yield return null;
     }
@@ -159,15 +160,32 @@ public class MovePlayer : MonoBehaviour
                 }
                 else if (runCommands[i] == "jumpBlock(Clone)" && stepUpFlag == 1)
                 {
-                    StartCoroutine(Jump(1,1));
+                    StartCoroutine(Jump(1, 1));
                     jumpReversePath.Push("jumpUp");
                     Debug.Log("IN STEP-UP CODE !");
                 }
                 else if (runCommands[i] == "jumpBlock(Clone)" && stepDownFlag == 1)
                 {
-                    StartCoroutine(Jump(-1,1));
+                    StartCoroutine(Jump(-1, 1));
                     jumpReversePath.Push("jumpDown");
                     Debug.Log("IN STEP-DOWN CODE !");
+                }
+                else if (runCommands[i].Contains("ifBlock(Clone)"))
+                {
+                    chosenColor = runCommands[i].Split('-').ToList<string>();
+                    //Debug.Log(chosenColor[1]);
+
+                    string panelColor = "Red"; //
+                    if (panelColor == chosenColor[1])
+                    {
+                        StartCoroutine(Move(1));
+                    }
+                    else
+                    {
+                        //Stop, Don't Continue
+                        //break;
+                    }
+
                 }
                 //Debug.Log("B"+chosenBlocks);
                 chosenBlocks--;
