@@ -175,7 +175,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                 break;
 
             case "ifBlock(Clone)":
-                sprites = jumpBlocks;
+                sprites = ifBlocks;
                 break;
 
             case "procedureBlock(Clone)":
