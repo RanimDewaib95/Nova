@@ -8,6 +8,8 @@ TagManager:
   - Step Up
   - Step Down
   - Midway Step
+  - Target
+  - Wall
   layers:
   - Default
   - TransparentFX
