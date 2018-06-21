@@ -6,15 +6,17 @@ using UnityEngine.UI;
 
 public class MovePlayer : MonoBehaviour
 {
-    public float moveSpeed = 1000f;//Change in inspector to adjust move speed
-    public int flag = 0;
+    Vector3 player;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
+
     List<string> runCommands = new List<string>(); //All Slot Panel Blocks Translated
     List<string> chosenColor = new List<string>();
     string TBCC; //String Carries Names of all blocks in panel Slot
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
-    //Vector3 playerInitialPosition, playerInitialForward; // Initial Player Setting
 
+    public float moveSpeed = 1000f;//Change in inspector to adjust move speed
+    public int flag = 0;   
+   
     private int scoreCount;
     public Text scoreText;
 
@@ -46,9 +48,10 @@ public class MovePlayer : MonoBehaviour
 
         runButton = GameObject.Find("RunButton").GetComponent<Button>(); 
 
+        player = transform.position;
+
         scoreCount = 0;
         SetScoreText();
-
         pickupSource = GetComponent<AudioSource>();
     }
 
@@ -72,10 +75,14 @@ public class MovePlayer : MonoBehaviour
     public void ResetButtonClicker()
     {
         clicksCountResetButton++;
-        //Debug.Log("in reverse");
-        chosenBlocks = runCommands.Count;
+
+        Debug.Log("in reverse");
+
+        resetPlayer();
+        //chosenBlocks = runCommands.Count;
         //Debug.Log("number of blocks to reverse is " + chosenBlocks);
-        StartCoroutine(reverseMovement());
+        //StartCoroutine(reverseMovement());
+
         //Enable Run Button
         Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
         Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
@@ -245,8 +252,8 @@ public class MovePlayer : MonoBehaviour
         else if (col.gameObject.CompareTag("Wall"))
         {
             Debug.Log("DETECTED WALL BOUNDARY !");
-            transform.gameObject.SetActive(false);
-            //end current level then display a message containing "restart level" and "levels menu" buttons
+            //transform.gameObject.SetActive(false);
+            resetPlayer();
         }
         else if (col.gameObject.CompareTag("Step Up"))
         {
@@ -269,5 +276,11 @@ public class MovePlayer : MonoBehaviour
     void SetScoreText()
     {
         scoreText.text = "Score: " + scoreCount.ToString();
+    }
+
+    void resetPlayer()
+    {
+        transform.position = player;
+        transform.forward = Vector3.Normalize(forward);
     }
 }
