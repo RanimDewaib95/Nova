@@ -84,10 +84,8 @@ public class MovePlayer : MonoBehaviour
         //StartCoroutine(reverseMovement());
 
         //Enable Run Button
-        Button RunButton = GameObject.Find("RunButton").GetComponent<Button>();
-        Button ResetButton = GameObject.Find("ResetButton").GetComponent<Button>();
-        RunButton.interactable = true;
-        ResetButton.interactable = false;
+        runButton.interactable = true;
+        resetButton.interactable = false;
         //Clear Slots Panel
 
         if(clicksCountResetButton == 3)
@@ -280,6 +278,7 @@ public class MovePlayer : MonoBehaviour
 
     void resetPlayer()
     {
+        runButton.interactable = true;
         transform.position = player;
         transform.forward = Vector3.Normalize(forward);
     }
