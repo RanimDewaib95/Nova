@@ -21,24 +21,23 @@ public class endingMessage : MonoBehaviour {
 
     public void goToNextLevel()
     {
-        if (LevelsMenuController.level == 1)
+        if (SceneManager.GetActiveScene().name == "Spacestation-Level1")
         {
             LevelsMenuController.level = 2;
             SceneManager.LoadScene("Pop up messages");
         }
 
-        if (LevelsMenuController.level == 2)
+        if (SceneManager.GetActiveScene().name == "Planet1-Level1")
         {
             LevelsMenuController.level = 3;
             SceneManager.LoadScene("Pop up messages");
         }
 
-        if (LevelsMenuController.level == 3)
+        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
         {
             LevelsMenuController.level = 4;
             SceneManager.LoadScene("Pop up messages");
         }
-
     }
 
     public void goToLevelsMenu()

@@ -10,6 +10,7 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
     public int clicksCount = 0;
     List<string> moveBlocks = new List<string>();
     List<string> jumpBlocks = new List<string>();
+    List<string> ifBlocks = new List<string>();
     List<string> procedureBlocks = new List<string>();
 
     private void Start()
@@ -30,6 +31,12 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             jumpBlocks.Add("jump4");
             jumpBlocks.Add("jump5");
             jumpBlocks.Add("jump1");
+
+            ifBlocks.Add("ifRed");
+            ifBlocks.Add("ifYellow");
+            ifBlocks.Add("ifGreen");
+            ifBlocks.Add("ifBlue");
+            ifBlocks.Add("ifAll");
         }
         if (SceneManager.GetActiveScene().name == "Planet3-Level1")
         {
@@ -115,6 +122,21 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
                         }
                         break;
 
+                    case "ifBlock(Clone)":
+                        if (clicksCount < 5)
+                        {
+                            displaySprite(nameOfClickedBlock);
+                            clicksCount++;
+
+                            //Debug.Log(clicksCount);
+                        }
+                        else
+                        {
+                            clicksCount = 0;
+                            displaySprite(nameOfClickedBlock);
+                        }
+                        break;
+
                     case "procedureBlock(Clone)":
                         if (clicksCount < 5)
                         {
@@ -150,6 +172,10 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
 
             case "jumpBlock(Clone)":
                 sprites = jumpBlocks;
+                break;
+
+            case "ifBlock(Clone)":
+                sprites = ifBlocks;
                 break;
 
             case "procedureBlock(Clone)":

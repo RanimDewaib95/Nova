@@ -15,11 +15,11 @@ public class NewBehaviourScript : MonoBehaviour {
 
     IEnumerator OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Target"))
-        {
+       // if (other.CompareTag("Target"))
+        //{
             yield return new WaitForSeconds(1.0f);
             goalMessage.displayLastMessage();
             Debug.Log("found collider");
-        }      
+       // }      
     }
 }

@@ -56,7 +56,7 @@ public class Inventory : MonoBehaviour
                     numberOfClicksProcedure = slotTransform.GetComponent<Slot>().clicksCount;
                     //Debug.Log("clicks of procedure:" + numberOfClicksProcedure);
 
-                    for (int r = 0; r < numberOfClicksProcedure+1; r++)
+                    for (int r = 0; r < numberOfClicksProcedure + 1; r++)
                     {
                         //Debug.Log("repeating");
                         foreach (Transform slotTransformProcedure in slots) //slots of the procedure panel
@@ -69,6 +69,47 @@ public class Inventory : MonoBehaviour
                                 loopThroughClicks(item.name, numberOfClicks);
                             }
                         }
+                    }
+                }
+                else if (item.name == "ifBlock(Clone)")
+                {
+                    //Debug.Log("Color is " + item.GetComponent<Image>().name);
+                    numberOfClicks = slotTransform.GetComponent<Slot>().clicksCount;
+                    string color;
+                    //loopThroughClicks(item.name, numberOfClicks);
+                    if (numberOfClicks == 0)
+                    {
+                        builder.Append(",");
+                        color = "ifAll";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else if (numberOfClicks == 1)
+                    {
+                        builder.Append(",");
+                        color = "Red";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else if (numberOfClicks == 2)
+                    {
+                        builder.Append(",");
+                        color = "Yellow";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else if (numberOfClicks == 3)
+                    {
+                        builder.Append(",");
+                        color = "Green";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else if (numberOfClicks == 4)
+                    {
+                        builder.Append(",");
+                        color = "Blue";
+                        builder.Append(item.name + "-" + color);
+                    }
+                    else
+                    {
+                        //Something is wrong
                     }
                 }
                 else
