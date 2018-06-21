@@ -251,6 +251,12 @@ public class MovePlayer : MonoBehaviour
             Debug.Log("DETECTED JUMP-DOWN COLLIDER !");
             jumpDownFlag = 1;
         }
+        else if (col.CompareTag("Target"))
+        {
+            endingMessage goalMessage = new endingMessage();
+            goalMessage.displayLastMessage();
+            Debug.Log("FOUND SPACESTATION COLLIDER!");
+        }
     }
 
     void SetScoreText()
