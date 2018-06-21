@@ -15,8 +15,8 @@ public class MovePlayer : MonoBehaviour
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
 
     public float moveSpeed = 1000f;//Change in inspector to adjust move speed
-    public int flag = 0;   
-   
+    public int flag = 0;
+
     private int scoreCount;
     public Text scoreText;
 
@@ -28,9 +28,8 @@ public class MovePlayer : MonoBehaviour
     int ColorCounter = 0;
 
     public int jumpDownFlag = 0;
-    //Stack jumpReversePath = new Stack();
 
-    public static int  clicksCountResetButton = 0;
+    public static int clicksCountResetButton = 0;
     hintMessage hint = new hintMessage();
 
     Button runButton;
@@ -43,15 +42,16 @@ public class MovePlayer : MonoBehaviour
         forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
 
+        playerStart = transform.position;//save the initial position of the player for future use
+
         resetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         resetButton.interactable = false;
 
-        runButton = GameObject.Find("RunButton").GetComponent<Button>(); 
-
-        playerStart = transform.position;
+        runButton = GameObject.Find("RunButton").GetComponent<Button>();
 
         scoreCount = 0;
         SetScoreText();
+
         pickupSource = GetComponent<AudioSource>();
     }
 
@@ -74,21 +74,19 @@ public class MovePlayer : MonoBehaviour
 
     public void ResetButtonClicker()
     {
-        clicksCountResetButton++;
-
-        Debug.Log("in reverse");
-
+        //Reset player to start position
+        Debug.Log("RESET BUTTON CLICKED!");
         resetPlayer();
-        //chosenBlocks = runCommands.Count;
-        //Debug.Log("number of blocks to reverse is " + chosenBlocks);
-        //StartCoroutine(reverseMovement());
+
+        //Clear Slots Panel:to be resolved later
 
         //Enable Run Button
         runButton.interactable = true;
         resetButton.interactable = false;
-        //Clear Slots Panel
 
-        if(clicksCountResetButton == 3)
+        //Check number of times the Reset Button is clicked to display hints
+        clicksCountResetButton++;
+        if (clicksCountResetButton == 3)
         {
             Debug.Log("will start displaying hints");
             StartCoroutine(hint.displayHint());
@@ -105,15 +103,6 @@ public class MovePlayer : MonoBehaviour
 
     public IEnumerator Jump(int verticalDirection, int horizontalDirection)
     {
-        //if (verticalDirection == 1)//jump upwards
-        //{
-        //    stepUpFlag = 0;
-        //}
-        //else if (verticalDirection == -1)//jump downwards
-        //{
-        //    stepDownFlag = 0;
-        //}
-
         float s = (15 / Time.deltaTime) * 10;
         Debug.Log("speed is" + s);
 
