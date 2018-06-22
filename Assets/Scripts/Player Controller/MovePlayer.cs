@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class MovePlayer : MonoBehaviour
 {
@@ -25,7 +27,10 @@ public class MovePlayer : MonoBehaviour
 
     int i = 0;
     int ContinueFlag = 1; // Flag to know when player made a mistake
-    List<string> Level3Colors = new List<string> { "Yellow", "Blue" };
+	List<string> LevelColors = new List<string> { "Yellow", "Blue" };
+    int ifTrigger = 0;
+	public GameObject[] ifPortal;
+
     int ColorCounter = 0;
 
     public int jumpUpFlag = 0;//to avoid jumping up again when player is on a high-level tile already
@@ -55,6 +60,7 @@ public class MovePlayer : MonoBehaviour
         SetScoreText();
 
         pickupSource = GetComponent<AudioSource>();
+
     }
 
     public void RunButtonClicker()
@@ -168,12 +174,21 @@ public class MovePlayer : MonoBehaviour
                     else if (runCommands[i].Contains("ifBlock(Clone)"))
                     {
                         chosenColor = runCommands[i].Split('-').ToList<string>();
-                        //Debug.Log(chosenColor[1]);
+                        Debug.Log(chosenColor[1]);
+						Debug.Log (LevelColors [ColorCounter]);
 
-                        if (chosenColor[1] == Level3Colors[ColorCounter])
+                        if (chosenColor[1] == LevelColors[ColorCounter] && ifTrigger == 1)
                         {
                             ContinueFlag = 1;
                             ColorCounter++;
+							ifPortal = GameObject.FindGameObjectsWithTag (chosenColor [1]);
+
+                            //Renderer rend = GetComponent<Renderer>();
+                            //rend.material.shader = Shader.Find("portalYellow");
+                            ifPortal[0].GetComponent<Renderer>().material[2].color = Color.red;
+                            //Destroy(Shader.Find("portalYellow"));
+                            //Destroy (ifPortal[0]);
+                            //make portal disappear
                         }
                         else
                         {
@@ -253,6 +268,11 @@ public class MovePlayer : MonoBehaviour
         {
             Debug.Log("DETECTED JUMP-DOWN COLLIDER !");
             jumpDownFlag = 1;
+        }
+        else if (col.gameObject.CompareTag("ifTrigger"))
+        {
+            ifTrigger = 1;
+            Debug.Log("HIT if Trigger");
         }
     }
 

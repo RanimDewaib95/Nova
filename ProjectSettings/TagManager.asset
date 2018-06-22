@@ -9,6 +9,11 @@ TagManager:
   - Step Down
   - Target
   - Wall
+  - ifTrigger
+  - Yellow
+  - Blue
+  - Green
+  - Red
   layers:
   - Default
   - TransparentFX
