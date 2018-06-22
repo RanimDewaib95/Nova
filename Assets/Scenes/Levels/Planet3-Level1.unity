@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -588,7 +588,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 72606735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71.58453, y: 68.582054, z: -30.572056}
+  m_LocalPosition: {x: 71.58453, y: 67.86, z: -30.572056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1497997778}
@@ -640,6 +640,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 72606735}
   m_Mesh: {fileID: 4300000, guid: 045e5dd385002d84ab31d62dbd5eb016, type: 3}
+--- !u!1 &72606743 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1924274397272122, guid: bd4c95d33b9c3ee408aaae33b5dcc7de,
+    type: 2}
+  m_PrefabInternal: {fileID: 72606733}
+--- !u!65 &72606744
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 72606743}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.000002, y: 5.4000063, z: 10.000002}
+  m_Center: {x: 5.0000014, y: 1.9000057, z: 4.9999914}
 --- !u!224 &75625782 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224995828047623954, guid: f23a3a6e1a061d844a5f06de6c318514,
