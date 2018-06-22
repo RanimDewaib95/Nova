@@ -205,47 +205,7 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
-    //public IEnumerator reverseMovement()
-    //{
-    //    while (chosenBlocks > 0 && flag == 0)
-    //    {
-    //        flag = 1;
-
-    //        for (int i = runCommands.Count - 1; i >= 0; i--)
-    //        {
-    //            //Debug.Log(i + runCommands[i]);
-    //            if (runCommands[i] == "rotateLeftBlock(Clone)")
-    //            {
-    //                StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-    //            }
-    //            else if (runCommands[i] == "rotateRightBlock(Clone)")
-    //            {
-    //                StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
-
-    //            }
-    //            else if (runCommands[i] == "moveBlock(Clone)")
-    //            {
-    //                StartCoroutine(Move(-1));
-    //            }
-    //            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpUp"))
-    //            {
-    //                StartCoroutine(Jump(-1,-1));
-    //                jumpReversePath.Pop();
-    //                Debug.Log("IN REVERSE STEP-UP CODE !");
-    //            }
-    //            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpDown"))
-    //            {
-    //                StartCoroutine(Jump(1,-1));
-    //                jumpReversePath.Pop();
-    //                Debug.Log("IN REVERSE STEP-DOWN CODE !");
-    //            }
-    //            chosenBlocks--;
-    //            yield return new WaitForSeconds(2.0f);
-    //        }
-    //        flag = 0;
-    //    }
-    //}
-
+    
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Pick Up"))
@@ -293,5 +253,68 @@ public class MovePlayer : MonoBehaviour
         StopAllCoroutines();
         runCommands.Clear();
         Inventory.start = true;
+
+        ColorCounter = 0;
+        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
+            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.green;
+        }
+        else if (SceneManager.GetActiveScene().name == "Planet3-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
+            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.yellow;
+
+            ren = ifPortal[1].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.cyan; //cyan is close enough xD
+        }
     }
 }
+
+
+
+//public IEnumerator reverseMovement()
+//{
+//    while (chosenBlocks > 0 && flag == 0)
+//    {
+//        flag = 1;
+
+//        for (int i = runCommands.Count - 1; i >= 0; i--)
+//        {
+//            //Debug.Log(i + runCommands[i]);
+//            if (runCommands[i] == "rotateLeftBlock(Clone)")
+//            {
+//                StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
+//            }
+//            else if (runCommands[i] == "rotateRightBlock(Clone)")
+//            {
+//                StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
+
+//            }
+//            else if (runCommands[i] == "moveBlock(Clone)")
+//            {
+//                StartCoroutine(Move(-1));
+//            }
+//            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpUp"))
+//            {
+//                StartCoroutine(Jump(-1,-1));
+//                jumpReversePath.Pop();
+//                Debug.Log("IN REVERSE STEP-UP CODE !");
+//            }
+//            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpDown"))
+//            {
+//                StartCoroutine(Jump(1,-1));
+//                jumpReversePath.Pop();
+//                Debug.Log("IN REVERSE STEP-DOWN CODE !");
+//            }
+//            chosenBlocks--;
+//            yield return new WaitForSeconds(2.0f);
+//        }
+//        flag = 0;
+//    }
+//}
