@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MovePlayer : MonoBehaviour
 {
-    Vector3 player;
+    Vector3 playerStart, playerCurrent;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
 
     List<string> runCommands = new List<string>(); //All Slot Panel Blocks Translated
@@ -15,8 +15,8 @@ public class MovePlayer : MonoBehaviour
     int chosenBlocks = 0; // Number of Blocks in panel slot, # of commands to be executed
 
     public float moveSpeed = 1000f;//Change in inspector to adjust move speed
-    public int flag = 0;   
-   
+    public int flag = 0;
+
     private int scoreCount;
     public Text scoreText;
 
@@ -26,11 +26,10 @@ public class MovePlayer : MonoBehaviour
     int ContinueFlag = 1; // Flag to know when player made a mistake
     List<string> Level3Colors = new List<string> { "Yellow", "Blue" };
     int ColorCounter = 0;
-    public int stepUpFlag = 0;
-    public int stepDownFlag = 0;
-    Stack jumpReversePath = new Stack();
 
-    public static int  clicksCountResetButton = 0;
+    public int jumpDownFlag = 0;
+
+    public static int clicksCountResetButton = 0;
     hintMessage hint = new hintMessage();
 
     Button runButton;
@@ -43,15 +42,16 @@ public class MovePlayer : MonoBehaviour
         forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
 
+        playerStart = transform.position;//save the initial position of the player for future use
+
         resetButton = GameObject.Find("ResetButton").GetComponent<Button>();
         resetButton.interactable = false;
 
-        runButton = GameObject.Find("RunButton").GetComponent<Button>(); 
-
-        player = transform.position;
+        runButton = GameObject.Find("RunButton").GetComponent<Button>();
 
         scoreCount = 0;
         SetScoreText();
+
         pickupSource = GetComponent<AudioSource>();
     }
 
@@ -74,21 +74,19 @@ public class MovePlayer : MonoBehaviour
 
     public void ResetButtonClicker()
     {
-        clicksCountResetButton++;
-
-        Debug.Log("in reverse");
-
+        //Reset player to start position
+        Debug.Log("RESET BUTTON CLICKED!");
         resetPlayer();
-        //chosenBlocks = runCommands.Count;
-        //Debug.Log("number of blocks to reverse is " + chosenBlocks);
-        //StartCoroutine(reverseMovement());
+
+        //Clear Slots Panel:to be resolved later
 
         //Enable Run Button
         runButton.interactable = true;
         resetButton.interactable = false;
-        //Clear Slots Panel
 
-        if(clicksCountResetButton == 3)
+        //Check number of times the Reset Button is clicked to display hints
+        clicksCountResetButton++;
+        if (clicksCountResetButton == 3)
         {
             Debug.Log("will start displaying hints");
             StartCoroutine(hint.displayHint());
@@ -105,15 +103,6 @@ public class MovePlayer : MonoBehaviour
 
     public IEnumerator Jump(int verticalDirection, int horizontalDirection)
     {
-        if (verticalDirection == 1)//jump upwards
-        {
-            stepUpFlag = 0;
-        }
-        else if (verticalDirection == -1)//jump downwards
-        {
-            stepDownFlag = 0;
-        }
-
         float s = (15 / Time.deltaTime) * 10;
         Debug.Log("speed is" + s);
 
@@ -147,6 +136,7 @@ public class MovePlayer : MonoBehaviour
             {
                 if (ContinueFlag == 1)
                 {
+                    playerCurrent = transform.position;
                     if (runCommands[i] == "rotateRightBlock(Clone)")
                     {
                         StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
@@ -154,23 +144,23 @@ public class MovePlayer : MonoBehaviour
                     else if (runCommands[i] == "rotateLeftBlock(Clone)")
                     {
                         StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
-
                     }
-                    else if (runCommands[i] == "moveBlock(Clone)" && stepUpFlag == 0 && stepDownFlag == 0)
+                    else if (runCommands[i] == "moveBlock(Clone)")
                     {
                         StartCoroutine(Move(1));
                     }
-                    else if (runCommands[i] == "jumpBlock(Clone)" && stepUpFlag == 1)
+                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0)
                     {
                         StartCoroutine(Jump(1, 1));
-                        jumpReversePath.Push("jumpUp");
-                        Debug.Log("IN STEP-UP CODE !");
+                        //jumpReversePath.Push("jumpUp");
+                        Debug.Log("PLAYER SHOULD JUMP UPWARDS!");
                     }
-                    else if (runCommands[i] == "jumpBlock(Clone)" && stepDownFlag == 1)
+                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 1)
                     {
                         StartCoroutine(Jump(-1, 1));
-                        jumpReversePath.Push("jumpDown");
-                        Debug.Log("IN STEP-DOWN CODE !");
+                        //jumpReversePath.Push("jumpDown");
+                        Debug.Log("PLAYER SHOULD JUMP DOWNWARDS!");
+                        jumpDownFlag = 0;
                     }
                     else if (runCommands[i].Contains("ifBlock(Clone)"))
                     {
@@ -194,49 +184,48 @@ public class MovePlayer : MonoBehaviour
             }
             flag = 0;
         }
-        //reverseFlag = 0;
     }
 
-    public IEnumerator reverseMovement()
-    {
-        while (chosenBlocks > 0 && flag == 0)
-        {
-            flag = 1;
+    //public IEnumerator reverseMovement()
+    //{
+    //    while (chosenBlocks > 0 && flag == 0)
+    //    {
+    //        flag = 1;
 
-            for (int i = runCommands.Count - 1; i >= 0; i--)
-            {
-                //Debug.Log(i + runCommands[i]);
-                if (runCommands[i] == "rotateLeftBlock(Clone)")
-                {
-                    StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-                }
-                else if (runCommands[i] == "rotateRightBlock(Clone)")
-                {
-                    StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
+    //        for (int i = runCommands.Count - 1; i >= 0; i--)
+    //        {
+    //            //Debug.Log(i + runCommands[i]);
+    //            if (runCommands[i] == "rotateLeftBlock(Clone)")
+    //            {
+    //                StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
+    //            }
+    //            else if (runCommands[i] == "rotateRightBlock(Clone)")
+    //            {
+    //                StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
 
-                }
-                else if (runCommands[i] == "moveBlock(Clone)")
-                {
-                    StartCoroutine(Move(-1));
-                }
-                else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpUp"))
-                {
-                    StartCoroutine(Jump(-1,-1));
-                    jumpReversePath.Pop();
-                    Debug.Log("IN REVERSE STEP-UP CODE !");
-                }
-                else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpDown"))
-                {
-                    StartCoroutine(Jump(1,-1));
-                    jumpReversePath.Pop();
-                    Debug.Log("IN REVERSE STEP-DOWN CODE !");
-                }
-                chosenBlocks--;
-                yield return new WaitForSeconds(2.0f);
-            }
-            flag = 0;
-        }
-    }
+    //            }
+    //            else if (runCommands[i] == "moveBlock(Clone)")
+    //            {
+    //                StartCoroutine(Move(-1));
+    //            }
+    //            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpUp"))
+    //            {
+    //                StartCoroutine(Jump(-1,-1));
+    //                jumpReversePath.Pop();
+    //                Debug.Log("IN REVERSE STEP-UP CODE !");
+    //            }
+    //            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpDown"))
+    //            {
+    //                StartCoroutine(Jump(1,-1));
+    //                jumpReversePath.Pop();
+    //                Debug.Log("IN REVERSE STEP-DOWN CODE !");
+    //            }
+    //            chosenBlocks--;
+    //            yield return new WaitForSeconds(2.0f);
+    //        }
+    //        flag = 0;
+    //    }
+    //}
 
     void OnTriggerEnter(Collider col)
     {
@@ -247,27 +236,26 @@ public class MovePlayer : MonoBehaviour
             scoreCount = scoreCount + 1;
             SetScoreText();
         }
-        else if (col.gameObject.CompareTag("Wall"))
+        else if (col.gameObject.CompareTag("Wall"))//if player hits a wall, reset player to start position
         {
             Debug.Log("DETECTED WALL BOUNDARY !");
-            //transform.gameObject.SetActive(false);
             resetPlayer();
         }
-        else if (col.gameObject.CompareTag("Step Up"))
+        else if (col.gameObject.CompareTag("Step Up"))//if player hits a step-up tile while moving, return to previous position
         {
-            Debug.Log("DETECTED STEP-UP COLLIDER !");
-            stepUpFlag = 1;
+            Debug.Log("DETECTED JUMP-UP COLLIDER !");
+            transform.position = playerCurrent;
         }
-        else if (col.gameObject.CompareTag("Step Down"))
+        else if (col.gameObject.CompareTag("Step Down"))//if player in on a high tile, set flag to allow downwards-jump
         {
-            Debug.Log("DETECTED STEP-DOWN COLLIDER !");
-            stepDownFlag = 1;
+            Debug.Log("DETECTED JUMP-DOWN COLLIDER !");
+            jumpDownFlag = 1;
         }
-        else if (col.gameObject.CompareTag("Midway Step"))
+        else if (col.CompareTag("Target"))
         {
-            Debug.Log("DETECTED MIDWAY-STEP COLLIDER !");
-            stepUpFlag = 1;
-            stepDownFlag = 1;
+            endingMessage goalMessage = new endingMessage();
+            goalMessage.displayLastMessage();
+            Debug.Log("FOUND SPACESTATION COLLIDER!");
         }
     }
 
@@ -279,7 +267,7 @@ public class MovePlayer : MonoBehaviour
     void resetPlayer()
     {
         runButton.interactable = true;
-        transform.position = player;
+        transform.position = playerStart;
         transform.forward = Vector3.Normalize(forward);
     }
 }

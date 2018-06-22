@@ -11,6 +11,8 @@ public class Inventory : MonoBehaviour
     Transform slots;
     [SerializeField]
     Text inventoryText;
+    [SerializeField]
+    Transform blocks;
 
     StringBuilder builder = new StringBuilder();
 
@@ -144,7 +146,6 @@ public class Inventory : MonoBehaviour
     }
 }
 
-
 namespace UnityEngine.EventSystems
 {
     public interface IHasChanged : IEventSystemHandler
@@ -152,3 +153,5 @@ namespace UnityEngine.EventSystems
         void HasChanged();
     }
 }
+
+
