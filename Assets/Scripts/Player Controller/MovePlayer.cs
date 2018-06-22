@@ -27,7 +27,7 @@ public class MovePlayer : MonoBehaviour
 
     int i = 0;
     int ContinueFlag = 1; // Flag to know when player made a mistake
-	List<string> LevelColors = new List<string> { "Yellow", "Blue" };
+    
     int ifTrigger = 0;
 	public GameObject[] ifPortal;
     public Renderer ren;
@@ -177,24 +177,19 @@ public class MovePlayer : MonoBehaviour
                     {
                         chosenColor = runCommands[i].Split('-').ToList<string>();
                         Debug.Log(chosenColor[1]);
-						Debug.Log (LevelColors [ColorCounter]);
+						Debug.Log (Slot.LevelColors [ColorCounter]);
 
-                        if (chosenColor[1] == LevelColors[ColorCounter] && ifTrigger == 1)
+                        if (chosenColor[1] == Slot.LevelColors[ColorCounter] && ifTrigger == 1)
                         {
                             ContinueFlag = 1;
                             ColorCounter++;
-							ifPortal = GameObject.FindGameObjectsWithTag (chosenColor [1]);
 
-                            //Renderer rend = GetComponent<Renderer>();
-                            //rend.material.shader = Shader.Find("portalYellow");
+							ifPortal = GameObject.FindGameObjectsWithTag (chosenColor [1]);
                             ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
                             mat = ren.materials;
-                            //mat[0].color = Color.red;
-                            //mat[1].color = Color.blue;
                             mat[2].color = Color.clear;
-                            //Destroy(Shader.Find("portalYellow"));
                             //Destroy (ifPortal[0]);
-                            //make portal disappear
+                            ifTrigger = 0;
                         }
                         else
                         {
