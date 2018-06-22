@@ -30,6 +30,8 @@ public class MovePlayer : MonoBehaviour
 	List<string> LevelColors = new List<string> { "Yellow", "Blue" };
     int ifTrigger = 0;
 	public GameObject[] ifPortal;
+    public Renderer ren;
+    public Material[] mat;
 
     int ColorCounter = 0;
 
@@ -185,7 +187,11 @@ public class MovePlayer : MonoBehaviour
 
                             //Renderer rend = GetComponent<Renderer>();
                             //rend.material.shader = Shader.Find("portalYellow");
-                            ifPortal[0].GetComponent<Renderer>().material[2].color = Color.red;
+                            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+                            mat = ren.materials;
+                            //mat[0].color = Color.red;
+                            //mat[1].color = Color.blue;
+                            mat[2].color = Color.clear;
                             //Destroy(Shader.Find("portalYellow"));
                             //Destroy (ifPortal[0]);
                             //make portal disappear
