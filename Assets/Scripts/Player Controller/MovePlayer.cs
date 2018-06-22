@@ -23,11 +23,13 @@ public class MovePlayer : MonoBehaviour
     public AudioClip pickupSound;
     public AudioSource pickupSource;
 
+    int i = 0;
     int ContinueFlag = 1; // Flag to know when player made a mistake
     List<string> Level3Colors = new List<string> { "Yellow", "Blue" };
     int ColorCounter = 0;
 
-    public int jumpDownFlag = 0;
+    public int jumpUpFlag = 0;//to avoid jumping up again when player is on a high-level tile already
+    public int jumpDownFlag = 0;//to make the player only jump down when going from a high-level tile to a ground-level tile
 
     public static int clicksCountResetButton = 0;
     hintMessage hint = new hintMessage();
@@ -76,8 +78,8 @@ public class MovePlayer : MonoBehaviour
     {
         //Reset player to start position
         Debug.Log("RESET BUTTON CLICKED!");
-        resetPlayer();
 
+        resetPlayer();
         //Clear Slots Panel:to be resolved later
 
         //Enable Run Button
@@ -132,7 +134,7 @@ public class MovePlayer : MonoBehaviour
         {
             flag = 1;
 
-            for (int i = 0; i < runCommands.Count; i++)
+            for (i = 0; i < runCommands.Count; i++)
             {
                 if (ContinueFlag == 1)
                 {
@@ -149,17 +151,18 @@ public class MovePlayer : MonoBehaviour
                     {
                         StartCoroutine(Move(1));
                     }
-                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0)
+                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0 && jumpUpFlag == 0)
                     {
-                        StartCoroutine(Jump(1, 1));
-                        //jumpReversePath.Push("jumpUp");
                         Debug.Log("PLAYER SHOULD JUMP UPWARDS!");
+                        StartCoroutine(Jump(1, 1));
+
+                        jumpUpFlag = 1;
                     }
                     else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 1)
                     {
-                        StartCoroutine(Jump(-1, 1));
-                        //jumpReversePath.Push("jumpDown");
                         Debug.Log("PLAYER SHOULD JUMP DOWNWARDS!");
+                        StartCoroutine(Jump(-1, 1));
+
                         jumpDownFlag = 0;
                     }
                     else if (runCommands[i].Contains("ifBlock(Clone)"))
@@ -263,5 +266,11 @@ public class MovePlayer : MonoBehaviour
         runButton.interactable = true;
         transform.position = playerStart;
         transform.forward = Vector3.Normalize(forward);
+
+        jumpUpFlag = 0;jumpDownFlag = 0;
+
+        StopAllCoroutines();
+        runCommands.Clear();
+        Inventory.start = true;
     }
 }
