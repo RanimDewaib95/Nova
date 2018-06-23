@@ -233,7 +233,7 @@ public class MovePlayer : MonoBehaviour
                             ContinueFlag = 1;
                             
 							ifPortal = GameObject.FindGameObjectsWithTag ("Portal");
-                            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+                            ren = ifPortal[ColorCounter].GetComponent<Renderer>();//.material[2].color = Color.red;
                             mat = ren.materials;
                             mat[2].color = Color.clear;
                             //Destroy (ifPortal[0]);
