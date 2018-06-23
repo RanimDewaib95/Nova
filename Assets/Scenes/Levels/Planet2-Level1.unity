@@ -3409,7 +3409,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1136461115957076, guid: 19fdca4a72268214392e89f3aba6cb53, type: 2}
       propertyPath: m_TagString
-      value: Green
+      value: Portal
       objectReference: {fileID: 0}
     - target: {fileID: 1136461115957076, guid: 19fdca4a72268214392e89f3aba6cb53, type: 2}
       propertyPath: m_Name
