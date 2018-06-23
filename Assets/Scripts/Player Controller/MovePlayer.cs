@@ -87,10 +87,7 @@ public class MovePlayer : MonoBehaviour
 
     public void ResetButtonClicker()
     {
-        Debug.Log("RESET BUTTON CLICKED!");
-
-        //Reset player to start position
-        resetPlayer(); 
+        Debug.Log("RESET BUTTON CLICKED!"); 
         
         //Enable Run Button
         runButton.interactable = true;
@@ -116,7 +113,6 @@ public class MovePlayer : MonoBehaviour
         }     
 
         //Resetting If Portals
-        Debug.Log("BEFORE IF RESET");
         ColorCounter = 0;
         if (SceneManager.GetActiveScene().name == "Planet2-Level1")
         {
@@ -138,19 +134,20 @@ public class MovePlayer : MonoBehaviour
             mat[2].color = Color.cyan; //cyan is close enough xD
         }
 
-
-        //Clear Slots Panel:to be resolved later
+        //Reset player to start position
+        resetPlayer();
+        Debug.Log("ALL RESET");
     }
+
     void resetPlayer()
     {
+        //runCommands.Clear();
+        Inventory.start = true;
+
         transform.position = playerStart;
         transform.forward = Vector3.Normalize(forward);
 
         jumpUpFlag = 0; jumpDownFlag = 0;
-
-        StopAllCoroutines();
-        runCommands.Clear();
-        Inventory.start = true;
     }
 
     public IEnumerator Move(int direction)
