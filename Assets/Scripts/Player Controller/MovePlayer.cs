@@ -104,6 +104,41 @@ public class MovePlayer : MonoBehaviour
             clicksCountResetButton = 0;
             hintNumber++;
         }
+
+        //Reset If
+        ColorCounter = 0;
+        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag("Portal");
+            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.green;
+        }
+        else if (SceneManager.GetActiveScene().name == "Planet3-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag("Portal");
+            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.yellow;
+
+            ren = ifPortal[1].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.cyan; //cyan is close enough xD
+        }
+    }
+
+    void resetPlayer()
+    {
+        runButton.interactable = true;
+        transform.position = playerStart;
+        transform.forward = Vector3.Normalize(forward);
+
+        jumpUpFlag = 0; jumpDownFlag = 0;
+
+        StopAllCoroutines();
+        runCommands.Clear();
+        Inventory.start = true;
+
     }
 
     public IEnumerator Move(int direction)
@@ -244,38 +279,6 @@ public class MovePlayer : MonoBehaviour
         scoreText.text = "Score: " + scoreCount.ToString();
     }
 
-    void resetPlayer()
-    {
-        runButton.interactable = true;
-        transform.position = playerStart;
-        transform.forward = Vector3.Normalize(forward);
-
-        jumpUpFlag = 0;jumpDownFlag = 0;
-
-        StopAllCoroutines();
-        runCommands.Clear();
-        Inventory.start = true;
-
-        ColorCounter = 0;
-        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
-        {
-            ifPortal = GameObject.FindGameObjectsWithTag("Portal");
-            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
-            mat = ren.materials;
-            mat[2].color = Color.green;
-        }
-        else if (SceneManager.GetActiveScene().name == "Planet3-Level1")
-        {
-            ifPortal = GameObject.FindGameObjectsWithTag("Portal");
-            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
-            mat = ren.materials;
-            mat[2].color = Color.yellow;
-
-            ren = ifPortal[1].GetComponent<Renderer>();//.material[2].color = Color.red;
-            mat = ren.materials;
-            mat[2].color = Color.cyan; //cyan is close enough xD
-        }
-    }
 }
 
 
