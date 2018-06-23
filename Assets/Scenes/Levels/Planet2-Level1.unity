@@ -1054,8 +1054,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: -5, y: 17, z: 0}
+  m_Size: {x: 10, y: 10, z: 15}
+  m_Center: {x: -5, y: 17, z: -2}
 --- !u!33 &415992134
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1363,8 +1363,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 50, z: 10}
-  m_Center: {x: -5, y: 17, z: 0}
+  m_Size: {x: 10, y: 50, z: 15}
+  m_Center: {x: -5, y: 17, z: -2}
 --- !u!33 &547200866
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2345,8 +2345,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 30, z: 10}
-  m_Center: {x: -5, y: 17, z: 0}
+  m_Size: {x: 10, y: 30, z: 15}
+  m_Center: {x: -5, y: 17, z: -2}
 --- !u!33 &1273195705
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3144,8 +3144,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 40, z: 10}
-  m_Center: {x: -5, y: 17, z: 0}
+  m_Size: {x: 10, y: 40, z: 15}
+  m_Center: {x: -5, y: 17, z: -2}
 --- !u!33 &1443499208
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3771,6 +3771,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1183923675462710, guid: 19fdca4a72268214392e89f3aba6cb53, type: 2}
       propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190889505515702, guid: 19fdca4a72268214392e89f3aba6cb53, type: 2}
+      propertyPath: m_TagString
       value: Step Up
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3853,7 +3857,7 @@ BoxCollider:
   m_Center: {x: 4.999999, y: 1.9000069, z: 4.9999914}
 --- !u!1 &1626047762 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1183923675462710, guid: 19fdca4a72268214392e89f3aba6cb53,
+  m_PrefabParentObject: {fileID: 1190889505515702, guid: 19fdca4a72268214392e89f3aba6cb53,
     type: 2}
   m_PrefabInternal: {fileID: 1626047754}
 --- !u!65 &1626047763
@@ -3866,8 +3870,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15, y: 4, z: 10.000002}
-  m_Center: {x: 2, y: 1.9000069, z: 4.9999914}
+  m_Size: {x: 10, y: 2, z: 10}
+  m_Center: {x: 5, y: 0.40000382, z: 4.9999924}
 --- !u!114 &1626047768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4405,8 +4409,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 10, z: 10}
-  m_Center: {x: -5, y: 17, z: 0}
+  m_Size: {x: 50, y: 10, z: 15}
+  m_Center: {x: -5, y: 17, z: -2}
 --- !u!33 &1835938826
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5365,8 +5369,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 50, z: 10}
-  m_Center: {x: -5, y: 17, z: 0}
+  m_Size: {x: 10, y: 50, z: 15}
+  m_Center: {x: -5, y: 17, z: -2}
 --- !u!33 &2053136307
 MeshFilter:
   m_ObjectHideFlags: 0
