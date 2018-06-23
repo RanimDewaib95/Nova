@@ -13,6 +13,8 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
     List<string> ifBlocks = new List<string>();
     List<string> procedureBlocks = new List<string>();
 
+    public static List<string> LevelColors = new List<string>();
+
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "Planet1-Level1" || SceneManager.GetActiveScene().name == "Planet2-Level1" || SceneManager.GetActiveScene().name == "Planet3-Level1")
@@ -23,9 +25,8 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             moveBlocks.Add("move5");
             moveBlocks.Add("move1");
         }
-        if (SceneManager.GetActiveScene().name == "Planet2-Level1" || SceneManager.GetActiveScene().name == "Planet3-Level1")
+        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
         {
-            //Add if here
             jumpBlocks.Add("jump2");
             jumpBlocks.Add("jump3");
             jumpBlocks.Add("jump4");
@@ -37,14 +38,31 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             ifBlocks.Add("ifGreen");
             ifBlocks.Add("ifBlue");
             ifBlocks.Add("ifAll");
+
+            LevelColors.Add("Green");
         }
         if (SceneManager.GetActiveScene().name == "Planet3-Level1")
         {
+            jumpBlocks.Add("jump2");
+            jumpBlocks.Add("jump3");
+            jumpBlocks.Add("jump4");
+            jumpBlocks.Add("jump5");
+            jumpBlocks.Add("jump1");
+
+            ifBlocks.Add("ifRed");
+            ifBlocks.Add("ifYellow");
+            ifBlocks.Add("ifGreen");
+            ifBlocks.Add("ifBlue");
+            ifBlocks.Add("ifAll");
+
             procedureBlocks.Add("p12");
             procedureBlocks.Add("p13");
             procedureBlocks.Add("p14");
             procedureBlocks.Add("p15");
             procedureBlocks.Add("p11");
+
+            LevelColors.Add("Yellow");
+            LevelColors.Add("Blue");
         }
     }
 

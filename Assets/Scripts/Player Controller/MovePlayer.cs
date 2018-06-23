@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class MovePlayer : MonoBehaviour
 {
@@ -23,11 +25,18 @@ public class MovePlayer : MonoBehaviour
     public AudioClip pickupSound;
     public AudioSource pickupSource;
 
+    int i = 0;
     int ContinueFlag = 1; // Flag to know when player made a mistake
-    List<string> Level3Colors = new List<string> { "Yellow", "Blue" };
+    
+    int ifTrigger = 0;
+	public GameObject[] ifPortal;
+    public Renderer ren;
+    public Material[] mat;
+
     int ColorCounter = 0;
 
-    public int jumpDownFlag = 0;
+    public int jumpUpFlag = 0;//to avoid jumping up again when player is on a high-level tile already
+    public int jumpDownFlag = 0;//to make the player only jump down when going from a high-level tile to a ground-level tile
 
     public static int clicksCountResetButton = 0;
     hintMessage hint = new hintMessage();
@@ -53,6 +62,7 @@ public class MovePlayer : MonoBehaviour
         SetScoreText();
 
         pickupSource = GetComponent<AudioSource>();
+
     }
 
     public void RunButtonClicker()
@@ -76,8 +86,8 @@ public class MovePlayer : MonoBehaviour
     {
         //Reset player to start position
         Debug.Log("RESET BUTTON CLICKED!");
-        resetPlayer();
 
+        resetPlayer();
         //Clear Slots Panel:to be resolved later
 
         //Enable Run Button
@@ -132,7 +142,7 @@ public class MovePlayer : MonoBehaviour
         {
             flag = 1;
 
-            for (int i = 0; i < runCommands.Count; i++)
+            for (i = 0; i < runCommands.Count; i++)
             {
                 if (ContinueFlag == 1)
                 {
@@ -149,28 +159,37 @@ public class MovePlayer : MonoBehaviour
                     {
                         StartCoroutine(Move(1));
                     }
-                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0)
+                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0 && jumpUpFlag == 0)
                     {
-                        StartCoroutine(Jump(1, 1));
-                        //jumpReversePath.Push("jumpUp");
                         Debug.Log("PLAYER SHOULD JUMP UPWARDS!");
+                        StartCoroutine(Jump(1, 1));
+
+                        jumpUpFlag = 1;
                     }
                     else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 1)
                     {
-                        StartCoroutine(Jump(-1, 1));
-                        //jumpReversePath.Push("jumpDown");
                         Debug.Log("PLAYER SHOULD JUMP DOWNWARDS!");
+                        StartCoroutine(Jump(-1, 1));
+
                         jumpDownFlag = 0;
                     }
                     else if (runCommands[i].Contains("ifBlock(Clone)"))
                     {
                         chosenColor = runCommands[i].Split('-').ToList<string>();
-                        //Debug.Log(chosenColor[1]);
+                        Debug.Log(chosenColor[1]);
+						Debug.Log (Slot.LevelColors [ColorCounter]);
 
-                        if (chosenColor[1] == Level3Colors[ColorCounter])
+                        if (chosenColor[1] == Slot.LevelColors[ColorCounter] && ifTrigger == 1)
                         {
                             ContinueFlag = 1;
                             ColorCounter++;
+
+							ifPortal = GameObject.FindGameObjectsWithTag (chosenColor [1]);
+                            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+                            mat = ren.materials;
+                            mat[2].color = Color.clear;
+                            //Destroy (ifPortal[0]);
+                            ifTrigger = 0;
                         }
                         else
                         {
@@ -186,47 +205,7 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
-    //public IEnumerator reverseMovement()
-    //{
-    //    while (chosenBlocks > 0 && flag == 0)
-    //    {
-    //        flag = 1;
-
-    //        for (int i = runCommands.Count - 1; i >= 0; i--)
-    //        {
-    //            //Debug.Log(i + runCommands[i]);
-    //            if (runCommands[i] == "rotateLeftBlock(Clone)")
-    //            {
-    //                StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
-    //            }
-    //            else if (runCommands[i] == "rotateRightBlock(Clone)")
-    //            {
-    //                StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
-
-    //            }
-    //            else if (runCommands[i] == "moveBlock(Clone)")
-    //            {
-    //                StartCoroutine(Move(-1));
-    //            }
-    //            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpUp"))
-    //            {
-    //                StartCoroutine(Jump(-1,-1));
-    //                jumpReversePath.Pop();
-    //                Debug.Log("IN REVERSE STEP-UP CODE !");
-    //            }
-    //            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpDown"))
-    //            {
-    //                StartCoroutine(Jump(1,-1));
-    //                jumpReversePath.Pop();
-    //                Debug.Log("IN REVERSE STEP-DOWN CODE !");
-    //            }
-    //            chosenBlocks--;
-    //            yield return new WaitForSeconds(2.0f);
-    //        }
-    //        flag = 0;
-    //    }
-    //}
-
+    
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Pick Up"))
@@ -251,6 +230,11 @@ public class MovePlayer : MonoBehaviour
             Debug.Log("DETECTED JUMP-DOWN COLLIDER !");
             jumpDownFlag = 1;
         }
+        else if (col.gameObject.CompareTag("ifTrigger"))
+        {
+            ifTrigger = 1;
+            Debug.Log("HIT if Trigger");
+        }
     }
 
     void SetScoreText()
@@ -263,5 +247,74 @@ public class MovePlayer : MonoBehaviour
         runButton.interactable = true;
         transform.position = playerStart;
         transform.forward = Vector3.Normalize(forward);
+
+        jumpUpFlag = 0;jumpDownFlag = 0;
+
+        StopAllCoroutines();
+        runCommands.Clear();
+        Inventory.start = true;
+
+        ColorCounter = 0;
+        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
+            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.green;
+        }
+        else if (SceneManager.GetActiveScene().name == "Planet3-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
+            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.yellow;
+
+            ren = ifPortal[1].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.cyan; //cyan is close enough xD
+        }
     }
 }
+
+
+
+//public IEnumerator reverseMovement()
+//{
+//    while (chosenBlocks > 0 && flag == 0)
+//    {
+//        flag = 1;
+
+//        for (int i = runCommands.Count - 1; i >= 0; i--)
+//        {
+//            //Debug.Log(i + runCommands[i]);
+//            if (runCommands[i] == "rotateLeftBlock(Clone)")
+//            {
+//                StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
+//            }
+//            else if (runCommands[i] == "rotateRightBlock(Clone)")
+//            {
+//                StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
+
+//            }
+//            else if (runCommands[i] == "moveBlock(Clone)")
+//            {
+//                StartCoroutine(Move(-1));
+//            }
+//            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpUp"))
+//            {
+//                StartCoroutine(Jump(-1,-1));
+//                jumpReversePath.Pop();
+//                Debug.Log("IN REVERSE STEP-UP CODE !");
+//            }
+//            else if (runCommands[i] == "jumpBlock(Clone)" && jumpReversePath.Peek().Equals("jumpDown"))
+//            {
+//                StartCoroutine(Jump(1,-1));
+//                jumpReversePath.Pop();
+//                Debug.Log("IN REVERSE STEP-DOWN CODE !");
+//            }
+//            chosenBlocks--;
+//            yield return new WaitForSeconds(2.0f);
+//        }
+//        flag = 0;
+//    }
+//}
