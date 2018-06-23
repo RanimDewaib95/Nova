@@ -30,6 +30,7 @@ public class MovePlayer : MonoBehaviour
     
     int ifTrigger = 0;
 	public GameObject[] ifPortal;
+    List<GameObject> PickupsList = new List<GameObject>();
     public Renderer ren;
     public Material[] mat;
 
@@ -85,11 +86,7 @@ public class MovePlayer : MonoBehaviour
 
     public void ResetButtonClicker()
     {
-        //Reset player to start position
         Debug.Log("RESET BUTTON CLICKED!");
-
-        resetPlayer();
-        //Clear Slots Panel:to be resolved later
 
         //Enable Run Button
         runButton.interactable = true;
@@ -104,12 +101,24 @@ public class MovePlayer : MonoBehaviour
             clicksCountResetButton = 0;
             hintNumber++;
         }
-
         //Reset If
         ColorCounter = 0;
         if (SceneManager.GetActiveScene().name == "Planet2-Level1")
         {
             ifPortal = GameObject.FindGameObjectsWithTag("Portal");
+        //Resetting Pickups
+        for (int i = 0; i < PickupsList.Count; i++)
+        {
+            PickupsList[i].SetActive(true);
+        }
+        scoreCount = 0;
+        SetScoreText();
+
+        //Resetting If Portals
+        ColorCounter = 0;
+        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
             ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
             mat = ren.materials;
             mat[2].color = Color.green;
@@ -117,6 +126,7 @@ public class MovePlayer : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "Planet3-Level1")
         {
             ifPortal = GameObject.FindGameObjectsWithTag("Portal");
+
             ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
             mat = ren.materials;
             mat[2].color = Color.yellow;
@@ -126,7 +136,10 @@ public class MovePlayer : MonoBehaviour
             mat[2].color = Color.cyan; //cyan is close enough xD
         }
     }
-
+        //Reset player to start position
+        resetPlayer();
+        //Clear Slots Panel:to be resolved later
+    }
     void resetPlayer()
     {
         runButton.interactable = true;
@@ -138,7 +151,6 @@ public class MovePlayer : MonoBehaviour
         StopAllCoroutines();
         runCommands.Clear();
         Inventory.start = true;
-
     }
 
     public IEnumerator Move(int direction)
@@ -248,7 +260,10 @@ public class MovePlayer : MonoBehaviour
         if (col.gameObject.CompareTag("Pick Up"))
         {
             pickupSource.PlayOneShot(pickupSound, 1);
+
+            PickupsList.Add(col.gameObject);
             col.gameObject.SetActive(false);
+
             scoreCount = scoreCount + 1;
             SetScoreText();
         }
@@ -262,7 +277,7 @@ public class MovePlayer : MonoBehaviour
             Debug.Log("DETECTED JUMP-UP COLLIDER !");
             transform.position = playerCurrent;
         }
-        else if (col.gameObject.CompareTag("Step Down"))//if player in on a high tile, set flag to allow downwards-jump
+        else if (col.gameObject.CompareTag("Step Down"))//if player is on a high tile, set flag to allow downwards-jump
         {
             Debug.Log("DETECTED JUMP-DOWN COLLIDER !");
             jumpDownFlag = 1;
@@ -278,7 +293,6 @@ public class MovePlayer : MonoBehaviour
     {
         scoreText.text = "Score: " + scoreCount.ToString();
     }
-
 }
 
 
