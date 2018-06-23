@@ -39,6 +39,7 @@ public class MovePlayer : MonoBehaviour
     public int jumpDownFlag = 0;//to make the player only jump down when going from a high-level tile to a ground-level tile
 
     public static int clicksCountResetButton = 0;
+    int hintNumber = 0;
     hintMessage hint = new hintMessage();
 
     Button runButton;
@@ -96,11 +97,12 @@ public class MovePlayer : MonoBehaviour
 
         //Check number of times the Reset Button is clicked to display hints
         clicksCountResetButton++;
-        if (clicksCountResetButton == 3)
+        if (clicksCountResetButton == 3 && hintNumber < 3)
         {
             Debug.Log("will start displaying hints");
             StartCoroutine(hint.displayHint());
             clicksCountResetButton = 0;
+            hintNumber++;
         }
     }
 
