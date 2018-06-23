@@ -30,6 +30,7 @@ public class MovePlayer : MonoBehaviour
     
     int ifTrigger = 0;
 	public GameObject[] ifPortal;
+    List<GameObject> PickupsList = new List<GameObject>();
     public Renderer ren;
     public Material[] mat;
 
@@ -104,6 +105,51 @@ public class MovePlayer : MonoBehaviour
             clicksCountResetButton = 0;
             hintNumber++;
         }
+
+        //Resetting Pickups
+        for (int i = 0; i < PickupsList.Count; i++)
+        {
+            PickupsList[i].SetActive(true);
+        }
+        scoreCount = 0;
+        SetScoreText();
+
+        //Resetting If Portals
+        ColorCounter = 0;
+        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
+            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.green;
+        }
+        else if (SceneManager.GetActiveScene().name == "Planet3-Level1")
+        {
+            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
+            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.yellow;
+
+            ren = ifPortal[1].GetComponent<Renderer>();//.material[2].color = Color.red;
+            mat = ren.materials;
+            mat[2].color = Color.cyan; //cyan is close enough xD
+        }
+
+    }
+
+
+    void resetPlayer()
+    {
+        runButton.interactable = true;
+        transform.position = playerStart;
+        transform.forward = Vector3.Normalize(forward);
+
+        jumpUpFlag = 0; jumpDownFlag = 0;
+
+        StopAllCoroutines();
+        runCommands.Clear();
+        Inventory.start = true;
+
     }
 
     public IEnumerator Move(int direction)
@@ -213,6 +259,7 @@ public class MovePlayer : MonoBehaviour
         if (col.gameObject.CompareTag("Pick Up"))
         {
             pickupSource.PlayOneShot(pickupSound, 1);
+            PickupsList.Add(col.gameObject);
             col.gameObject.SetActive(false);
             scoreCount = scoreCount + 1;
             SetScoreText();
@@ -244,38 +291,6 @@ public class MovePlayer : MonoBehaviour
         scoreText.text = "Score: " + scoreCount.ToString();
     }
 
-    void resetPlayer()
-    {
-        runButton.interactable = true;
-        transform.position = playerStart;
-        transform.forward = Vector3.Normalize(forward);
-
-        jumpUpFlag = 0;jumpDownFlag = 0;
-
-        StopAllCoroutines();
-        runCommands.Clear();
-        Inventory.start = true;
-
-        ColorCounter = 0;
-        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
-        {
-            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
-            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
-            mat = ren.materials;
-            mat[2].color = Color.green;
-        }
-        else if (SceneManager.GetActiveScene().name == "Planet3-Level1")
-        {
-            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
-            ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
-            mat = ren.materials;
-            mat[2].color = Color.yellow;
-
-            ren = ifPortal[1].GetComponent<Renderer>();//.material[2].color = Color.red;
-            mat = ren.materials;
-            mat[2].color = Color.cyan; //cyan is close enough xD
-        }
-    }
 }
 
 
