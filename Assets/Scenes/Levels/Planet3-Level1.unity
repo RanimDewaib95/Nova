@@ -3063,7 +3063,7 @@ GameObject:
   - component: {fileID: 779053682}
   - component: {fileID: 779053681}
   m_Layer: 0
-  m_Name: Blueportal
+  m_Name: Yellowportal
   m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3077,7 +3077,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 779053679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 59.95999, y: -0.3199997, z: -0.029975427}
+  m_LocalPosition: {x: 0.13, y: -0.3199997, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1293123852}
@@ -3100,7 +3100,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 788bd6994e6e0c043b3f705ec96f1d3d, type: 2}
   - {fileID: 2100000, guid: a5e7074da59a6a3468323f43f41359fa, type: 2}
-  - {fileID: 2100000, guid: e444c1560dbf14d4aa85d4c3864d6105, type: 2}
+  - {fileID: 2100000, guid: 6eb5942130d0ee14490468bc5c6bef1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8490,7 +8490,7 @@ GameObject:
   - component: {fileID: 2140984274}
   - component: {fileID: 2140984273}
   m_Layer: 0
-  m_Name: Yellowportal
+  m_Name: Blueportal
   m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8504,7 +8504,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2140984271}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -59.96, y: -0.3199997, z: -0.07001923}
+  m_LocalPosition: {x: 0.03, y: -0.3199997, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 222383426}
@@ -8527,7 +8527,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 788bd6994e6e0c043b3f705ec96f1d3d, type: 2}
   - {fileID: 2100000, guid: a5e7074da59a6a3468323f43f41359fa, type: 2}
-  - {fileID: 2100000, guid: 6eb5942130d0ee14490468bc5c6bef1e, type: 2}
+  - {fileID: 2100000, guid: e444c1560dbf14d4aa85d4c3864d6105, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
