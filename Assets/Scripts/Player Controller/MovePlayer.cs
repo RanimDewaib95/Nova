@@ -61,7 +61,7 @@ public class MovePlayer : MonoBehaviour
         runButton = GameObject.Find("RunButton").GetComponent<Button>();
 
         scoreCount = 0;
-        SetScoreText();
+        //SetScoreText();
 
         pickupSource = GetComponent<AudioSource>();
 
@@ -98,7 +98,7 @@ public class MovePlayer : MonoBehaviour
             PickupsList[i].SetActive(true);
         }
         scoreCount = 0;
-        SetScoreText();
+        //SetScoreText();
 
         //Check number of times the Reset Button is clicked to display hints
         clicksCountResetButton++;
@@ -108,7 +108,7 @@ public class MovePlayer : MonoBehaviour
             StartCoroutine(hint.displayHint());
             clicksCountResetButton = 0;
             hintNumber++;
-        }
+        }     
 
         //Resetting If Portals
         ColorCounter = 0;
@@ -200,20 +200,20 @@ public class MovePlayer : MonoBehaviour
                     {
                         StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
                     }
-                    else if (runCommands[i] == "moveBlock(Clone)")
+                    else if (runCommands[i] == "moveBlock(Clone)" && jumpDownFlag == 0 && jumpUpFlag == 0)
                     {
                         StartCoroutine(Move(1));
                     }
-                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0 && jumpUpFlag == 0)
+                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0 && jumpUpFlag == 1)
                     {
-                        Debug.Log("PLAYER SHOULD JUMP UPWARDS!");
+                        Debug.Log("PLAYER JUMPING UPWARDS!");
                         StartCoroutine(Jump(1, 1));
 
-                        jumpUpFlag = 1;
+                        jumpUpFlag = 0;
                     }
-                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 1)
+                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 1 && jumpUpFlag == 0)
                     {
-                        Debug.Log("PLAYER SHOULD JUMP DOWNWARDS!");
+                        Debug.Log("PLAYER JUMPING DOWNWARDS!");
                         StartCoroutine(Jump(-1, 1));
 
                         jumpDownFlag = 0;
@@ -261,7 +261,7 @@ public class MovePlayer : MonoBehaviour
             col.gameObject.SetActive(false);
 
             scoreCount = scoreCount + 1;
-            SetScoreText();
+            //SetScoreText();
         }
         else if (col.gameObject.CompareTag("Wall"))//if player hits a wall, reset player to start position
         {
@@ -271,7 +271,8 @@ public class MovePlayer : MonoBehaviour
         else if (col.gameObject.CompareTag("Step Up"))//if player hits a step-up tile while moving, return to previous position
         {
             Debug.Log("DETECTED JUMP-UP COLLIDER !");
-            transform.position = playerCurrent;
+            jumpUpFlag = 1;
+            //transform.position = playerCurrent;
         }
         else if (col.gameObject.CompareTag("Step Down"))//if player is on a high tile, set flag to allow downwards-jump
         {
@@ -285,10 +286,10 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
-    void SetScoreText()
-    {
-        scoreText.text = "Score: " + scoreCount.ToString();
-    }
+    //void SetScoreText()
+    //{
+    //    scoreText.text = "Score: " + scoreCount.ToString();
+    //}
 }
 
 
