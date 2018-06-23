@@ -33,12 +33,14 @@ public class Inventory : MonoBehaviour
     }
     public void Changed()
     {
+        Debug.Log("I am in again");
         getStringOfBlocks();
+        Debug.Log("I got the blocks");
         if (finished == true)
         {
             //Debug.Log("I am printing TBCC");
             TBCC = builder.ToString();
-            //Debug.Log(TBCC);
+            Debug.Log(TBCC);
             start = true;
             player.GetComponent<MovePlayer>().RunButtonClicker();
             builder = new StringBuilder("");
@@ -47,6 +49,7 @@ public class Inventory : MonoBehaviour
 
     public void getStringOfBlocks()
     {
+        Debug.Log("I am in again getblocks");
         foreach (Transform slotTransform in slots)
         {
             item = slotTransform.GetComponent<Slot>().item;

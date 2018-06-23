@@ -74,8 +74,9 @@ public class MovePlayer : MonoBehaviour
 
         //after inventory finished getting the chosen blocks
         if (Inventory.start == true)
-        {
+        {            
             TBCC = Inventory.TBCC;
+            Debug.Log(TBCC);
             runCommands = TBCC.Split(',').ToList<string>();
             runCommands.RemoveAt(0);
             chosenBlocks = runCommands.Count;
@@ -87,7 +88,6 @@ public class MovePlayer : MonoBehaviour
     public void ResetButtonClicker()
     {
         Debug.Log("RESET BUTTON CLICKED!");
-
         //Enable Run Button
         runButton.interactable = true;
         resetButton.interactable = false;
