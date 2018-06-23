@@ -61,7 +61,7 @@ public class MovePlayer : MonoBehaviour
         runButton = GameObject.Find("RunButton").GetComponent<Button>();
 
         scoreCount = 0;
-        SetScoreText();
+        //SetScoreText();
 
         pickupSource = GetComponent<AudioSource>();
 
@@ -92,6 +92,14 @@ public class MovePlayer : MonoBehaviour
         runButton.interactable = true;
         resetButton.interactable = false;
 
+        //Resetting Pickups
+        for (int i = 0; i < PickupsList.Count; i++)
+        {
+            PickupsList[i].SetActive(true);
+        }
+        scoreCount = 0;
+        //SetScoreText();
+
         //Check number of times the Reset Button is clicked to display hints
         clicksCountResetButton++;
         if (clicksCountResetButton == 3 && hintNumber < 3)
@@ -100,19 +108,7 @@ public class MovePlayer : MonoBehaviour
             StartCoroutine(hint.displayHint());
             clicksCountResetButton = 0;
             hintNumber++;
-        }
-        //Reset If
-        ColorCounter = 0;
-        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
-        {
-            ifPortal = GameObject.FindGameObjectsWithTag("Portal");
-        //Resetting Pickups
-        for (int i = 0; i < PickupsList.Count; i++)
-        {
-            PickupsList[i].SetActive(true);
-        }
-        scoreCount = 0;
-        SetScoreText();
+        }     
 
         //Resetting If Portals
         ColorCounter = 0;
@@ -135,7 +131,7 @@ public class MovePlayer : MonoBehaviour
             mat = ren.materials;
             mat[2].color = Color.cyan; //cyan is close enough xD
         }
-    }
+
         //Reset player to start position
         resetPlayer();
         //Clear Slots Panel:to be resolved later
@@ -204,20 +200,20 @@ public class MovePlayer : MonoBehaviour
                     {
                         StartCoroutine(RotateAround(Vector3.up, -90.0f, 1.0f));
                     }
-                    else if (runCommands[i] == "moveBlock(Clone)")
+                    else if (runCommands[i] == "moveBlock(Clone)" && jumpDownFlag == 0 && jumpUpFlag == 0)
                     {
                         StartCoroutine(Move(1));
                     }
-                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0 && jumpUpFlag == 0)
+                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 0 && jumpUpFlag == 1)
                     {
-                        Debug.Log("PLAYER SHOULD JUMP UPWARDS!");
+                        Debug.Log("PLAYER JUMPING UPWARDS!");
                         StartCoroutine(Jump(1, 1));
 
-                        jumpUpFlag = 1;
+                        jumpUpFlag = 0;
                     }
-                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 1)
+                    else if (runCommands[i] == "jumpBlock(Clone)" && jumpDownFlag == 1 && jumpUpFlag == 0)
                     {
-                        Debug.Log("PLAYER SHOULD JUMP DOWNWARDS!");
+                        Debug.Log("PLAYER JUMPING DOWNWARDS!");
                         StartCoroutine(Jump(-1, 1));
 
                         jumpDownFlag = 0;
@@ -265,7 +261,7 @@ public class MovePlayer : MonoBehaviour
             col.gameObject.SetActive(false);
 
             scoreCount = scoreCount + 1;
-            SetScoreText();
+            //SetScoreText();
         }
         else if (col.gameObject.CompareTag("Wall"))//if player hits a wall, reset player to start position
         {
@@ -275,7 +271,8 @@ public class MovePlayer : MonoBehaviour
         else if (col.gameObject.CompareTag("Step Up"))//if player hits a step-up tile while moving, return to previous position
         {
             Debug.Log("DETECTED JUMP-UP COLLIDER !");
-            transform.position = playerCurrent;
+            jumpUpFlag = 1;
+            //transform.position = playerCurrent;
         }
         else if (col.gameObject.CompareTag("Step Down"))//if player is on a high tile, set flag to allow downwards-jump
         {
@@ -289,10 +286,10 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
-    void SetScoreText()
-    {
-        scoreText.text = "Score: " + scoreCount.ToString();
-    }
+    //void SetScoreText()
+    //{
+    //    scoreText.text = "Score: " + scoreCount.ToString();
+    //}
 }
 
 
