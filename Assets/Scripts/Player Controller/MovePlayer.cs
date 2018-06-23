@@ -74,8 +74,9 @@ public class MovePlayer : MonoBehaviour
 
         //after inventory finished getting the chosen blocks
         if (Inventory.start == true)
-        {
+        {            
             TBCC = Inventory.TBCC;
+            Debug.Log(TBCC);
             runCommands = TBCC.Split(',').ToList<string>();
             runCommands.RemoveAt(0);
             chosenBlocks = runCommands.Count;
@@ -87,10 +88,17 @@ public class MovePlayer : MonoBehaviour
     public void ResetButtonClicker()
     {
         Debug.Log("RESET BUTTON CLICKED!");
-
         //Enable Run Button
         runButton.interactable = true;
         resetButton.interactable = false;
+
+        //Resetting Pickups
+        for (int i = 0; i < PickupsList.Count; i++)
+        {
+            PickupsList[i].SetActive(true);
+        }
+        scoreCount = 0;
+        SetScoreText();
 
         //Check number of times the Reset Button is clicked to display hints
         clicksCountResetButton++;
@@ -101,18 +109,6 @@ public class MovePlayer : MonoBehaviour
             clicksCountResetButton = 0;
             hintNumber++;
         }
-        //Reset If
-        ColorCounter = 0;
-        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
-        {
-            ifPortal = GameObject.FindGameObjectsWithTag("Portal");
-        //Resetting Pickups
-        for (int i = 0; i < PickupsList.Count; i++)
-        {
-            PickupsList[i].SetActive(true);
-        }
-        scoreCount = 0;
-        SetScoreText();
 
         //Resetting If Portals
         ColorCounter = 0;
@@ -135,7 +131,7 @@ public class MovePlayer : MonoBehaviour
             mat = ren.materials;
             mat[2].color = Color.cyan; //cyan is close enough xD
         }
-    }
+
         //Reset player to start position
         resetPlayer();
         //Clear Slots Panel:to be resolved later
