@@ -184,14 +184,14 @@ public class MovePlayer : MonoBehaviour
                         if (chosenColor[1] == Slot.LevelColors[ColorCounter] && ifTrigger == 1)
                         {
                             ContinueFlag = 1;
-                            ColorCounter++;
 
-							ifPortal = GameObject.FindGameObjectsWithTag (chosenColor [1]);
+							ifPortal = GameObject.FindGameObjectsWithTag ("Portal");
                             ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
                             mat = ren.materials;
                             mat[2].color = Color.clear;
                             //Destroy (ifPortal[0]);
                             ifTrigger = 0;
+                            ColorCounter++;
                         }
                         else
                         {
@@ -259,14 +259,14 @@ public class MovePlayer : MonoBehaviour
         ColorCounter = 0;
         if (SceneManager.GetActiveScene().name == "Planet2-Level1")
         {
-            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
+            ifPortal = GameObject.FindGameObjectsWithTag("Portal");
             ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
             mat = ren.materials;
             mat[2].color = Color.green;
         }
         else if (SceneManager.GetActiveScene().name == "Planet3-Level1")
         {
-            ifPortal = GameObject.FindGameObjectsWithTag(chosenColor[1]);
+            ifPortal = GameObject.FindGameObjectsWithTag("Portal");
             ren = ifPortal[0].GetComponent<Renderer>();//.material[2].color = Color.red;
             mat = ren.materials;
             mat[2].color = Color.yellow;
