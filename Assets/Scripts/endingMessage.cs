@@ -16,6 +16,7 @@ public class endingMessage : MonoBehaviour {
 
     public void displayLastMessage()
     {
+        Debug.Log("will display last message");
         endMessage.SetActive(true);
     }
 
