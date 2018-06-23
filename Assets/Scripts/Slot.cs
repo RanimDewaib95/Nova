@@ -24,15 +24,15 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
             moveBlocks.Add("move4");
             moveBlocks.Add("move5");
             moveBlocks.Add("move1");
-        }
-        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
-        {
+
             jumpBlocks.Add("jump2");
             jumpBlocks.Add("jump3");
             jumpBlocks.Add("jump4");
             jumpBlocks.Add("jump5");
             jumpBlocks.Add("jump1");
-
+        }
+        if (SceneManager.GetActiveScene().name == "Planet2-Level1")
+        {
             ifBlocks.Add("ifRed");
             ifBlocks.Add("ifYellow");
             ifBlocks.Add("ifGreen");
@@ -43,12 +43,6 @@ public class Slot : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
         if (SceneManager.GetActiveScene().name == "Planet3-Level1")
         {
-            jumpBlocks.Add("jump2");
-            jumpBlocks.Add("jump3");
-            jumpBlocks.Add("jump4");
-            jumpBlocks.Add("jump5");
-            jumpBlocks.Add("jump1");
-
             ifBlocks.Add("ifRed");
             ifBlocks.Add("ifYellow");
             ifBlocks.Add("ifGreen");
