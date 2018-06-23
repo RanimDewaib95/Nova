@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class MovePlayer : MonoBehaviour
 {
-    Vector3 playerStart, playerCurrent;
+    Vector3 playerStart, playerBefore;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
 
     List<string> runCommands = new List<string>(); //All Slot Panel Blocks Translated
@@ -193,7 +193,7 @@ public class MovePlayer : MonoBehaviour
             {
                 if (ContinueFlag == 1)
                 {
-                    playerCurrent = transform.position;
+                    playerBefore = transform.position;
                     if (runCommands[i] == "rotateRightBlock(Clone)")
                     {
                         StartCoroutine(RotateAround(Vector3.up, 90.0f, 1.0f));
@@ -268,7 +268,9 @@ public class MovePlayer : MonoBehaviour
         else if (col.gameObject.CompareTag("Wall"))//if player hits a wall, reset player to start position
         {
             Debug.Log("DETECTED WALL BOUNDARY !");
-            ResetButtonClicker();
+            transform.position = playerBefore;
+            transform.forward = Vector3.Normalize(forward);
+            //ResetButtonClicker();
         }
         else if (col.gameObject.CompareTag("Step Up"))//if player hits a step-up tile while moving, return to previous position
         {
