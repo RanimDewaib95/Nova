@@ -61,7 +61,7 @@ public class MovePlayer : MonoBehaviour
         runButton = GameObject.Find("RunButton").GetComponent<Button>();
 
         scoreCount = 0;
-        //SetScoreText();
+        SetScoreText();
 
         pickupSource = GetComponent<AudioSource>();
 
@@ -96,15 +96,6 @@ public class MovePlayer : MonoBehaviour
         runButton.interactable = true;
         resetButton.interactable = false;
 
-        //Resetting Pickups
-        for (int i = 0; i < PickupsList.Count; i++)
-        {
-            PickupsList[i].SetActive(true);
-        }
-
-        //scoreCount = 0;
-        //SetScoreText();
-
         //Check number of times the Reset Button is clicked to display hints
         clicksCountResetButton++;
         if (clicksCountResetButton == 3 && hintNumber < 3)
@@ -138,6 +129,13 @@ public class MovePlayer : MonoBehaviour
             mat[2].color = Color.cyan; //cyan is close enough xD
         }
 
+        //Resetting Pickups
+        for (int i = 0; i < PickupsList.Count; i++)
+        {
+            PickupsList[i].SetActive(true);
+        }
+        scoreCount = 0;
+        SetScoreText();
 
         //Clear Slots Panel:to be resolved later
     }
@@ -265,7 +263,7 @@ public class MovePlayer : MonoBehaviour
             col.gameObject.SetActive(false);
 
             scoreCount = scoreCount + 1;
-            //SetScoreText();
+            SetScoreText();
         }
         else if (col.gameObject.CompareTag("Wall"))//if player hits a wall, reset player to start position
         {
@@ -290,10 +288,10 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
-    //void SetScoreText()
-    //{
-    //    scoreText.text = "Score: " + scoreCount.ToString();
-    //}
+    void SetScoreText()
+    {
+        scoreText.text = "Score: " + scoreCount.ToString();
+    }
 }
 
 
