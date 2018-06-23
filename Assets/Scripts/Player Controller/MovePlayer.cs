@@ -88,6 +88,10 @@ public class MovePlayer : MonoBehaviour
     public void ResetButtonClicker()
     {
         Debug.Log("RESET BUTTON CLICKED!");
+
+        //Reset player to start position
+        resetPlayer(); 
+        
         //Enable Run Button
         runButton.interactable = true;
         resetButton.interactable = false;
@@ -97,8 +101,8 @@ public class MovePlayer : MonoBehaviour
         {
             PickupsList[i].SetActive(true);
         }
-        scoreCount = 0;
-        SetScoreText();
+        //scoreCount = 0;
+        //SetScoreText();
 
         //Check number of times the Reset Button is clicked to display hints
         clicksCountResetButton++;
@@ -111,6 +115,7 @@ public class MovePlayer : MonoBehaviour
         }
 
         //Resetting If Portals
+        Debug.Log("BEFORE IF RESET");
         ColorCounter = 0;
         if (SceneManager.GetActiveScene().name == "Planet2-Level1")
         {
@@ -132,13 +137,11 @@ public class MovePlayer : MonoBehaviour
             mat[2].color = Color.cyan; //cyan is close enough xD
         }
 
-        //Reset player to start position
-        resetPlayer();
+
         //Clear Slots Panel:to be resolved later
     }
     void resetPlayer()
     {
-        runButton.interactable = true;
         transform.position = playerStart;
         transform.forward = Vector3.Normalize(forward);
 
@@ -266,7 +269,7 @@ public class MovePlayer : MonoBehaviour
         else if (col.gameObject.CompareTag("Wall"))//if player hits a wall, reset player to start position
         {
             Debug.Log("DETECTED WALL BOUNDARY !");
-            resetPlayer();
+            ResetButtonClicker();
         }
         else if (col.gameObject.CompareTag("Step Up"))//if player hits a step-up tile while moving, return to previous position
         {
